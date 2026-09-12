@@ -6,6 +6,10 @@ import {
   IAdvisorProvider,
   ISimulatorProvider,
   IReportProvider,
+  ILocationProvider,
+  IBusinessProvider,
+  IFinancePreviewProvider,
+  IAnalysisProfileProvider,
 } from "@/providers/interfaces";
 
 import { MockProfileProvider } from "@/providers/mock/MockProfileProvider";
@@ -15,6 +19,13 @@ import { MockSchemeProvider } from "@/providers/mock/MockSchemeProvider";
 import { MockAdvisorProvider } from "@/providers/mock/MockAdvisorProvider";
 import { MockSimulatorProvider } from "@/providers/mock/MockSimulatorProvider";
 import { MockReportProvider } from "@/providers/mock/MockReportProvider";
+import { MockLocationProvider } from "@/providers/mock/MockLocationProvider";
+import { MockBusinessProvider } from "@/providers/mock/MockBusinessProvider";
+import { MockFinancePreviewProvider } from "@/providers/mock/MockFinancePreviewProvider";
+import { MockAnalysisProfileProvider } from "@/providers/mock/MockAnalysisProfileProvider";
+import { VentureLocation, LocationProfile, AnalysisProfile } from "@/domain";
+
+export { onboardingStore } from "./onboardingStore";
 
 /**
  * Service Layer for GramVest
@@ -32,6 +43,10 @@ const schemeProvider: ISchemeProvider = new MockSchemeProvider();
 const advisorProvider: IAdvisorProvider = new MockAdvisorProvider();
 const simulatorProvider: ISimulatorProvider = new MockSimulatorProvider();
 const reportProvider: IReportProvider = new MockReportProvider();
+const locationProvider: ILocationProvider = new MockLocationProvider();
+const businessProvider: IBusinessProvider = new MockBusinessProvider();
+const financePreviewProvider: IFinancePreviewProvider = new MockFinancePreviewProvider();
+const analysisProfileProvider: IAnalysisProfileProvider = new MockAnalysisProfileProvider();
 
 // Domain Services
 export const profileService = {
@@ -88,26 +103,6 @@ export const reportService = {
   getReport: () => reportProvider.getFeasibilityReport(),
   downloadPdf: (reportId: string) => reportProvider.generateDownloadPdfUrl(reportId),
 };
-
-// Onboarding & Profile Services
-import {
-  ILocationProvider,
-  IBusinessProvider,
-  IFinancePreviewProvider,
-  IAnalysisProfileProvider,
-} from "@/providers/interfaces";
-import { MockLocationProvider } from "@/providers/mock/MockLocationProvider";
-import { MockBusinessProvider } from "@/providers/mock/MockBusinessProvider";
-import { MockFinancePreviewProvider } from "@/providers/mock/MockFinancePreviewProvider";
-import { MockAnalysisProfileProvider } from "@/providers/mock/MockAnalysisProfileProvider";
-import { LocationProfile, AnalysisProfile } from "@/domain";
-
-export { onboardingStore } from "./onboardingStore";
-
-const locationProvider: ILocationProvider = new MockLocationProvider();
-const businessProvider: IBusinessProvider = new MockBusinessProvider();
-const financePreviewProvider: IFinancePreviewProvider = new MockFinancePreviewProvider();
-const analysisProfileProvider: IAnalysisProfileProvider = new MockAnalysisProfileProvider();
 
 export const locationService = {
   searchLocations: (query: string) => locationProvider.searchLocations(query),

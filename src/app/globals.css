@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-surface: #fff8f2;
+    --color-surface-dim: #dfd9d3;
+    --color-surface-bright: #fff8f2;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #f9f3ec;
+    --color-surface-container: #f3ede6;
+    --color-surface-container-high: #ede7e1;
+    --color-surface-container-highest: #e7e2db;
+    --color-on-surface: #1d1b18;
+    --color-on-surface-variant: #706c63;
+    --color-outline: #8a726b;
+    --color-outline-variant: #ddd6c9;
+    --color-primary: #9d3e21;
+    --color-primary-terracotta: #c75d3e;
+    --color-primary-container: #fbebe4;
+    --color-secondary: #536346;
+    --color-secondary-container: #d4e6c1;
+    --color-tertiary: #735c00;
+    --color-tertiary-container: #caa739;
+    --color-error: #ba1a1a;
+    --color-error-container: #ffdad6;
+    --color-success: #4d7558;
+  }
+
+  html,
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, .font-serif-editorial {
+    font-family: var(--font-noto-serif), Georgia, serif;
+  }
+}
+
+/* Custom scrollbar and animations */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Tactile paper card helper */
+.paper-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd6c9;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.paper-card-subtle {
+  background-color: #f9f3ec;
+  border: 1px solid #e7ded5;
+  border-radius: 0.75rem;
+}
+
+/* Leaflet map custom fixes */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  z-index: 10;
+  background-color: #f6f2e9;
+  font-family: var(--font-plus-jakarta), sans-serif;
+}

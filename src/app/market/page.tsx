@@ -47,6 +47,11 @@ export default function MarketPage() {
   const [loading, setLoading] = useState(true);
   const [isSwitchingRadius, setIsSwitchingRadius] = useState(false);
 
+  // GPS / geolocation state
+  const [gpsLocation, setGpsLocation] = useState<VentureLocation | null>(null);
+  const [gpsLoading, setGpsLoading] = useState(false);
+  const [gpsError, setGpsError] = useState<string | null>(null);
+
   // 3-Way Synchronization States
   const [selectedCompetitorId, setSelectedCompetitorId] = useState<string | null>(null);
   const [hoveredCompetitorId, setHoveredCompetitorId] = useState<string | null>(null);
@@ -60,26 +65,104 @@ export default function MarketPage() {
     distanceFilter: "all",
   });
 
-  const activeLocation: VentureLocation = useMemo(() => {
-    return (
-      location || {
-        id: "loc-default",
-        state: "Punjab",
-        district: "Ludhiana",
-        block: "Jagraon",
-        villageOrTown: "Jagraon",
-        pincode: "142026",
-        latitude: 30.7853,
-        longitude: 75.4731,
-        marketCatchmentName: "Jagraon Commercial Catchment",
-        nearestMandi: "Jagraon APMC Main Grain & Fodder Mandi",
-        distanceToMandiKm: 1.8,
-      }
+  // Attempt GPS resolution when no saved location exists
+  useEffect(() => {
+    if (location) return; // Already have a saved profile location — skip GPS
+    if (typeof window === "undefined" || !navigator.geolocation) {
+      setGpsError("Geolocation not supported.");
+      return;
+    }
+    setGpsLoading(true);
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude, longitude } = pos.coords;
+        try {
+          const res = await fetch(
+            `/api/v1/location/resolve?lat=${latitude}&lng=${longitude}&radius=5`
+          );
+          if (res.ok) {
+            const data = await res.json();
+            setGpsLocation({
+              id: data.id || "loc-gps",
+              state: data.state || "Punjab",
+              district: data.district || "Punjab",
+              block: data.block || data.district || "Punjab",
+              villageOrTown: data.village || data.block || "Your Location",
+              pincode: data.pincode || "000000",
+              latitude,
+              longitude,
+              marketCatchmentName:
+                data.market_catchment_name || `${data.block} Agro Catchment`,
+              nearestMandi:
+                data.nearest_mandi || `${data.block} APMC Mandi`,
+              distanceToMandiKm: data.distance_to_mandi_km || 5,
+            });
+          } else {
+            setGpsLocation({
+              id: "loc-gps-raw",
+              state: "Punjab",
+              district: "Punjab",
+              block: "Punjab",
+              villageOrTown: "Your Location",
+              pincode: "000000",
+              latitude,
+              longitude,
+              marketCatchmentName: "Local Catchment",
+              nearestMandi: "Nearest APMC Mandi",
+              distanceToMandiKm: 5,
+            });
+          }
+        } catch {
+          setGpsLocation({
+            id: "loc-gps-raw",
+            state: "Punjab",
+            district: "Punjab",
+            block: "Punjab",
+            villageOrTown: "Your Location",
+            pincode: "000000",
+            latitude,
+            longitude,
+            marketCatchmentName: "Local Catchment",
+            nearestMandi: "Nearest APMC Mandi",
+            distanceToMandiKm: 5,
+          });
+        } finally {
+          setGpsLoading(false);
+        }
+      },
+      (err) => {
+        setGpsError(err.message || "Location access denied.");
+        setGpsLoading(false);
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
     );
   }, [location]);
 
-  // Load Market Analysis whenever radius or location changes
+  // Derive activeLocation: profile location > GPS location > static fallback
+  const activeLocation: VentureLocation = useMemo(() => {
+    if (location) return location;
+    if (gpsLocation) return gpsLocation;
+    // Static fallback — only shown while GPS is loading or denied
+    return {
+      id: "loc-default",
+      state: "Punjab",
+      district: "Ludhiana",
+      block: "Jagraon",
+      villageOrTown: "Jagraon",
+      pincode: "142026",
+      latitude: 30.7853,
+      longitude: 75.4731,
+      marketCatchmentName: "Jagraon Commercial Catchment",
+      nearestMandi: "Jagraon APMC Main Grain & Fodder Mandi",
+      distanceToMandiKm: 1.8,
+    };
+  }, [location, gpsLocation]);
+
+  // Load Market Analysis whenever radius or location changes.
+  // Skip while GPS is still resolving to avoid loading at the static fallback
+  // and immediately re-loading at the real GPS location.
   const loadMarketIntelligence = useCallback(async () => {
+    if (!location && gpsLoading) return; // Wait for GPS before loading
     try {
       setLoading(true);
       const [mkt, rankedComps, mandiList, prices] = await Promise.all([
@@ -99,7 +182,7 @@ export default function MarketPage() {
       setLoading(false);
       setIsSwitchingRadius(false);
     }
-  }, [radiusKm, activeLocation]);
+  }, [radiusKm, activeLocation, location, gpsLoading]);
 
   useEffect(() => {
     loadMarketIntelligence();
@@ -210,6 +293,33 @@ export default function MarketPage() {
               </span>
             </div>
             <span className="text-[11px] text-[#786d65]">Geospatial Survey Sync</span>
+          </div>
+        )}
+
+        {/* GPS Location Status Banner */}
+        {!location && gpsLoading && (
+          <div className="p-3 rounded-2xl bg-[#f0f7f4] border border-[#3a6b4c]/30 flex items-center gap-2 text-xs text-[#241b16] animate-in fade-in duration-200">
+            <Loader2 size={14} className="animate-spin text-[#3a6b4c] shrink-0" />
+            <span className="font-medium text-[#3a6b4c]">Detecting your location…</span>
+            <span className="text-[#786d65]">Requesting GPS to center the map on your area</span>
+          </div>
+        )}
+        {!location && gpsLocation && !gpsLoading && (
+          <div className="p-3 rounded-2xl bg-[#f0f7f4] border border-[#3a6b4c]/30 flex items-center gap-2 text-xs text-[#241b16] animate-in fade-in duration-200">
+            <MapPin size={14} className="text-[#3a6b4c] shrink-0" />
+            <span className="font-medium text-[#3a6b4c]">Using your current location</span>
+            <span className="text-[#786d65]">
+              Map centered on {gpsLocation.villageOrTown}, {gpsLocation.district}
+            </span>
+          </div>
+        )}
+        {!location && gpsError && !gpsLoading && (
+          <div className="p-3 rounded-2xl bg-[#faf4ee] border border-[#786d65]/30 flex items-center gap-2 text-xs text-[#241b16] animate-in fade-in duration-200">
+            <Compass size={14} className="text-[#786d65] shrink-0" />
+            <span className="text-[#786d65]">
+              Location access denied — showing default Punjab area. Complete onboarding to set your
+              location.
+            </span>
           </div>
         )}
 

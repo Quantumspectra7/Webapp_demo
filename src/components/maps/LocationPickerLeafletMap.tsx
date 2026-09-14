@@ -61,15 +61,15 @@ export const LocationPickerLeafletMap: React.FC<LocationPickerLeafletMapProps> =
 
     mapRef.current = map;
 
-    // Base Tile Layer (Default CartoDB Positron for warm, clear paper look)
+    // Base Tile Layer (Default OpenStreetMap / ArcGIS Satellite)
     const tileUrl =
       mapLayer === "satellite"
         ? "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-        : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+        : "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
     tileLayerRef.current = L.tileLayer(tileUrl, {
-      maxZoom: 18,
-      subdomains: "abcd",
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
     // Primary 5km Collection Radius Circle

@@ -41,10 +41,10 @@ export const CompetitorLeafletMap: React.FC<CompetitorLeafletMapProps> = ({
       attributionControl: false,
     });
 
-    // Clean CartoDB Positron / OSM tiles for warm, calm paper aesthetics
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-      maxZoom: 18,
-      subdomains: "abcd",
+    // Free OpenStreetMap standard tile layer
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
     // Add Catchment Radius Circle

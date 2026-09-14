@@ -23,6 +23,7 @@ import { MockLocationProvider } from "@/providers/mock/MockLocationProvider";
 import { MockBusinessProvider } from "@/providers/mock/MockBusinessProvider";
 import { MockFinancePreviewProvider } from "@/providers/mock/MockFinancePreviewProvider";
 import { MockAnalysisProfileProvider } from "@/providers/mock/MockAnalysisProfileProvider";
+import { ApiMarketProvider } from "@/providers/api/ApiMarketProvider";
 import { VentureLocation, LocationProfile, AnalysisProfile } from "@/domain";
 
 export { onboardingStore } from "./onboardingStore";
@@ -30,14 +31,18 @@ export { onboardingStore } from "./onboardingStore";
 /**
  * Service Layer for GramVest
  *
- * Current implementation uses Mock Providers.
- * In production, replace `mock*Provider` instances with `api*Provider` instances
+ * Current implementation uses Mock Providers by default.
+ * In production or live API mode, set NEXT_PUBLIC_DEMO_MODE=false to use ApiMarketProvider
  * without changing any page or component call signatures.
  */
 
+const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE !== "false";
+
 // Provider Singletons
 const profileProvider: IProfileProvider = new MockProfileProvider();
-const marketProvider: IMarketProvider = new MockMarketProvider();
+const marketProvider: IMarketProvider = isDemo
+  ? new MockMarketProvider()
+  : new ApiMarketProvider();
 const financeProvider: IFinanceProvider = new MockFinanceProvider();
 const schemeProvider: ISchemeProvider = new MockSchemeProvider();
 const advisorProvider: IAdvisorProvider = new MockAdvisorProvider();

@@ -1,0 +1,3 @@
+id,base_scenario_id,scenario_name,selling_price_change_pct,demand_change_pct,raw_material_change_pct,operating_cost_change_pct,capital_change,loan_change,other_assumptions,created_at,data_status
+WIF-PB-2026-001,SCEN-PB-2026-001,Stress Case: 5% Drop in Milk Selling Price & 10% Raw Milk Cost Surge,-5.0,0.0,10.0,5.0,0.0,0.0,"{""stress_description"": ""Simulates adverse winter milk glut combined with feed price inflation.""}",2026-03-01T10:10:00Z,demo
+WIF-PB-2026-002,SCEN-PB-2026-001,Expansion Case: 20% Volume Surge from Commercial Caterer Contracts,0.0,20.0,0.0,12.0,150000.0,100000.0,"{""expansion_description"": ""Adding second paneer vat to capture wedding season surge.""}",2026-03-01T10:15:00Z,demo

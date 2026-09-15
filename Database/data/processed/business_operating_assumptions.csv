@@ -1,0 +1,6 @@
+id,business_category_id,parameter_name,value,unit,applicable_region,source_id,confidence,notes,data_status
+OPS-WC-DAYS-DAIRY,CAT-DAIRY,Normative Working Capital Inventory & Receivables Cycle,21.0,days,Punjab,SRC-NABARD-PLP-LDH,0.92,15 days raw milk procurement holding + 6 days receivables from cooperatives/dhabas.,verified
+OPS-WC-DAYS-FLOUR,CAT-AGRO-FOOD,Normative Raw Grain Inventory Buffer Days,30.0,days,Punjab,SRC-NABARD-PLP-LDH,0.9,30 days raw grain buffer required to smooth out mandi auction price spikes.,verified
+OPS-WASTE-PCT-FLOUR,CAT-AGRO-FOOD,Grain Cleaning & Milling Dust Loss Percentage,1.5,percent,Punjab,SRC-VEND-EQUIP-REF,0.91,"Screening dust, chaff, and stone removal loss prior to milling.",verified
+OPS-RAMPUP-MONTHS,CAT-DAIRY,Capacity Ramp-Up Timeline to Reach 1000 LPD,4.0,months,Punjab,SRC-GRAMVEST-CURATED,0.88,"Month 1: 50%, Month 2: 70%, Month 3: 85%, Month 4: 100% capacity utilization.",curated
+OPS-DIESEL-LPH-TRACTOR,CAT-FARM-EQUIP,Average Hourly Diesel Consumption - 50 HP 4WD Rotavator,4.5,liters_per_hour,Punjab,SRC-NABARD-PLP-LDH,0.93,Heavy rotavator tillage in Punjab loam soil.,verified

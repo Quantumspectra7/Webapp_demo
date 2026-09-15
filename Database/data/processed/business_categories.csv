@@ -1,0 +1,9 @@
+id,name,parent_category,slug,description,active,mvp,data_status
+CAT-DAIRY,Dairy & Milk Value Addition,,dairy-milk-processing,"Small-scale dairy farming, bulk milk chilling, curd, paneer, and local milk aggregation.",True,True,verified
+CAT-AGRO-FOOD,Agro & Food Processing,,agro-food-processing,"Flour/atta milling, spice grinding, mustard oil expeller, and local grain value addition.",True,True,verified
+CAT-FARM-EQUIP,Farm Equipment & Custom Hiring Services,,farm-equipment-services,"Tractor implement rental, custom hiring center (CHC), and agricultural machinery repair workshop.",True,True,verified
+CAT-POULTRY,Poultry & Livestock Farming,,poultry-livestock,"Commercial broiler and layer poultry farming, goat rearing, and feed formulation.",True,False,curated
+CAT-BEEKEEPING,Beekeeping & Honey Processing,,beekeeping-honey,"Apiary establishment, migratory beekeeping, raw honey extraction and bottling.",True,False,curated
+CAT-RETAIL-GROCERY,Rural Retail & Kirana,,rural-kirana-retail,"Daily consumables, packaged foods, and farm household essentials retail counter.",True,False,curated
+CAT-REPAIR-SERVICES,Technical & Mobile Repair Services,,technical-repair-services,"Mobile phone, electrical appliance, and motor rewinding repair unit.",True,False,curated
+CAT-GARMENTS,Tailoring & Ready Garment Production,,tailoring-garments,"Boutique stitching, uniform manufacturing, and rural garment trading.",True,False,curated

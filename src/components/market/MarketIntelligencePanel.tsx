@@ -168,22 +168,22 @@ export const MarketIntelligencePanel: React.FC<MarketIntelligencePanelProps> = (
           <div className="h-2 w-full bg-[#ede3d8] rounded-full overflow-hidden flex gap-1">
             <div
               className={`h-full flex-1 rounded-l-full ${
-                market.demographics.competitorDensityRating === "Low"
+                (market.densityLabel || market.demographics.competitorDensityRating) === "Low"
                   ? "bg-[#3a6b4c]"
                   : "bg-[#3a6b4c]/40"
               }`}
             ></div>
             <div
               className={`h-full flex-1 ${
-                market.demographics.competitorDensityRating === "Moderate" ||
-                market.demographics.competitorDensityRating === "Medium"
+                (market.densityLabel || market.demographics.competitorDensityRating) === "Moderate" ||
+                (market.densityLabel || market.demographics.competitorDensityRating) === "Medium"
                   ? "bg-[#caa739]"
                   : "bg-[#caa739]/30"
               }`}
             ></div>
             <div
               className={`h-full flex-1 rounded-r-full ${
-                market.demographics.competitorDensityRating === "High"
+                (market.densityLabel || market.demographics.competitorDensityRating) === "High"
                   ? "bg-[#c75d3e]"
                   : "bg-[#c75d3e]/20"
               }`}
@@ -197,7 +197,7 @@ export const MarketIntelligencePanel: React.FC<MarketIntelligencePanelProps> = (
         </div>
 
         <p className="text-xs text-[#786d65] leading-relaxed mt-2">
-          Competition is present but not highly concentrated. Most facilities focus on retail morning supply rather than organized chilling.
+          {market.densityExplanation || "Competition is present but not highly concentrated. Most facilities focus on retail morning supply rather than organized chilling."}
         </p>
       </div>
 

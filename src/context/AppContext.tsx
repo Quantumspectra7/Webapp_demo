@@ -11,6 +11,8 @@ import {
 } from "@/domain";
 import { profileService, financeService, onboardingProfileService } from "@/services";
 
+import { getScenarioForBusiness } from "@/data/real/business_scenarios";
+
 interface AppContextType {
   profile: EntrepreneurProfile | null;
   location: VentureLocation | null;
@@ -61,12 +63,52 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         financeService.getScenario(),
         onboardingProfileService.getProfile(),
       ]);
+
       setProfile(prof);
       setLocation(loc);
-      setBusiness(biz);
-      setFinancialScenario(fin);
+
+      // If user had previously saved an analysis profile, restore business & financials
       if (savedAnalysis) {
         setAnalysisProfile(savedAnalysis);
+        const scenario = getScenarioForBusiness(savedAnalysis.business?.categoryId);
+        const syncedBiz: BusinessCategory = {
+          id: scenario.id,
+          title: savedAnalysis.business.customBusinessName || scenario.title,
+          slug: scenario.categoryId,
+          description: savedAnalysis.business.businessDescription || scenario.description,
+          typicalInvestmentRange: [
+            Math.round(scenario.indicativeProjectCost * 0.8),
+            Math.round(scenario.indicativeProjectCost * 1.2),
+          ],
+          unitOfProduction: scenario.capacityUnit,
+          benchmarkGrossMarginPct: scenario.marketInsights.valueAdditionPct,
+          primaryMachinery: scenario.capexItems.map((c) => c.name),
+          applicableSchemes: scenario.governmentSchemes.map((s) => s.schemeName),
+        };
+        setBusiness(syncedBiz);
+        setSelectedRadius(savedAnalysis.analysisRadius || 5);
+
+        // Recalculate financial scenario to match saved business
+        try {
+          const recalculated = await financeService.recalculateScenario({
+            projectCost: scenario.indicativeProjectCost,
+            ownContribution: savedAnalysis.capital || scenario.ownContribution,
+            interestRate: scenario.interestRate,
+            tenureMonths: scenario.tenureMonths,
+            dailyCapacity: scenario.dailyCapacity,
+            capacityUtilization: scenario.capacityUtilization,
+            sellingPrice: scenario.sellingPricePerUnit,
+            purchasePrice: scenario.purchasePricePerUnit,
+            powerAndDiesel: scenario.monthlyPowerCost,
+            categoryId: scenario.id,
+          });
+          setFinancialScenario(recalculated);
+        } catch {
+          setFinancialScenario(fin);
+        }
+      } else {
+        setBusiness(biz);
+        setFinancialScenario(fin);
       }
     } catch (err) {
       console.error("Failed to load initial context data", err);
@@ -116,16 +158,25 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setLocation(updatedLoc);
     await profileService.updateLocation(updatedLoc);
 
+    // Fetch matching real business scenario
+    const scenarioData = getScenarioForBusiness(newProfile.business.categoryId);
+
     // Sync Business
-    if (business) {
-      const updatedBiz: BusinessCategory = {
-        ...business,
-        id: newProfile.business.categoryId || "biz-custom",
-        title: newProfile.business.customBusinessName || newProfile.business.categoryName,
-        description: newProfile.business.businessDescription,
-      };
-      setBusiness(updatedBiz);
-    }
+    const updatedBiz: BusinessCategory = {
+      id: scenarioData.id,
+      title: newProfile.business.customBusinessName || scenarioData.title,
+      slug: scenarioData.categoryId,
+      description: newProfile.business.businessDescription || scenarioData.description,
+      typicalInvestmentRange: [
+        Math.round(scenarioData.indicativeProjectCost * 0.8),
+        Math.round(scenarioData.indicativeProjectCost * 1.2),
+      ],
+      unitOfProduction: scenarioData.capacityUnit,
+      benchmarkGrossMarginPct: scenarioData.marketInsights.valueAdditionPct,
+      primaryMachinery: scenarioData.capexItems.map((c) => c.name),
+      applicableSchemes: scenarioData.governmentSchemes.map((s) => s.schemeName),
+    };
+    setBusiness(updatedBiz);
 
     // Sync Entrepreneur Profile
     if (profile) {
@@ -147,19 +198,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     setSelectedRadius(newProfile.analysisRadius);
 
-    // Recalculate Financial Scenario dynamically with indicative project cost:
-    const calculatedProjectCost = Math.round(newProfile.capital / 0.1);
+    // Recalculate Financial Scenario with verified domain parameters
     try {
       const recalculated = await financeService.recalculateScenario({
-        projectCost: calculatedProjectCost,
-        ownContribution: newProfile.capital,
-        interestRate: 8.5,
-        tenureMonths: 84,
-        dailyCapacity: 1000,
-        capacityUtilization: 75,
-        sellingPrice: 42,
-        purchasePrice: 32,
-        powerAndDiesel: 12000,
+        projectCost: scenarioData.indicativeProjectCost,
+        ownContribution: newProfile.capital || scenarioData.ownContribution,
+        interestRate: scenarioData.interestRate,
+        tenureMonths: scenarioData.tenureMonths,
+        dailyCapacity: scenarioData.dailyCapacity,
+        capacityUtilization: scenarioData.capacityUtilization,
+        sellingPrice: scenarioData.sellingPricePerUnit,
+        purchasePrice: scenarioData.purchasePricePerUnit,
+        powerAndDiesel: scenarioData.monthlyPowerCost,
       });
       setFinancialScenario(recalculated);
     } catch (e) {

@@ -175,14 +175,21 @@ export const TopCompetitorsTable: React.FC<TopCompetitorsTableProps> = ({
                   </span>
 
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <h4 className="text-sm font-bold text-[#241b16] hover:text-[#c75d3e] transition-colors">
                         {comp.name}
                       </h4>
                       {getCategoryBadge(comp.category, comp.type)}
+                      {comp.rating !== undefined && comp.rating > 0 && (
+                        <div className="flex items-center gap-0.5 text-[10px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-md border border-amber-200">
+                          <span>★</span>
+                          <span>{comp.rating}</span>
+                          <span className="text-[9px] text-[#786d65] ml-0.5 font-normal">({comp.reviewCount || 0})</span>
+                        </div>
+                      )}
                     </div>
                     <p className="text-xs text-[#786d65] mt-0.5">
-                      {comp.businessType || comp.primaryArea} · Est. {comp.operationalSinceYear}
+                      {comp.businessType || comp.primaryArea} · {comp.estimatedMaturity || `Est. ${comp.operationalSinceYear}`}
                     </p>
                   </div>
                 </div>

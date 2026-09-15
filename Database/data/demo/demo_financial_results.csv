@@ -1,0 +1,2 @@
+id,run_id,scenario_id,emi,total_interest,annual_revenue,annual_expense,annual_profit,cash_flow,break_even,dscr,viability_score,calculated_at,data_status
+RES-PB-2026-001,RUN-PB-2026-001,SCEN-PB-2026-001,15670.0,359280.0,13478400.0,12090000.0,1388400.0,1200360.0,42.5,7.38,84.5,2026-03-01T10:05:00Z,demo

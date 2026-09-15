@@ -1,9 +1,3 @@
-# GramVest — Backend Integration Guide
-
-This guide explains how to connect the GramVest frontend to the future **FastAPI + PostgreSQL + PostGIS + pgvector** backend without modifying any UI components or page files.
-
----
-
 ## 1. Architecture Overview
 
 GramVest is architected with complete decoupling between the UI and data layers:
@@ -21,9 +15,6 @@ Page Components (/dashboard, /market, /money, etc.)
    ▼                       ▼
 Mock Providers        Future API Providers
 (`src/providers/mock/`)  (`src/providers/api/`)
-```
-
-Page components do **not** import mock fixtures or hardcoded URLs. They strictly interact with singletons exported from `src/services/index.ts`.
 
 ---
 

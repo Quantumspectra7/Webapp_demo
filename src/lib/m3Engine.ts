@@ -120,10 +120,11 @@ export function generateMarketAnalysisPayload(
   lat?: number,
   lng?: number,
   category = "Dairy",
-  villageName?: string
+  villageName?: string,
+  injectedCompetitors?: Competitor[]
 ): MarketAnalysis {
   const loc = resolveLocationContext(villageName, undefined, lat, lng, radiusKm);
-  const comps = getCompetitorsInRadius(loc.latitude, loc.longitude, radiusKm, category);
+  const comps = injectedCompetitors || getCompetitorsInRadius(loc.latitude, loc.longitude, radiusKm, category);
 
   const demoNode = PUNJAB_DEMOGRAPHICS.find((d) => d.location_id === loc.id) || PUNJAB_DEMOGRAPHICS[0];
   const radiusKey = radiusKm === 10 ? "radius_10km" : "radius_5km";
@@ -139,6 +140,17 @@ export function generateMarketAnalysisPayload(
   const densityVal = comps.length / areaSqKm;
   const densityRating: "Low" | "Moderate" | "High" =
     densityVal < 0.04 ? "Low" : densityVal <= 0.08 ? "Moderate" : "High";
+  
+  let densityExplanation = "";
+  if (comps.length === 0) {
+    densityExplanation = "No digital footprints found on Google Maps in this radius. On-ground verification recommended as informal local shops might exist.";
+  } else if (densityRating === "Low") {
+    densityExplanation = "Low density suggests lower direct competition, representing a strong early-mover opportunity.";
+  } else if (densityRating === "Moderate") {
+    densityExplanation = "Moderate density indicates healthy market activity but requires clear differentiation and quality to stand out.";
+  } else {
+    densityExplanation = "High density signifies a saturated zone. Compete strictly on margins, supply chain efficiency, or niche value addition.";
+  }
 
   // Mandis
   const mandis: MarketLocation[] = PUNJAB_MARKETS.map((m) => ({
@@ -240,6 +252,8 @@ export function generateMarketAnalysisPayload(
       { period: "Jul 2026", procurementPrice: 42, retailPrice: 62 },
       { period: "Sep 2026", procurementPrice: 40.5, retailPrice: 60 },
     ],
+    densityLabel: densityRating,
+    densityExplanation,
     metadata: {
       source: "GramVest M3 GIS Engine & Punjab Mandi Board",
       sourceDate: "2026-06-20",

@@ -1,0 +1,2 @@
+id,version,market_demand_weight,competition_opportunity_weight,capital_fit_weight,profit_cashflow_weight,risk_resilience_weight,effective_from,effective_to,data_status
+SCOR-CONF-V1,1.0-SIH2026,0.25,0.2,0.2,0.2,0.15,2026-01-01,2027-12-31,curated

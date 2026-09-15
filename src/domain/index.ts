@@ -71,6 +71,9 @@ export interface Competitor {
   source?: string;
   coverageType?: string;
   relevanceScore?: number;
+  rating?: number;
+  reviewCount?: number;
+  estimatedMaturity?: string;
 }
 
 export interface MarketLocation {
@@ -134,6 +137,8 @@ export interface MarketAnalysis {
     positive: string[];
     watchouts: string[];
   };
+  densityLabel?: "Low" | "Moderate" | "High";
+  densityExplanation?: string;
   priceTrend: {
     period: string;
     procurementPrice: number;
@@ -309,11 +314,27 @@ export interface AdvisorCitation {
   url?: string;
 }
 
+export interface StructuredAdvisorResponse {
+  intent: string;
+  answer: string;
+  verdict?: "PROMISING" | "PROMISING WITH CAUTION" | "FINANCIALLY CONSTRAINED" | "HIGH COMPETITION" | "REQUIRES VALIDATION" | "INSUFFICIENT DATA";
+  key_findings?: string[];
+  financial_snapshot?: { label: string; value: string }[];
+  market_evidence?: string[];
+  risks?: string[];
+  scheme_matches?: { name: string; subsidy: string; note: string }[];
+  recommendations?: string[];
+  next_actions?: { label: string; action_type: string; route: string }[];
+  confidence: "high" | "medium" | "low" | "unknown";
+  needs_clarification: boolean;
+}
+
 export interface AdvisorMessage {
   id: string;
   role: "user" | "assistant";
   content: string;
   timestamp: string;
+  structuredData?: StructuredAdvisorResponse;
   citations?: AdvisorCitation[];
   actionLinks?: {
     label: string;

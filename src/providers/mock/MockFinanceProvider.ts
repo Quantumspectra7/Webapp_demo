@@ -1,7 +1,8 @@
-import { FinancialScenario } from "@/domain";
+import { FinancialScenario, ProjectCostItem } from "@/domain";
 import { IFinanceProvider } from "@/providers/interfaces";
 import { DEMO_FINANCIAL_SCENARIO } from "@/data/scenarios/dairy-jagraon";
 import { calculateEMI, calculateOperatingFinancials } from "@/lib/calculations";
+import { getScenarioForBusiness } from "@/data/real/business_scenarios";
 
 export class MockFinanceProvider implements IFinanceProvider {
   private currentScenario: FinancialScenario = JSON.parse(
@@ -23,8 +24,11 @@ export class MockFinanceProvider implements IFinanceProvider {
     sellingPrice: number;
     purchasePrice: number;
     powerAndDiesel: number;
+    categoryId?: string;
   }): Promise<FinancialScenario> {
     await new Promise((res) => setTimeout(res, 50));
+
+    const scenario = getScenarioForBusiness(params.categoryId);
 
     const loanAmount = Math.max(0, params.projectCost - params.ownContribution);
     const ownContributionPct = params.projectCost > 0
@@ -39,32 +43,59 @@ export class MockFinanceProvider implements IFinanceProvider {
       moratoriumMonths: 6,
     });
 
+    const laborMonthly = scenario.monthlyLaborCost || 25000;
+    const packagingMonthly = Math.round(params.projectCost * 0.012);
+    const maintenanceMonthly = Math.round(params.projectCost * 0.005);
+
     const opCalc = calculateOperatingFinancials({
       dailyCapacity: params.dailyCapacity,
       capacityUtilization: params.capacityUtilization,
       sellingPricePerUnit: params.sellingPrice,
       rawMaterialCostPerUnit: params.purchasePrice,
       powerAndFuelMonthly: params.powerAndDiesel,
-      laborMonthly: 15000,
-      packagingAndConsumablesMonthly: 8000,
-      maintenanceAndOtherMonthly: 4000,
+      laborMonthly,
+      packagingAndConsumablesMonthly: packagingMonthly,
+      maintenanceAndOtherMonthly: maintenanceMonthly,
       monthlyLoanEMI: loanCalc.monthlyEMI,
       depreciationMonthly: Math.round(params.projectCost * 0.008),
     });
 
-    // PMEGP 35% subsidy on eligible project cost up to ₹50L
-    const eligibleSubsidy = Math.round(params.projectCost * 0.35);
+    // 35% subsidy on eligible project cost under PMFME / PMEGP
+    const primaryScheme = scenario.governmentSchemes[0];
+    const eligibleSubsidy = Math.min(
+      primaryScheme ? primaryScheme.maxSubsidyAmount : 1000000,
+      Math.round(params.projectCost * ((primaryScheme ? primaryScheme.subsidyPct : 35) / 100))
+    );
+
+    // Build authentic CaPEx items from scenario
+    const costBreakdown: ProjectCostItem[] = scenario.capexItems.map((c) => ({
+      category:
+        c.category === "Civil / Shed"
+          ? "Civil Works & Shed"
+          : c.category === "Electrification"
+          ? "Electrification & DG"
+          : c.category === "Working Capital"
+          ? "Working Capital"
+          : "Plant & Machinery",
+      itemName: c.name,
+      cost: c.amount,
+      eligibleForSubsidy: c.category !== "Working Capital",
+      notes: `${c.specification} (${c.supplierOrigin || "Punjab"})`,
+    }));
 
     const updated: FinancialScenario = {
       ...this.currentScenario,
+      id: `fin-${scenario.id}`,
+      title: `${scenario.title} — Verified Financial Model`,
       totalProjectCost: params.projectCost,
+      costBreakdown,
       financingMeans: {
         ownContribution: params.ownContribution,
         ownContributionPct,
         termLoan: loanAmount,
         termLoanPct,
         eligibleSubsidyAmount: eligibleSubsidy,
-        subsidySchemeName: "PMEGP (Rural Special 35%)",
+        subsidySchemeName: primaryScheme?.schemeName || "PMFME (35% Credit-Linked Subsidy)",
         effectiveNetLoan: Math.max(0, loanAmount - eligibleSubsidy),
       },
       loanTerms: {
@@ -81,9 +112,9 @@ export class MockFinanceProvider implements IFinanceProvider {
         purchasePricePerLiter: params.purchasePrice,
         sellingPricePerLiter: params.sellingPrice,
         powerAndDieselMonthly: params.powerAndDiesel,
-        laborMonthly: 15000,
-        consumablesMonthly: 8000,
-        maintenanceMonthly: 4000,
+        laborMonthly,
+        consumablesMonthly: packagingMonthly,
+        maintenanceMonthly,
       },
       projections: {
         monthlyRevenue: opCalc.monthlyRevenue,

@@ -1,0 +1,11 @@
+id,scheme_version_id,rule_type,field_name,operator,expected_value,description,source_id,data_status
+RULE-PMEGP-01,SCHVER-PMEGP-V2,numeric_range,project_cost,<=,5000000,Maximum project cost for manufacturing micro units is Rs 50 Lakhs.,SRC-GOI-MSME-PMEGP,official
+RULE-PMEGP-02,SCHVER-PMEGP-V2,boolean,is_greenfield,==,true,PMEGP first loan is strictly for greenfield (new) enterprise creation.,SRC-GOI-MSME-PMEGP,official
+RULE-PMEGP-03,SCHVER-PMEGP-V2,numeric_range,applicant_age,>=,18,Applicant must be minimum 18 years of age.,SRC-GOI-MSME-PMEGP,official
+RULE-PMEGP-04,SCHVER-PMEGP-V2,categorical,sector,in,"manufacturing,service",Eligible sectors are non-farm manufacturing and service activities.,SRC-GOI-MSME-PMEGP,official
+RULE-PMFME-01,SCHVER-PMFME-V1,numeric_range,project_cost,<=,4000000,PMFME individual enterprise maximum supported capital size.,SRC-GOI-MOFPI-PMFME,official
+RULE-PMFME-02,SCHVER-PMFME-V1,categorical,business_category_id,in,"CAT-AGRO-FOOD,CAT-DAIRY",Must be food processing or agri-produce value addition.,SRC-GOI-MOFPI-PMFME,official
+RULE-AHIDF-01,SCHVER-AHIDF-V1,numeric_range,project_cost,>=,1000000,AHIDF minimum project size for commercial chilling/processing plants is Rs 10 Lakhs.,SRC-GOI-DAHD-AHIDF,official
+RULE-AHIDF-02,SCHVER-AHIDF-V1,categorical,business_category_id,==,CAT-DAIRY,"Enterprise must focus on dairy processing, chilling, or feed manufacturing.",SRC-GOI-DAHD-AHIDF,official
+RULE-MUDRA-01,SCHVER-MUDRA-TARUN,numeric_range,loan_amount,<=,2000000,Mudra Tarun / Tarun Plus maximum financing is Rs 20 Lakhs.,SRC-GOI-PMMY-MUDRA,official
+RULE-MUDRA-02,SCHVER-MUDRA-TARUN,numeric_range,loan_amount,>,500000,Tarun category starts above Rs 5 Lakhs.,SRC-GOI-PMMY-MUDRA,official

@@ -1,0 +1,17 @@
+id,district_id,name,block_code,active,data_status
+BLK-MUK-079,DST-MUK,Muktsar,079,True,official
+BLK-MUK-080,DST-MUK,Kot Bhai,080,True,official
+BLK-MUK-081,DST-MUK,Lambi,081,True,official
+BLK-MUK-082,DST-MUK,Malout,082,True,official
+BLK-LDH-JAG,DST-LDH,Jagraon,230,True,official
+BLK-LDH-KHA,DST-LDH,Khanna,225,True,official
+BLK-LDH-SAM,DST-LDH,Samrala,224,True,official
+BLK-LDH-PAY,DST-LDH,Payal,226,True,official
+BLK-LDH-DEH,DST-LDH,Ludhiana (East),227,True,official
+BLK-LDH-LDH1,DST-LDH,Ludhiana (West),228,True,official
+BLK-LDH-RAI,DST-LDH,Raikot,229,True,official
+BLK-ASR-MAJ,DST-ASR,Majitha,203,True,official
+BLK-JAL-NAK,DST-JAL,Nakodar,210,True,official
+BLK-BTI-TAL,DST-BTI,Talwandi Sabo,245,True,official
+BLK-HSH-DAS,DST-HSH,Dasua,214,True,official
+BLK-SAS-MOH,DST-SAS,SAS Nagar (Mohali),252,True,official

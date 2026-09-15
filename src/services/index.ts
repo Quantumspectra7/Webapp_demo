@@ -17,6 +17,7 @@ import { MockMarketProvider } from "@/providers/mock/MockMarketProvider";
 import { MockFinanceProvider } from "@/providers/mock/MockFinanceProvider";
 import { MockSchemeProvider } from "@/providers/mock/MockSchemeProvider";
 import { MockAdvisorProvider } from "@/providers/mock/MockAdvisorProvider";
+import { ApiAdvisorProvider } from "@/providers/api/ApiAdvisorProvider";
 import { MockSimulatorProvider } from "@/providers/mock/MockSimulatorProvider";
 import { MockReportProvider } from "@/providers/mock/MockReportProvider";
 import { MockLocationProvider } from "@/providers/mock/MockLocationProvider";
@@ -45,7 +46,9 @@ const marketProvider: IMarketProvider = isDemo
   : new ApiMarketProvider();
 const financeProvider: IFinanceProvider = new MockFinanceProvider();
 const schemeProvider: ISchemeProvider = new MockSchemeProvider();
-const advisorProvider: IAdvisorProvider = new MockAdvisorProvider();
+const advisorProvider: IAdvisorProvider = isDemo
+  ? new MockAdvisorProvider()
+  : new ApiAdvisorProvider();
 const simulatorProvider: ISimulatorProvider = new MockSimulatorProvider();
 const reportProvider: IReportProvider = new MockReportProvider();
 const locationProvider: ILocationProvider = new MockLocationProvider();

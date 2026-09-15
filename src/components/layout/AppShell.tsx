@@ -25,8 +25,10 @@ import {
   Edit3,
   Check,
   ArrowRight,
+  Database,
 } from "lucide-react";
 import { formatCurrency } from "@/lib/formatters";
+import { getTranslation } from "@/lib/i18n";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -46,6 +48,8 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
     updateLocation,
   } = useApp();
 
+  const t = getTranslation(language);
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -58,74 +62,81 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
   // Permanent Quiet Navigation strictly per structural freeze
   const navItems = [
     {
-      name: "Dashboard",
+      name: t.dashboard,
       href: "/dashboard",
       icon: LayoutDashboard,
       hint: "Control Center",
       stepKey: "dashboard",
     },
     {
-      name: "Market",
+      name: t.market,
       href: "/market",
       icon: Store,
       hint: "Reach & Saturation",
       stepKey: "market",
     },
     {
-      name: "Opportunity",
+      name: t.opportunity,
       href: "/opportunity",
       icon: Compass,
       hint: "Why Here?",
       stepKey: "opportunity",
     },
     {
-      name: "Risks",
+      name: t.risks,
       href: "/risks",
       icon: AlertTriangle,
       hint: "Threats & Mitigations",
       stepKey: "risks",
     },
     {
-      name: "Feasibility",
+      name: t.feasibility,
       href: "/feasibility",
       icon: Scale,
       hint: "78 / 100 Verdict",
       stepKey: "feasibility",
     },
     {
-      name: "Money",
+      name: t.money,
       href: "/money",
       icon: Wallet,
       hint: "Capacity & Cash Flow",
       stepKey: "money",
     },
     {
-      name: "Financing",
+      name: t.financing,
       href: "/financing",
       icon: Coins,
-      hint: "Recommended Route",
+      hint: "Schemes & Subsidies",
       stepKey: "financing",
     },
     {
-      name: "Advisor",
+      name: t.advisor,
       href: "/advisor",
       icon: MessageSquareQuote,
-      hint: "Contextual Q&A",
+      hint: "Gemini 3.6 AI",
       stepKey: "advisor",
     },
     {
-      name: "What if?",
+      name: t.whatIf,
       href: "/what-if",
       icon: SlidersHorizontal,
-      hint: "Stress Simulator",
+      hint: "Stress Test",
       stepKey: "what-if",
     },
     {
-      name: "Feasibility Report",
+      name: t.report,
       href: "/report",
       icon: FileText,
-      hint: "Final Decision Dossier",
+      hint: "Bank-Ready DPR",
       stepKey: "report",
+    },
+    {
+      name: "Database (Jury)",
+      href: "/database",
+      icon: Database,
+      hint: "PostgreSQL & MSME",
+      stepKey: "database",
     },
   ];
 
@@ -317,8 +328,39 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
             </span>
           </div>
 
-          {/* Right: [ Edit Analysis ] Button + Profile */}
-          <div className="flex items-center gap-2.5">
+          {/* Right: Language Pill + [ Edit Analysis ] Button + Profile */}
+          <div className="flex items-center gap-2">
+            {/* Top Bar Language Switcher */}
+            <div className="flex items-center gap-0.5 bg-white border border-[#ede3d8] rounded-xl p-0.5 shadow-2xs text-xs">
+              <button
+                type="button"
+                onClick={() => setLanguage("EN")}
+                className={`px-2 py-1 rounded-lg text-[11px] font-bold cursor-pointer transition-colors ${
+                  language === "EN" ? "bg-[#c75d3e] text-white" : "text-[#786d65] hover:text-[#241b16]"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage("PA")}
+                className={`px-2 py-1 rounded-lg text-[11px] font-bold cursor-pointer transition-colors ${
+                  language === "PA" ? "bg-[#c75d3e] text-white" : "text-[#786d65] hover:text-[#241b16]"
+                }`}
+              >
+                ਪੰਜਾਬੀ
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage("HI")}
+                className={`px-2 py-1 rounded-lg text-[11px] font-bold cursor-pointer transition-colors ${
+                  language === "HI" ? "bg-[#c75d3e] text-white" : "text-[#786d65] hover:text-[#241b16]"
+                }`}
+              >
+                हिंदी
+              </button>
+            </div>
+
             <button
               type="button"
               onClick={() => {
@@ -326,10 +368,10 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
                 setEditVillage(location?.villageOrTown || "Sidhwan Bet");
                 setEditModalOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white hover:bg-[#faf4ee] border border-[#ede3d8] text-xs font-bold text-[#c75d3e] shadow-2xs transition-all"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#faf4ee] border border-[#ede3d8] text-xs font-bold text-[#c75d3e] shadow-2xs transition-all cursor-pointer"
             >
               <Edit3 size={13} />
-              <span>Edit Analysis</span>
+              <span>{t.editAnalysis}</span>
             </button>
 
             {/* User Initials Avatar */}

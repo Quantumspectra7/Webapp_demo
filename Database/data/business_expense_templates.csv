@@ -1,0 +1,15 @@
+id,business_template_id,expense_type,item_name,monthly_amount,unit,source_id,confidence,data_status
+EXP-TMPL-DAIRY-01,TMPL-DAIRY-CHILLING-PANEER,raw_material,"Raw Milk Procurement (24,000 L @ Rs 38.5/L avg)",924000.0,INR,SRC-PB-DAIRY-BOARD,0.95,official
+EXP-TMPL-DAIRY-02,TMPL-DAIRY-CHILLING-PANEER,electricity,Commercial Electricity & DG Fuel for Chiller,32000.0,INR,SRC-GRAMVEST-CURATED,0.9,curated
+EXP-TMPL-DAIRY-03,TMPL-DAIRY-CHILLING-PANEER,salary,Operator & Plant Assistant Wages (2 persons),28000.0,INR,SRC-GRAMVEST-CURATED,0.9,curated
+EXP-TMPL-DAIRY-04,TMPL-DAIRY-CHILLING-PANEER,transport,Local Milk Collection Logistics & Cans Handling,16000.0,INR,SRC-GRAMVEST-CURATED,0.88,curated
+EXP-TMPL-DAIRY-05,TMPL-DAIRY-CHILLING-PANEER,maintenance,"Equipment Cleaning Chemicals, Sanitizer & Spares",7500.0,INR,SRC-GRAMVEST-CURATED,0.88,curated
+EXP-TMPL-FLOUR-01,TMPL-FLOUR-AGRO-CHAKKI,raw_material,Raw Wheat Purchase (165 quintals @ Rs 2425/qtl),400125.0,INR,SRC-PB-MANDI-AGMARK,0.96,official
+EXP-TMPL-FLOUR-02,TMPL-FLOUR-AGRO-CHAKKI,electricity,Power Tariff (15 HP motor running 8 hrs/day),24000.0,INR,SRC-GRAMVEST-CURATED,0.91,curated
+EXP-TMPL-FLOUR-03,TMPL-FLOUR-AGRO-CHAKKI,salary,Mill Master & Packaging Helper,26000.0,INR,SRC-GRAMVEST-CURATED,0.9,curated
+EXP-TMPL-FLOUR-04,TMPL-FLOUR-AGRO-CHAKKI,marketing,Packaging Pouches & Distribution Handling,14000.0,INR,SRC-GRAMVEST-CURATED,0.88,curated
+EXP-TMPL-FLOUR-05,TMPL-FLOUR-AGRO-CHAKKI,maintenance,Chakki Stone Dressing & Screen Replacement,4500.0,INR,SRC-GRAMVEST-CURATED,0.9,curated
+EXP-TMPL-CHC-01,TMPL-CUSTOM-HIRING-CENTER,raw_material,Diesel Consumption (140 hrs @ 4.5 L/hr * Rs 88/L),55440.0,INR,SRC-GRAMVEST-CURATED,0.92,curated
+EXP-TMPL-CHC-02,TMPL-CUSTOM-HIRING-CENTER,salary,Skilled Tractor Driver / Operator Honorarium,18000.0,INR,SRC-GRAMVEST-CURATED,0.9,curated
+EXP-TMPL-CHC-03,TMPL-CUSTOM-HIRING-CENTER,maintenance,"Lube Oil, Rotavator Blades & Hydraulic Maintenance",8500.0,INR,SRC-NABARD-PLP-LDH,0.89,verified
+EXP-TMPL-CHC-04,TMPL-CUSTOM-HIRING-CENTER,insurance,Comprehensive Vehicle & Commercial Liability Insurance,3500.0,INR,SRC-GRAMVEST-CURATED,0.92,curated

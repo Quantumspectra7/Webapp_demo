@@ -1,0 +1,5 @@
+id,schema_name,table_name,record_id,confidence_score,freshness_score,completeness_score,validation_status,last_validated,notes,data_status
+DQ-001,master,villages,VIL-PB-033886,0.98,0.7,1.0,PASS,2026-03-01T12:00:00Z,Official Census 2011 code (MDDS PLCN 33886) and verified polygon bounds in Ludhiana.,official
+DQ-002,master,prices,PRC-WHEAT-KHA-2026,0.98,0.99,1.0,PASS,2026-03-01T12:00:00Z,Daily AGMARKNET auction modal quote for Khanna APMC.,official
+DQ-003,master,schemes,SCH-PMEGP,0.99,0.95,1.0,PASS,2026-03-01T12:00:00Z,Verified from KVIC 2022 guidelines circular.,official
+DQ-004,master,businesses,BIZ-LDH-001,0.88,0.9,0.92,PASS,2026-03-01T12:00:00Z,OSM commercial node verified; coverage status flagged as 'good'.,verified

@@ -1,0 +1,6 @@
+id,business_category_id,factor,condition,score,reason,source_id,confidence,data_status
+OPP-DAIRY-01,CAT-DAIRY,market_gap,village_milk_surplus_over_500lpd_and_no_chiller_within_5km,85.0,High raw milk availability combined with absence of local chilling creates an immediate aggregation opportunity for premium milk sale.,SRC-PB-DAIRY-BOARD,0.92,verified
+OPP-DAIRY-02,CAT-DAIRY,pricing_arbitrage,paneer_raw_milk_spread_over_120rs,90.0,"Value-addition conversion of 10 liters buffalo milk (Rs 540) yields 2.2 kg paneer (Rs 726) plus whey, generating 34% higher gross margin.",SRC-GRAMVEST-CURATED,0.93,curated
+OPP-FOOD-01,CAT-AGRO-FOOD,population_density,cluster_households_over_800,80.0,Sufficient local consumption demand (approx 24 quintals atta/month per 100 households) ensures immediate local cash flow.,SRC-GOI-CENSUS-2011,0.9,verified
+OPP-FOOD-02,CAT-AGRO-FOOD,subsidy_advantage,pmfme_eligible_odop_district,92.0,35% credit-linked capital subsidy up to Rs 10 Lakh reduces debt service burden and drives positive Year 1 DSCR.,SRC-GOI-MOFPI-PMFME,0.96,official
+OPP-CHC-01,CAT-FARM-EQUIP,small_farmer_density,marginal_cultivators_over_50_percent,88.0,Small and marginal farmers lack capital to purchase tractors; hiring equipment on custom rental is 40% cheaper for them than owning.,SRC-NABARD-PLP-LDH,0.94,verified

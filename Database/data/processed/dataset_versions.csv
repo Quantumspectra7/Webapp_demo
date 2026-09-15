@@ -1,0 +1,2 @@
+id,version_tag,release_date,schema_version,is_active,change_summary,data_status
+DSV-1.0.0-SIH2026,1.0.0-SIH2026-MVP,2026-03-01,2.0.0,True,"Initial baseline release for SIH 2026 PS 26091 with two-tier schema separation, verified Punjab reference data, and deterministic calculation engine.",official

@@ -1,0 +1,21 @@
+id,state_id,name,district_code,headquarters,active,data_status
+DST-GUR,ST-PB,Gurdaspur,035,Gurdaspur,True,official
+DST-KAP,ST-PB,Kapurthala,036,Kapurthala,True,official
+DST-JAL,ST-PB,Jalandhar,037,Jalandhar,True,official
+DST-HSH,ST-PB,Hoshiarpur,038,Hoshiarpur,True,official
+DST-SBS,ST-PB,Shahid Bhagat Singh Nagar,039,Nawanshahr,True,official
+DST-FGS,ST-PB,Fatehgarh Sahib,040,Fatehgarh Sahib,True,official
+DST-LDH,ST-PB,Ludhiana,041,Ludhiana,True,official
+DST-MOG,ST-PB,Moga,042,Moga,True,official
+DST-FRZ,ST-PB,Firozpur,043,Firozpur,True,official
+DST-MUK,ST-PB,Muktsar,044,Sri Muktsar Sahib,True,official
+DST-FDK,ST-PB,Faridkot,045,Faridkot,True,official
+DST-BTI,ST-PB,Bathinda,046,Bathinda,True,official
+DST-MAN,ST-PB,Mansa,047,Mansa,True,official
+DST-PAT,ST-PB,Patiala,048,Patiala,True,official
+DST-ASR,ST-PB,Amritsar,049,Amritsar,True,official
+DST-TTN,ST-PB,Tarn Taran,050,Tarn Taran,True,official
+DST-RUP,ST-PB,Rupnagar,051,Rupnagar,True,official
+DST-SAS,ST-PB,Sahibzada Ajit Singh Nagar,052,SAS Nagar (Mohali),True,official
+DST-SNG,ST-PB,Sangrur,053,Sangrur,True,official
+DST-BAR,ST-PB,Barnala,054,Barnala,True,official

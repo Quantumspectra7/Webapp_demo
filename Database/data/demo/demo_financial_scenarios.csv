@@ -1,0 +1,2 @@
+id,user_id,business_template_id,project_cost,own_contribution,financing_requirement,loan_amount,interest_rate,tenure_months,moratorium_months,monthly_revenue,monthly_expenses,working_capital,created_at,updated_at,data_status
+SCEN-PB-2026-001,USR-PB-2026-001,TMPL-DAIRY-CHILLING-PANEER,1195000.0,239000.0,956000.0,956000.0,9.5,84,6,1123200.0,1007500.0,295000.0,2026-03-01T10:00:00Z,2026-03-01T10:00:00Z,demo

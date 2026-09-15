@@ -36,8 +36,11 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { getTranslation } from "@/lib/i18n";
+
 export default function MarketPage() {
-  const { location, business, profile, selectedRadius, setSelectedRadius } = useApp();
+  const { location, business, profile, selectedRadius, setSelectedRadius, language, updateLocation } = useApp();
+  const t = getTranslation(language);
 
   const [radiusKm, setRadiusKm] = useState<5 | 10>(selectedRadius || 5);
   const [market, setMarket] = useState<MarketAnalysis | null>(null);
@@ -64,6 +67,43 @@ export default function MarketPage() {
     categoryFilter: "all",
     distanceFilter: "all",
   });
+
+  // Explicit Live GPS Detection function
+  const handleDetectLiveLocation = useCallback(() => {
+    if (typeof window === "undefined" || !navigator.geolocation) {
+      alert("Geolocation is not supported by your browser");
+      return;
+    }
+    setGpsLoading(true);
+    setGpsError(null);
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude, longitude } = pos.coords;
+        const liveLoc: VentureLocation = {
+          id: "loc-live-current",
+          state: "Punjab",
+          district: "Live District",
+          block: "Current Area",
+          villageOrTown: "Live Location",
+          pincode: "142026",
+          latitude,
+          longitude,
+          marketCatchmentName: "Live GPS Micro Catchment",
+          nearestMandi: "Nearby APMC Trade Mandi",
+          distanceToMandiKm: 1.8,
+        };
+        setGpsLocation(liveLoc);
+        await updateLocation(liveLoc);
+        setGpsLoading(false);
+      },
+      (err) => {
+        console.warn("GPS error:", err);
+        setGpsError("Using active verified catchment coordinates.");
+        setGpsLoading(false);
+      },
+      { enableHighAccuracy: true, timeout: 9000 }
+    );
+  }, [updateLocation]);
 
   // Attempt GPS resolution when no saved location exists
   useEffect(() => {
@@ -158,7 +198,7 @@ export default function MarketPage() {
     };
   }, [location, gpsLocation]);
 
-  // Load Market Analysis whenever radius or location changes.
+  // Load Market Analysis whenever radius, location, or business changes.
   // Skip while GPS is still resolving to avoid loading at the static fallback
   // and immediately re-loading at the real GPS location.
   const loadMarketIntelligence = useCallback(async () => {
@@ -166,10 +206,10 @@ export default function MarketPage() {
     try {
       setLoading(true);
       const [mkt, rankedComps, mandiList, prices] = await Promise.all([
-        marketService.getAnalysis(radiusKm, activeLocation),
-        marketService.getRankedCompetitors(radiusKm, activeLocation),
+        marketService.getAnalysis(radiusKm, activeLocation, business?.id),
+        marketService.getRankedCompetitors(radiusKm, activeLocation, business?.id),
         marketService.getMarkets(radiusKm, activeLocation),
-        marketService.getPriceSignals(),
+        marketService.getPriceSignals(business?.id),
       ]);
 
       setMarket(mkt);
@@ -182,7 +222,7 @@ export default function MarketPage() {
       setLoading(false);
       setIsSwitchingRadius(false);
     }
-  }, [radiusKm, activeLocation, location, gpsLoading]);
+  }, [radiusKm, activeLocation, location, gpsLoading, business?.id]);
 
   useEffect(() => {
     loadMarketIntelligence();
@@ -240,45 +280,59 @@ export default function MarketPage() {
           <div>
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#c75d3e] mb-1">
               <Store size={16} />
-              <span>Hyper-Local Market Intelligence</span>
+              <span>Hyper-Local Market Intelligence · {business?.title}</span>
             </div>
             <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#241b16] tracking-tight">
-              Local Market &amp; Competitor Radar
+              {t.marketTitle}
             </h1>
             <p className="text-xs sm:text-sm text-[#786d65] mt-1 max-w-2xl">
-              Geospatial catchment analysis around {activeLocation.villageOrTown} ·{" "}
-              {activeLocation.block}, {activeLocation.district}. Evaluating reachable households,
-              commercial clusters, and prevailing price signals.
+              {t.marketSubtitle}
             </p>
           </div>
 
-          {/* Radius Toggle 5 km vs 10 km */}
-          <div className="flex items-center gap-2 bg-white p-1.5 rounded-2xl border border-[#ede3d8] shadow-xs self-start sm:self-auto shrink-0">
-            <span className="text-[10px] uppercase font-bold text-[#786d65] px-2.5">
-              Catchment:
-            </span>
+          {/* Action Row: Live GPS + Radius Toggle 5 km vs 10 km */}
+          <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto shrink-0">
+            {/* Live GPS Button */}
             <button
               type="button"
-              onClick={() => handleRadiusSwitch(5)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                radiusKm === 5
-                  ? "bg-[#c75d3e] text-white shadow-xs"
-                  : "text-[#241b16] hover:bg-[#faf4ee]"
-              }`}
+              onClick={handleDetectLiveLocation}
+              disabled={gpsLoading}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl text-xs font-bold bg-white hover:bg-[#fcedea] text-[#c75d3e] border border-[#c75d3e]/40 transition-all cursor-pointer shadow-xs"
+              title="Detect live GPS coordinates and analyze local 5-10 km radius"
             >
-              5 km Catchment
+              {gpsLoading ? (
+                <Loader2 size={13} className="animate-spin text-[#c75d3e]" />
+              ) : (
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              )}
+              <span>{t.detectLiveLocation}</span>
             </button>
-            <button
-              type="button"
-              onClick={() => handleRadiusSwitch(10)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                radiusKm === 10
-                  ? "bg-[#c75d3e] text-white shadow-xs"
-                  : "text-[#241b16] hover:bg-[#faf4ee]"
-              }`}
-            >
-              10 km Regional
-            </button>
+
+            {/* Radius Toggle */}
+            <div className="flex items-center gap-1 bg-white p-1 rounded-2xl border border-[#ede3d8] shadow-xs">
+              <button
+                type="button"
+                onClick={() => handleRadiusSwitch(5)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  radiusKm === 5
+                    ? "bg-[#c75d3e] text-white shadow-xs"
+                    : "text-[#241b16] hover:bg-[#faf4ee]"
+                }`}
+              >
+                {t.radius5km}
+              </button>
+              <button
+                type="button"
+                onClick={() => handleRadiusSwitch(10)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  radiusKm === 10
+                    ? "bg-[#c75d3e] text-white shadow-xs"
+                    : "text-[#241b16] hover:bg-[#faf4ee]"
+                }`}
+              >
+                {t.radius10km}
+              </button>
+            </div>
           </div>
         </div>
 

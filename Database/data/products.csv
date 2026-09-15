@@ -1,0 +1,12 @@
+id,name,category,subcategory,unit,description,active,data_status
+PRD-MILK-RAW-COW,Raw Cow Milk,Dairy,Raw Milk,liter,"Fresh farm raw cow milk (min 3.5% fat, 8.5% SNF)",True,official
+PRD-MILK-RAW-BUF,Raw Buffalo Milk,Dairy,Raw Milk,liter,"Fresh farm raw buffalo milk (min 6.5% fat, 9.0% SNF)",True,official
+PRD-DAIRY-PANEER,Fresh Cottage Cheese (Paneer),Dairy,Processed Dairy,kg,Fresh artisan vacuum-packed or bulk block paneer,True,verified
+PRD-DAIRY-CURD,Fresh Curd (Dahi),Dairy,Processed Dairy,kg,Fermented whole milk curd packaged in tubs or retail pouches,True,verified
+PRD-DAIRY-GHEE,Pure Desi Ghee,Dairy,Processed Dairy,liter,Traditional clarified butter prepared from cultured cream,True,verified
+PRD-GRAIN-WHEAT,Whole Wheat Grain (Sharbati/PBW),Grains,Raw Grain,quintal,Food-grade cleaned milling wheat grain from Punjab mandis,True,official
+PRD-FLOUR-ATTA,Stone-Ground Whole Wheat Atta,Agro Processing,Milled Grain,kg,High-fiber whole wheat chakki fresh flour packaged in 5kg/10kg bags,True,verified
+PRD-FLOUR-MAIDA,Refined Wheat Flour (Maida),Agro Processing,Milled Grain,kg,Finely sifted baking and culinary wheat flour,True,verified
+PRD-FEED-CATTLE,Balanced Cattle Feed Pellet,Agri Inputs,Livestock Feed,kg,"Compound pellet feed with 20% crude protein, vitamins, minerals",True,official
+PRD-SERV-CUSTOM-HIRE,Tractor + Rotavator Custom Tilling Service,Agri Services,Machinery Rental,hour,Tractor machinery tillage custom hiring service per acre/hour,True,verified
+PRD-SERV-LASER-LEVEL,Laser Land Leveling Service,Agri Services,Machinery Rental,hour,Precision laser controlled land leveling custom operation,True,verified

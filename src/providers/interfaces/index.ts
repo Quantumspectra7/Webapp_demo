@@ -50,6 +50,7 @@ export interface IFinanceProvider {
     sellingPrice: number;
     purchasePrice: number;
     powerAndDiesel: number;
+    categoryId?: string;
   }): Promise<FinancialScenario>;
 }
 

@@ -1,0 +1,2 @@
+id,scenario_id,engine_version,input_snapshot_json,calculated_at,execution_status,execution_notes,data_status
+RUN-PB-2026-001,SCEN-PB-2026-001,GramVest-DeterministicFinance-v1.0,"{""project_cost"": 1195000.0, ""own_contribution"": 239000.0, ""loan_amount"": 956000.0, ""interest_rate"": 9.5, ""tenure_months"": 84, ""moratorium_months"": 6, ""monthly_revenue"": 1123200.0, ""monthly_expenses"": 1007500.0}",2026-03-01T10:04:30Z,SUCCESS,Deterministic amortization and DSCR calculation completed without warnings.,demo

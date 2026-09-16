@@ -22,7 +22,6 @@ import {
   ChevronDown,
   Menu,
   X,
-  RotateCcw,
   Edit3,
   Check,
   ArrowRight,
@@ -44,7 +43,6 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
     business,
     language,
     setLanguage,
-    reloadDemoData,
     updateProfile,
     updateLocation,
     applyAnalysisProfile,
@@ -346,16 +344,6 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
 
         {/* Sidebar Footer Controls */}
         <div suppressHydrationWarning className="p-3 border-t border-[#ede3d8] flex flex-col gap-1 bg-[#faf4ee]">
-          <button
-            suppressHydrationWarning
-            onClick={() => reloadDemoData()}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[#56423d] hover:bg-white hover:text-[#1d1b18] text-[12px] font-medium transition-colors w-full text-left cursor-pointer"
-            title="Reset to Gurpreet Singh (Dairy Jagraon) demo baseline"
-          >
-            <RotateCcw size={14} className="text-[#786d65]" />
-            <span>Reset Demo Scenario</span>
-          </button>
-
           {/* Language Switcher */}
           <div className="notranslate flex items-center justify-between px-3 py-1.5 rounded-lg bg-white border border-[#ede3d8] text-[#56423d] text-[12px] font-medium" translate="no">
             <span className="flex items-center gap-1.5 notranslate" translate="no">

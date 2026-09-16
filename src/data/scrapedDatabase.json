@@ -1,0 +1,3852 @@
+[
+  {
+    "key": "jagraon-ludhiana-5-dairy",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 43240,
+    "households": 7721,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 4410,
+    "marketDemand": 19458,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 7394,
+    "aiSnippet": "The estimated population of the Jagraon 5 km rural catchment is approximately 43,240 persons across 7,721 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 7,394 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.718Z",
+    "hitsCount": 2
+  },
+  {
+    "key": "jagraon-ludhiana-10-dairy",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 94000,
+    "households": 16786,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 9588,
+    "marketDemand": 42300,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 16074,
+    "aiSnippet": "The estimated population of the Jagraon 10 km rural catchment is approximately 94,000 persons across 16,786 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 16,074 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.719Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-5-flour",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 43240,
+    "households": 7721,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 6849,
+    "marketDemand": 15134,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 5751,
+    "aiSnippet": "The estimated population of the Jagraon 5 km rural catchment is approximately 43,240 persons across 7,721 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 5,751 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.719Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-10-flour",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 94000,
+    "households": 16786,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 14890,
+    "marketDemand": 32900,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 12502,
+    "aiSnippet": "The estimated population of the Jagraon 10 km rural catchment is approximately 94,000 persons across 16,786 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 12,502 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.719Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-5-farmequipment",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 43240,
+    "households": 7721,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 2594,
+    "marketDemand": 2162,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 822,
+    "aiSnippet": "The estimated population of the Jagraon 5 km rural catchment is approximately 43,240 persons across 7,721 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 822 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.719Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-10-farmequipment",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 94000,
+    "households": 16786,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 5640,
+    "marketDemand": 4700,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 1786,
+    "aiSnippet": "The estimated population of the Jagraon 10 km rural catchment is approximately 94,000 persons across 16,786 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 1,786 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.719Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-5-mustardoil",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 43240,
+    "households": 7721,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 3459,
+    "marketDemand": 1297,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 493,
+    "aiSnippet": "The estimated population of the Jagraon 5 km rural catchment is approximately 43,240 persons across 7,721 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 493 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.719Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-10-mustardoil",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 94000,
+    "households": 16786,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 7520,
+    "marketDemand": 2820,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 1072,
+    "aiSnippet": "The estimated population of the Jagraon 10 km rural catchment is approximately 94,000 persons across 16,786 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 1,072 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.719Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-5-poultry",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 43240,
+    "households": 7721,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 4964,
+    "marketDemand": 25944,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 9859,
+    "aiSnippet": "The estimated population of the Jagraon 5 km rural catchment is approximately 43,240 persons across 7,721 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 9,859 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.719Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-10-poultry",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 94000,
+    "households": 16786,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 10791,
+    "marketDemand": 56400,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 21432,
+    "aiSnippet": "The estimated population of the Jagraon 10 km rural catchment is approximately 94,000 persons across 16,786 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 21,432 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.719Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-5-bakery",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 43240,
+    "households": 7721,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 5837,
+    "marketDemand": 5189,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 1972,
+    "aiSnippet": "The estimated population of the Jagraon 5 km rural catchment is approximately 43,240 persons across 7,721 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 1,972 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-10-bakery",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 94000,
+    "households": 16786,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 12690,
+    "marketDemand": 11280,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 4286,
+    "aiSnippet": "The estimated population of the Jagraon 10 km rural catchment is approximately 94,000 persons across 16,786 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 4,286 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-5-coldstorage",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 43240,
+    "households": 7721,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 1816,
+    "marketDemand": 865,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 329,
+    "aiSnippet": "The estimated population of the Jagraon 5 km rural catchment is approximately 43,240 persons across 7,721 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 329 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "jagraon-ludhiana-10-coldstorage",
+    "locationName": "Jagraon",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 94000,
+    "households": 16786,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 3948,
+    "marketDemand": 1880,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 714,
+    "aiSnippet": "The estimated population of the Jagraon 10 km rural catchment is approximately 94,000 persons across 16,786 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 714 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-5-dairy",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 58880,
+    "households": 10514,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 6006,
+    "marketDemand": 26496,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 10068,
+    "aiSnippet": "The estimated population of the Khanna 5 km rural catchment is approximately 58,880 persons across 10,514 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 10,068 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-10-dairy",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 128000,
+    "households": 22857,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 13056,
+    "marketDemand": 57600,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 21888,
+    "aiSnippet": "The estimated population of the Khanna 10 km rural catchment is approximately 1,28,000 persons across 22,857 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 21,888 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-5-flour",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 58880,
+    "households": 10514,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 9327,
+    "marketDemand": 20608,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 7831,
+    "aiSnippet": "The estimated population of the Khanna 5 km rural catchment is approximately 58,880 persons across 10,514 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 7,831 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-10-flour",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 128000,
+    "households": 22857,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 20275,
+    "marketDemand": 44800,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 17024,
+    "aiSnippet": "The estimated population of the Khanna 10 km rural catchment is approximately 1,28,000 persons across 22,857 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 17,024 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-5-farmequipment",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 58880,
+    "households": 10514,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 3533,
+    "marketDemand": 2944,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 1119,
+    "aiSnippet": "The estimated population of the Khanna 5 km rural catchment is approximately 58,880 persons across 10,514 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 1,119 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-10-farmequipment",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 128000,
+    "households": 22857,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 7680,
+    "marketDemand": 6400,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 2432,
+    "aiSnippet": "The estimated population of the Khanna 10 km rural catchment is approximately 1,28,000 persons across 22,857 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 2,432 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-5-mustardoil",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 58880,
+    "households": 10514,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 4710,
+    "marketDemand": 1766,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 671,
+    "aiSnippet": "The estimated population of the Khanna 5 km rural catchment is approximately 58,880 persons across 10,514 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 671 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-10-mustardoil",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 128000,
+    "households": 22857,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 10240,
+    "marketDemand": 3840,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 1459,
+    "aiSnippet": "The estimated population of the Khanna 10 km rural catchment is approximately 1,28,000 persons across 22,857 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 1,459 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-5-poultry",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 58880,
+    "households": 10514,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 6759,
+    "marketDemand": 35328,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 13425,
+    "aiSnippet": "The estimated population of the Khanna 5 km rural catchment is approximately 58,880 persons across 10,514 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 13,425 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-10-poultry",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 128000,
+    "households": 22857,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 14694,
+    "marketDemand": 76800,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 29184,
+    "aiSnippet": "The estimated population of the Khanna 10 km rural catchment is approximately 1,28,000 persons across 22,857 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 29,184 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-5-bakery",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 58880,
+    "households": 10514,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 7949,
+    "marketDemand": 7066,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 2685,
+    "aiSnippet": "The estimated population of the Khanna 5 km rural catchment is approximately 58,880 persons across 10,514 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 2,685 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-10-bakery",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 128000,
+    "households": 22857,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 17280,
+    "marketDemand": 15360,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 5837,
+    "aiSnippet": "The estimated population of the Khanna 10 km rural catchment is approximately 1,28,000 persons across 22,857 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 5,837 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-5-coldstorage",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 58880,
+    "households": 10514,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 2473,
+    "marketDemand": 1178,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 448,
+    "aiSnippet": "The estimated population of the Khanna 5 km rural catchment is approximately 58,880 persons across 10,514 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 448 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "khanna-ludhiana-10-coldstorage",
+    "locationName": "Khanna",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 128000,
+    "households": 22857,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 5376,
+    "marketDemand": 2560,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 973,
+    "aiSnippet": "The estimated population of the Khanna 10 km rural catchment is approximately 1,28,000 persons across 22,857 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 973 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-5-dairy",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 19320,
+    "households": 3450,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 1971,
+    "marketDemand": 8694,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 3304,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 5 km rural catchment is approximately 19,320 persons across 3,450 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 3,304 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-10-dairy",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 42000,
+    "households": 7500,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 4284,
+    "marketDemand": 18900,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 7182,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 10 km rural catchment is approximately 42,000 persons across 7,500 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 7,182 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-5-flour",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 19320,
+    "households": 3450,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 3060,
+    "marketDemand": 6762,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 2570,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 5 km rural catchment is approximately 19,320 persons across 3,450 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 2,570 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-10-flour",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 42000,
+    "households": 7500,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 6653,
+    "marketDemand": 14700,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 5586,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 10 km rural catchment is approximately 42,000 persons across 7,500 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 5,586 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-5-farmequipment",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 19320,
+    "households": 3450,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 1159,
+    "marketDemand": 966,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 367,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 5 km rural catchment is approximately 19,320 persons across 3,450 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 367 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-10-farmequipment",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 42000,
+    "households": 7500,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 2520,
+    "marketDemand": 2100,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 798,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 10 km rural catchment is approximately 42,000 persons across 7,500 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 798 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-5-mustardoil",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 19320,
+    "households": 3450,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 1546,
+    "marketDemand": 580,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 220,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 5 km rural catchment is approximately 19,320 persons across 3,450 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 220 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-10-mustardoil",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 42000,
+    "households": 7500,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 3360,
+    "marketDemand": 1260,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 479,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 10 km rural catchment is approximately 42,000 persons across 7,500 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 479 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-5-poultry",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 19320,
+    "households": 3450,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 2218,
+    "marketDemand": 11592,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 4405,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 5 km rural catchment is approximately 19,320 persons across 3,450 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 4,405 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-10-poultry",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 42000,
+    "households": 7500,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 4822,
+    "marketDemand": 25200,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 9576,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 10 km rural catchment is approximately 42,000 persons across 7,500 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 9,576 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-5-bakery",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 19320,
+    "households": 3450,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 2608,
+    "marketDemand": 2318,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 881,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 5 km rural catchment is approximately 19,320 persons across 3,450 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 881 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-10-bakery",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 42000,
+    "households": 7500,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 5670,
+    "marketDemand": 5040,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 1915,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 10 km rural catchment is approximately 42,000 persons across 7,500 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 1,915 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-5-coldstorage",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 19320,
+    "households": 3450,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 811,
+    "marketDemand": 386,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 147,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 5 km rural catchment is approximately 19,320 persons across 3,450 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 147 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "sidhwanbet-ludhiana-10-coldstorage",
+    "locationName": "Sidhwan Bet",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 42000,
+    "households": 7500,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 1764,
+    "marketDemand": 840,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 319,
+    "aiSnippet": "The estimated population of the Sidhwan Bet 10 km rural catchment is approximately 42,000 persons across 7,500 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 319 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-5-dairy",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 5537,
+    "marketDemand": 24426,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 9282,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 9,282 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 2
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-10-dairy",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 12036,
+    "marketDemand": 53100,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 20178,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 20,178 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-5-flour",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 8598,
+    "marketDemand": 18998,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 7219,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 7,219 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-10-flour",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 18691,
+    "marketDemand": 41300,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 15694,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 15,694 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-5-farmequipment",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 3257,
+    "marketDemand": 2714,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 1031,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 1,031 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-10-farmequipment",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 7080,
+    "marketDemand": 5900,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 2242,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 2,242 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-5-mustardoil",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 4342,
+    "marketDemand": 1628,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 619,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 619 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-10-mustardoil",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 9440,
+    "marketDemand": 3540,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 1345,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 1,345 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-5-poultry",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 6231,
+    "marketDemand": 32568,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 12376,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 12,376 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-10-poultry",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 13546,
+    "marketDemand": 70800,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 26904,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 26,904 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-5-bakery",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 7328,
+    "marketDemand": 6514,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 2475,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 2,475 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 2
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-10-bakery",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 15930,
+    "marketDemand": 14160,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 5381,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 5,381 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-5-coldstorage",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 2280,
+    "marketDemand": 1086,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 413,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 413 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwaralawgatelpu-kapurthala-10-coldstorage",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 4956,
+    "marketDemand": 2360,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 897,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 897 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-5-dairy",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 5537,
+    "marketDemand": 24426,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 9282,
+    "aiSnippet": "The estimated population of the Phagwara 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 9,282 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-10-dairy",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 12036,
+    "marketDemand": 53100,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 20178,
+    "aiSnippet": "The estimated population of the Phagwara 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 20,178 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-5-flour",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 8598,
+    "marketDemand": 18998,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 7219,
+    "aiSnippet": "The estimated population of the Phagwara 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 7,219 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-10-flour",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 18691,
+    "marketDemand": 41300,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 15694,
+    "aiSnippet": "The estimated population of the Phagwara 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 15,694 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-5-farmequipment",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 3257,
+    "marketDemand": 2714,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 1031,
+    "aiSnippet": "The estimated population of the Phagwara 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 1,031 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-10-farmequipment",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 7080,
+    "marketDemand": 5900,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 2242,
+    "aiSnippet": "The estimated population of the Phagwara 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 2,242 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-5-mustardoil",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 4342,
+    "marketDemand": 1628,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 619,
+    "aiSnippet": "The estimated population of the Phagwara 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 619 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-10-mustardoil",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 9440,
+    "marketDemand": 3540,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 1345,
+    "aiSnippet": "The estimated population of the Phagwara 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 1,345 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-5-poultry",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 6231,
+    "marketDemand": 32568,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 12376,
+    "aiSnippet": "The estimated population of the Phagwara 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 12,376 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-10-poultry",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 13546,
+    "marketDemand": 70800,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 26904,
+    "aiSnippet": "The estimated population of the Phagwara 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 26,904 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-5-bakery",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 7328,
+    "marketDemand": 6514,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 2475,
+    "aiSnippet": "The estimated population of the Phagwara 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 2,475 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-10-bakery",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 15930,
+    "marketDemand": 14160,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 5381,
+    "aiSnippet": "The estimated population of the Phagwara 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 5,381 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-5-coldstorage",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 54280,
+    "households": 9693,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 2280,
+    "marketDemand": 1086,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 413,
+    "aiSnippet": "The estimated population of the Phagwara 5 km rural catchment is approximately 54,280 persons across 9,693 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 413 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "phagwara-kapurthala-10-coldstorage",
+    "locationName": "Phagwara",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 118000,
+    "households": 21071,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 4956,
+    "marketDemand": 2360,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 897,
+    "aiSnippet": "The estimated population of the Phagwara 10 km rural catchment is approximately 1,18,000 persons across 21,071 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 897 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-5-dairy",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 25760,
+    "households": 4600,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 2628,
+    "marketDemand": 11592,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 4405,
+    "aiSnippet": "The estimated population of the Samrala 5 km rural catchment is approximately 25,760 persons across 4,600 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 4,405 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-10-dairy",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 56000,
+    "households": 10000,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 5712,
+    "marketDemand": 25200,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 9576,
+    "aiSnippet": "The estimated population of the Samrala 10 km rural catchment is approximately 56,000 persons across 10,000 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 9,576 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-5-flour",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 25760,
+    "households": 4600,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 4080,
+    "marketDemand": 9016,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 3426,
+    "aiSnippet": "The estimated population of the Samrala 5 km rural catchment is approximately 25,760 persons across 4,600 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 3,426 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-10-flour",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 56000,
+    "households": 10000,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 8870,
+    "marketDemand": 19600,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 7448,
+    "aiSnippet": "The estimated population of the Samrala 10 km rural catchment is approximately 56,000 persons across 10,000 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 7,448 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-5-farmequipment",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 25760,
+    "households": 4600,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 1546,
+    "marketDemand": 1288,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 489,
+    "aiSnippet": "The estimated population of the Samrala 5 km rural catchment is approximately 25,760 persons across 4,600 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 489 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-10-farmequipment",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 56000,
+    "households": 10000,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 3360,
+    "marketDemand": 2800,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 1064,
+    "aiSnippet": "The estimated population of the Samrala 10 km rural catchment is approximately 56,000 persons across 10,000 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 1,064 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-5-mustardoil",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 25760,
+    "households": 4600,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 2061,
+    "marketDemand": 773,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 294,
+    "aiSnippet": "The estimated population of the Samrala 5 km rural catchment is approximately 25,760 persons across 4,600 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 294 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-10-mustardoil",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 56000,
+    "households": 10000,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 4480,
+    "marketDemand": 1680,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 638,
+    "aiSnippet": "The estimated population of the Samrala 10 km rural catchment is approximately 56,000 persons across 10,000 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 638 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-5-poultry",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 25760,
+    "households": 4600,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 2957,
+    "marketDemand": 15456,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 5873,
+    "aiSnippet": "The estimated population of the Samrala 5 km rural catchment is approximately 25,760 persons across 4,600 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 5,873 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-10-poultry",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 56000,
+    "households": 10000,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 6429,
+    "marketDemand": 33600,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 12768,
+    "aiSnippet": "The estimated population of the Samrala 10 km rural catchment is approximately 56,000 persons across 10,000 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 12,768 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-5-bakery",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 25760,
+    "households": 4600,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 3478,
+    "marketDemand": 3091,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 1175,
+    "aiSnippet": "The estimated population of the Samrala 5 km rural catchment is approximately 25,760 persons across 4,600 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 1,175 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-10-bakery",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 56000,
+    "households": 10000,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 7560,
+    "marketDemand": 6720,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 2554,
+    "aiSnippet": "The estimated population of the Samrala 10 km rural catchment is approximately 56,000 persons across 10,000 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 2,554 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-5-coldstorage",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 25760,
+    "households": 4600,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 1082,
+    "marketDemand": 515,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 196,
+    "aiSnippet": "The estimated population of the Samrala 5 km rural catchment is approximately 25,760 persons across 4,600 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 196 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "samrala-ludhiana-10-coldstorage",
+    "locationName": "Samrala",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 56000,
+    "households": 10000,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 2352,
+    "marketDemand": 1120,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 426,
+    "aiSnippet": "The estimated population of the Samrala 10 km rural catchment is approximately 56,000 persons across 10,000 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 426 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-5-dairy",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 22080,
+    "households": 3943,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 2252,
+    "marketDemand": 9936,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 3776,
+    "aiSnippet": "The estimated population of the Doraha 5 km rural catchment is approximately 22,080 persons across 3,943 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 3,776 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-10-dairy",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 48000,
+    "households": 8571,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 4896,
+    "marketDemand": 21600,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 8208,
+    "aiSnippet": "The estimated population of the Doraha 10 km rural catchment is approximately 48,000 persons across 8,571 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 8,208 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-5-flour",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 22080,
+    "households": 3943,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 3497,
+    "marketDemand": 7728,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 2937,
+    "aiSnippet": "The estimated population of the Doraha 5 km rural catchment is approximately 22,080 persons across 3,943 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 2,937 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-10-flour",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 48000,
+    "households": 8571,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 7603,
+    "marketDemand": 16800,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 6384,
+    "aiSnippet": "The estimated population of the Doraha 10 km rural catchment is approximately 48,000 persons across 8,571 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 6,384 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-5-farmequipment",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 22080,
+    "households": 3943,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 1325,
+    "marketDemand": 1104,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 420,
+    "aiSnippet": "The estimated population of the Doraha 5 km rural catchment is approximately 22,080 persons across 3,943 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 420 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-10-farmequipment",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 48000,
+    "households": 8571,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 2880,
+    "marketDemand": 2400,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 912,
+    "aiSnippet": "The estimated population of the Doraha 10 km rural catchment is approximately 48,000 persons across 8,571 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 912 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-5-mustardoil",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 22080,
+    "households": 3943,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 1766,
+    "marketDemand": 662,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 252,
+    "aiSnippet": "The estimated population of the Doraha 5 km rural catchment is approximately 22,080 persons across 3,943 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 252 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-10-mustardoil",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 48000,
+    "households": 8571,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 3840,
+    "marketDemand": 1440,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 547,
+    "aiSnippet": "The estimated population of the Doraha 10 km rural catchment is approximately 48,000 persons across 8,571 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 547 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-5-poultry",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 22080,
+    "households": 3943,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 2535,
+    "marketDemand": 13248,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 5034,
+    "aiSnippet": "The estimated population of the Doraha 5 km rural catchment is approximately 22,080 persons across 3,943 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 5,034 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-10-poultry",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 48000,
+    "households": 8571,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 5510,
+    "marketDemand": 28800,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 10944,
+    "aiSnippet": "The estimated population of the Doraha 10 km rural catchment is approximately 48,000 persons across 8,571 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 10,944 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-5-bakery",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 22080,
+    "households": 3943,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 2981,
+    "marketDemand": 2650,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 1007,
+    "aiSnippet": "The estimated population of the Doraha 5 km rural catchment is approximately 22,080 persons across 3,943 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 1,007 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-10-bakery",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 48000,
+    "households": 8571,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 6480,
+    "marketDemand": 5760,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 2189,
+    "aiSnippet": "The estimated population of the Doraha 10 km rural catchment is approximately 48,000 persons across 8,571 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 2,189 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-5-coldstorage",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 5,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 22080,
+    "households": 3943,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 927,
+    "marketDemand": 442,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 168,
+    "aiSnippet": "The estimated population of the Doraha 5 km rural catchment is approximately 22,080 persons across 3,943 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 168 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "doraha-ludhiana-10-coldstorage",
+    "locationName": "Doraha",
+    "districtName": "Ludhiana",
+    "radiusKm": 10,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 48000,
+    "households": 8571,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 2016,
+    "marketDemand": 960,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 365,
+    "aiSnippet": "The estimated population of the Doraha 10 km rural catchment is approximately 48,000 persons across 8,571 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 365 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-5-dairy",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 46460,
+    "households": 8296,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 4739,
+    "marketDemand": 20907,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 7945,
+    "aiSnippet": "The estimated population of the Kapurthala 5 km rural catchment is approximately 46,460 persons across 8,296 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 7,945 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-10-dairy",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Dairy Processing & Milk Chilling Unit",
+    "population": 101000,
+    "households": 18036,
+    "targetCustomerRate": 0.12,
+    "accessibilityFactor": 0.85,
+    "estimatedCustomers": 10302,
+    "marketDemand": 45450,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 17271,
+    "aiSnippet": "The estimated population of the Kapurthala 10 km rural catchment is approximately 1,01,000 persons across 18,036 households. For Dairy Processing & Milk Chilling Unit, local unmet demand is estimated at 17,271 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-5-flour",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 46460,
+    "households": 8296,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 7359,
+    "marketDemand": 16261,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 6179,
+    "aiSnippet": "The estimated population of the Kapurthala 5 km rural catchment is approximately 46,460 persons across 8,296 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 6,179 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-10-flour",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Flour Mill & Multi-Grain Atta Chakki",
+    "population": 101000,
+    "households": 18036,
+    "targetCustomerRate": 0.18,
+    "accessibilityFactor": 0.88,
+    "estimatedCustomers": 15998,
+    "marketDemand": 35350,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 13433,
+    "aiSnippet": "The estimated population of the Kapurthala 10 km rural catchment is approximately 1,01,000 persons across 18,036 households. For Flour Mill & Multi-Grain Atta Chakki, local unmet demand is estimated at 13,433 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-5-farmequipment",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 46460,
+    "households": 8296,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 2788,
+    "marketDemand": 2323,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 883,
+    "aiSnippet": "The estimated population of the Kapurthala 5 km rural catchment is approximately 46,460 persons across 8,296 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 883 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-10-farmequipment",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Custom Hiring Centre & Farm Machinery Bank",
+    "population": 101000,
+    "households": 18036,
+    "targetCustomerRate": 0.08,
+    "accessibilityFactor": 0.75,
+    "estimatedCustomers": 6060,
+    "marketDemand": 5050,
+    "marketDemandUnit": "acres/season",
+    "unmetDemand": 1919,
+    "aiSnippet": "The estimated population of the Kapurthala 10 km rural catchment is approximately 1,01,000 persons across 18,036 households. For Custom Hiring Centre & Farm Machinery Bank, local unmet demand is estimated at 1,919 acres/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-5-mustardoil",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 46460,
+    "households": 8296,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 3717,
+    "marketDemand": 1394,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 530,
+    "aiSnippet": "The estimated population of the Kapurthala 5 km rural catchment is approximately 46,460 persons across 8,296 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 530 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-10-mustardoil",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Cold-Pressed Mustard Oil Expeller",
+    "population": 101000,
+    "households": 18036,
+    "targetCustomerRate": 0.1,
+    "accessibilityFactor": 0.8,
+    "estimatedCustomers": 8080,
+    "marketDemand": 3030,
+    "marketDemandUnit": "L/day",
+    "unmetDemand": 1151,
+    "aiSnippet": "The estimated population of the Kapurthala 10 km rural catchment is approximately 1,01,000 persons across 18,036 households. For Cold-Pressed Mustard Oil Expeller, local unmet demand is estimated at 1,151 L/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-5-poultry",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 46460,
+    "households": 8296,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 5334,
+    "marketDemand": 27876,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 10593,
+    "aiSnippet": "The estimated population of the Kapurthala 5 km rural catchment is approximately 46,460 persons across 8,296 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 10,593 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-10-poultry",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Layer Poultry & Commercial Egg Production",
+    "population": 101000,
+    "households": 18036,
+    "targetCustomerRate": 0.14,
+    "accessibilityFactor": 0.82,
+    "estimatedCustomers": 11595,
+    "marketDemand": 60600,
+    "marketDemandUnit": "eggs/day",
+    "unmetDemand": 23028,
+    "aiSnippet": "The estimated population of the Kapurthala 10 km rural catchment is approximately 1,01,000 persons across 18,036 households. For Layer Poultry & Commercial Egg Production, local unmet demand is estimated at 23,028 eggs/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-5-bakery",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 46460,
+    "households": 8296,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 6272,
+    "marketDemand": 5575,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 2119,
+    "aiSnippet": "The estimated population of the Kapurthala 5 km rural catchment is approximately 46,460 persons across 8,296 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 2,119 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-10-bakery",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Commercial Bakery & Confectionery Unit",
+    "population": 101000,
+    "households": 18036,
+    "targetCustomerRate": 0.15,
+    "accessibilityFactor": 0.9,
+    "estimatedCustomers": 13635,
+    "marketDemand": 12120,
+    "marketDemandUnit": "kg/day",
+    "unmetDemand": 4606,
+    "aiSnippet": "The estimated population of the Kapurthala 10 km rural catchment is approximately 1,01,000 persons across 18,036 households. For Commercial Bakery & Confectionery Unit, local unmet demand is estimated at 4,606 kg/day with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-5-coldstorage",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 46460,
+    "households": 8296,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 1951,
+    "marketDemand": 929,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 353,
+    "aiSnippet": "The estimated population of the Kapurthala 5 km rural catchment is approximately 46,460 persons across 8,296 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 353 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "key": "kapurthala-kapurthala-10-coldstorage",
+    "locationName": "Kapurthala",
+    "districtName": "Kapurthala",
+    "radiusKm": 10,
+    "category": "Mini Solar Cold Storage & Packhouse",
+    "population": 101000,
+    "households": 18036,
+    "targetCustomerRate": 0.06,
+    "accessibilityFactor": 0.7,
+    "estimatedCustomers": 4242,
+    "marketDemand": 2020,
+    "marketDemandUnit": "MT/season",
+    "unmetDemand": 768,
+    "aiSnippet": "The estimated population of the Kapurthala 10 km rural catchment is approximately 1,01,000 persons across 18,036 households. For Mini Solar Cold Storage & Packhouse, local unmet demand is estimated at 768 MT/season with strong off-take potential.",
+    "source": "GramVest Verified Punjab Census & ScrapeBadger Repository",
+    "confidence": "high",
+    "references": [
+      {
+        "title": "Census of India - Punjab District Handbooks",
+        "link": "https://censusindia.gov.in"
+      },
+      {
+        "title": "Punjab Agro-Industries Corporation (PAIC) Market Review",
+        "link": "https://agri.punjab.gov.in"
+      },
+      {
+        "title": "National Dairy Development Board (NDDB) Telemetry",
+        "link": "https://nddb.coop"
+      }
+    ],
+    "scrapedAt": "2026-09-16T06:03:40.720Z",
+    "hitsCount": 1
+  },
+  {
+    "population": 43240,
+    "households": 7721,
+    "targetCustomerRate": 0.35,
+    "accessibilityFactor": 0.42,
+    "estimatedCustomers": 1135,
+    "marketDemand": 14200,
+    "marketDemandUnit": "Liters/day",
+    "unmetDemand": 1850,
+    "aiSnippet": "The estimated population of the Local Area catchment is approximately 94,000 with strong agrarian and commercial off-take.",
+    "source": "GramVest Demographic Engine",
+    "confidence": "high",
+    "references": [],
+    "key": "localarea-punjab-5-dairy",
+    "locationName": "Local Area",
+    "districtName": "Punjab",
+    "radiusKm": 5,
+    "category": "Dairy",
+    "scrapedAt": "2026-09-16T06:09:23.264Z",
+    "hitsCount": 1
+  },
+  {
+    "population": 43240,
+    "households": 7721,
+    "targetCustomerRate": 0.88,
+    "accessibilityFactor": 0.45,
+    "estimatedCustomers": 3058,
+    "marketDemand": 8500,
+    "marketDemandUnit": "Kg/day",
+    "unmetDemand": 1400,
+    "aiSnippet": "The estimated population of the Phagwara (Law Gate / LPU) catchment is approximately 94,000 with strong agrarian and commercial off-take.",
+    "source": "GramVest Demographic Engine",
+    "confidence": "high",
+    "references": [],
+    "key": "phagwaralawgatelpu-kapurthala-5-commercialchakkiflourdalmill",
+    "locationName": "Phagwara (Law Gate / LPU)",
+    "districtName": "Kapurthala",
+    "radiusKm": 5,
+    "category": "Commercial Chakki Flour & Dal Mill",
+    "scrapedAt": "2026-09-16T06:10:26.580Z",
+    "hitsCount": 1
+  }
+]

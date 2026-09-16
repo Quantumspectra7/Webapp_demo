@@ -10,8 +10,11 @@
     "test": "node --experimental-strip-types tests/calculations.test.mjs && node --experimental-strip-types tests/formatters.test.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.116.0",
     "@types/leaflet": "^1.9.22",
     "clsx": "^2.1.1",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.45.0",
     "next": "16.3.5",

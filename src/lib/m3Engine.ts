@@ -44,6 +44,8 @@ export function resolveLocationContext(
     }
     return {
       ...closest,
+      village: village || closest.village,
+      district: district || closest.district,
       latitude: lat,
       longitude: lng,
     };

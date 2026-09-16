@@ -45,15 +45,23 @@ export default function ReportPage() {
     loadReport();
   }, []);
 
+  const [downloadedFilename, setDownloadedFilename] = useState<string>("");
+
   const handleDownloadPdf = async () => {
     if (!report) return;
     setDownloading(true);
     try {
-      const res = await reportService.downloadPdf(report.id);
+      const { downloadDprPdf } = await import("@/lib/pdfGenerator");
+      const filename = downloadDprPdf(report);
+      setDownloadedFilename(filename);
       setDownloadSuccess(true);
-      setTimeout(() => setDownloadSuccess(false), 4000);
+      setTimeout(() => setDownloadSuccess(false), 5000);
     } catch (err) {
       console.error("PDF download failed", err);
+      // Fallback to API route download
+      if (typeof window !== "undefined") {
+        window.location.href = `/api/v1/dossier/bank-cma.pdf?id=${encodeURIComponent(report.id)}`;
+      }
     } finally {
       setDownloading(false);
     }
@@ -129,11 +137,20 @@ export default function ReportPage() {
         </div>
 
         {downloadSuccess && (
-          <div className="p-3.5 rounded-xl bg-[#f0f6ec] border border-[#3a6b4c]/30 text-[#3a6b4c] text-xs font-bold flex items-center gap-2 animate-fadeIn print:hidden">
-            <CheckCircle2 size={16} />
-            <span>
-              Bankable Detailed Project Report generated successfully: GramVest_Business_Feasibility_Report_GurpreetSingh_Jagraon.pdf
-            </span>
+          <div className="p-3.5 rounded-xl bg-[#f0f6ec] border border-[#3a6b4c]/30 text-[#3a6b4c] text-xs font-bold flex flex-col sm:flex-row sm:items-center justify-between gap-2 animate-fadeIn print:hidden">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 size={16} className="flex-shrink-0 text-[#3a6b4c]" />
+              <span>
+                Bankable Detailed Project Report downloaded: <span className="font-mono text-[#241b16] font-semibold">{downloadedFilename || "GramVest_Bankable_DPR.pdf"}</span>
+              </span>
+            </div>
+            <a
+              href={`/api/v1/dossier/bank-cma.pdf?id=${encodeURIComponent(report.id)}`}
+              download={downloadedFilename || "GramVest_Bankable_DPR.pdf"}
+              className="text-[11px] underline text-[#3a6b4c] hover:text-[#241b16] self-end sm:self-auto font-medium"
+            >
+              Re-download file
+            </a>
           </div>
         )}
 

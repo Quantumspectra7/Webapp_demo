@@ -157,8 +157,8 @@ export class MockReportProvider implements IReportProvider {
     const cleanBiz = (business.slug || "Venture").replace(/\s+/g, "_");
 
     return {
-      downloadUrl: `#dpr-download-${reportId}`,
-      filename: `GramVest_DPR_${cleanName}_${cleanBiz}_${cleanTown}.pdf`,
+      downloadUrl: `/api/v1/dossier/bank-cma.pdf?id=${encodeURIComponent(reportId)}`,
+      filename: `GramVest_Bankable_DPR_${cleanBiz}_${cleanTown}_${cleanName}.pdf`,
     };
   }
 }

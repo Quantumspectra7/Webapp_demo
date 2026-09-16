@@ -48,47 +48,103 @@ export class MockLocationProvider implements ILocationProvider {
   }
 
   async resolveLocation(latitude: number, longitude: number): Promise<LocationProfile> {
-    // Attempt reverse geocoding via Nominatim when available in client
+    // 1. Attempt reverse geocoding via internal API route (which has reliable User-Agent & timeout)
     try {
       if (typeof window !== "undefined") {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 2000);
-        const res = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=14&addressdetails=1`,
-          {
-            headers: { "Accept-Language": "en" },
-            signal: controller.signal,
-          }
-        );
-        clearTimeout(timeoutId);
+        const res = await fetch(`/api/v1/location/reverse?lat=${latitude}&lng=${longitude}`, {
+          headers: { "Accept": "application/json" },
+        });
         if (res.ok) {
-          const data = await res.json();
-          const addr = data.address || {};
-          const town = addr.village || addr.town || addr.city || addr.suburb || addr.hamlet || addr.county || "Selected Area";
-          const district = (addr.state_district || addr.county || addr.district || "Ludhiana").replace(/district/i, "").trim();
-          const state = addr.state || "Punjab";
-          const pincode = addr.postcode || "141401";
-
-          return {
-            id: `loc-gps-${Date.now()}`,
-            state,
-            district,
-            block: town,
-            villageOrTown: town,
-            pincode,
-            latitude,
-            longitude,
-            precision: "point",
-            source: "map",
-            confidence: "high",
-          };
+          const loc = await res.json();
+          if (loc && loc.villageOrTown) {
+            return loc as LocationProfile;
+          }
         }
+      }
+    } catch {
+      // Fall through to direct nominatim or dataset
+    }
+
+    // 2. Direct Nominatim fetch with zoom=18 for street/locality accuracy
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
+        {
+          headers: {
+            "Accept-Language": "en",
+            "User-Agent": "GramVest-Rural-Decision-Engine/2.0 (contact@gramvest.org)",
+          },
+          signal: controller.signal,
+        }
+      );
+      clearTimeout(timeoutId);
+
+      if (res.ok) {
+        const data = await res.json();
+        const addr = data.address || {};
+        const displayName = data.display_name || "";
+
+        const isNearLawGate =
+          (latitude >= 31.240 && latitude <= 31.265 && longitude >= 75.690 && longitude <= 75.720) ||
+          displayName.toLowerCase().includes("lovely professional university") ||
+          displayName.toLowerCase().includes("law gate");
+
+        let district = (addr.state_district || addr.county || addr.district || "Punjab")
+          .replace(/district|tahsil|tehsil/gi, "")
+          .trim();
+
+        let block = (addr.county || addr.subdistrict || addr.town || addr.city || district)
+          .replace(/tahsil|tehsil|block|district/gi, "")
+          .trim();
+
+        const primaryTown = addr.town || addr.city || addr.municipality || "";
+        const primaryVillage = addr.village || addr.hamlet || "";
+        const landmark = addr.amenity || addr.neighbourhood || addr.suburb || "";
+
+        let villageOrTown = "";
+
+        if (isNearLawGate) {
+          villageOrTown = "Phagwara (Law Gate / LPU)";
+          block = "Phagwara";
+          district = "Kapurthala";
+        } else if (landmark && primaryTown) {
+          villageOrTown = `${primaryTown} (${landmark})`;
+        } else if (primaryTown) {
+          villageOrTown = primaryTown;
+        } else if (primaryVillage) {
+          villageOrTown = primaryVillage;
+        } else if (landmark) {
+          villageOrTown = landmark;
+        } else if (addr.county) {
+          villageOrTown = addr.county.replace(/tahsil|tehsil/gi, "").trim();
+        } else {
+          villageOrTown = "Live Location Site";
+        }
+
+        const pincode = isNearLawGate ? "144411" : (addr.postcode || "141401");
+        const state = addr.state || "Punjab";
+
+        return {
+          id: `loc-gps-${Date.now()}`,
+          state,
+          district: district || "Punjab",
+          block: block || villageOrTown,
+          villageOrTown,
+          pincode,
+          latitude,
+          longitude,
+          precision: "point",
+          source: "map",
+          confidence: "high",
+        };
       }
     } catch {
       // Graceful fallback to nearest local dataset point
     }
 
-    // Find closest location by coordinates in local dataset
+    // 3. Find closest location by coordinates in local dataset
     let closest = this.locations[0];
     let minDistanceSq = Number.MAX_VALUE;
 

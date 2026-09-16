@@ -64,15 +64,23 @@ export const LocationStep: React.FC<LocationStepProps> = ({
 
         try {
           const resolved = await locationService.resolveLocation(lat, lng);
-          setSelectedLocation({
+          const updatedLocation: LocationProfile = {
             ...resolved,
             latitude: lat,
             longitude: lng,
             precision: "point",
             source: "map",
             confidence: "high",
-          });
-          setGpsMessage(null);
+          };
+          setSelectedLocation(updatedLocation);
+
+          // Sync manual dropdowns so manual selectors stay in sync with live location
+          if (updatedLocation.district) setManualDistrict(updatedLocation.district);
+          if (updatedLocation.block) setManualBlock(updatedLocation.block);
+          if (updatedLocation.villageOrTown) setManualVillage(updatedLocation.villageOrTown);
+
+          setGpsMessage(`✓ Live location locked: ${updatedLocation.villageOrTown}, ${updatedLocation.district}`);
+          setTimeout(() => setGpsMessage(null), 5000);
         } catch {
           setSelectedLocation((prev) => ({
             ...prev,
@@ -81,7 +89,8 @@ export const LocationStep: React.FC<LocationStepProps> = ({
             source: "map",
             confidence: "high",
           }));
-          setGpsMessage(null);
+          setGpsMessage(`✓ GPS coordinates locked: ${lat}°, ${lng}°`);
+          setTimeout(() => setGpsMessage(null), 4000);
         } finally {
           setIsFetchingGps(false);
         }
@@ -183,14 +192,18 @@ export const LocationStep: React.FC<LocationStepProps> = ({
   const handleCoordinatesChange = async (lat: number, lng: number) => {
     try {
       const resolved = await locationService.resolveLocation(lat, lng);
-      setSelectedLocation({
+      const updated: LocationProfile = {
         ...resolved,
         latitude: lat,
         longitude: lng,
         precision: "point",
         source: "map",
         confidence: "high",
-      });
+      };
+      setSelectedLocation(updated);
+      if (updated.district) setManualDistrict(updated.district);
+      if (updated.block) setManualBlock(updated.block);
+      if (updated.villageOrTown) setManualVillage(updated.villageOrTown);
     } catch {
       setSelectedLocation((prev) => ({
         ...prev,

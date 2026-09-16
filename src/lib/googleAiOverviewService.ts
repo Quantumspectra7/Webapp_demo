@@ -1,4 +1,5 @@
 import { ScrapeBadger } from "scrapebadger";
+import { getScrapedCatchment, saveScrapedCatchment } from "./scrapedDatabase";
 
 export interface GoogleAiCatchmentData {
   population: number;
@@ -15,7 +16,7 @@ export interface GoogleAiCatchmentData {
   references?: Array<{ title?: string; link?: string }>;
 }
 
-// In-memory cache to guarantee sub-millisecond responses on repeated queries
+// In-memory cache to guarantee sub-millisecond responses on repeated queries within the same request
 const cache = new Map<string, GoogleAiCatchmentData>();
 
 /**
@@ -33,8 +34,10 @@ function extractPopulationFromSnippet(snippet: string): number | null {
 }
 
 /**
- * Fetch live demographics, population, households, and demand estimates
- * using Google AI Overview via ScrapeBadger SDK.
+ * Fetch live demographics, population, households, and demand estimates.
+ * Checks the persistent database FIRST. If already in database, serves immediately
+ * with 0 scraping latency and 0 API credits used.
+ * If new, scrapes/computes once and immediately saves into the persistent database.
  */
 export async function getGoogleAiCatchmentData(
   locationName: string = "Jagraon",
@@ -47,8 +50,20 @@ export async function getGoogleAiCatchmentData(
     return cache.get(cacheKey)!;
   }
 
+  // 1. Check persistent database on disk
+  try {
+    const stored = getScrapedCatchment(locationName, districtName, radiusKm, category);
+    if (stored) {
+      cache.set(cacheKey, stored);
+      return stored;
+    }
+  } catch (dbErr) {
+    console.warn("[ScrapedDatabase] Lookup error, proceeding to live fetch:", dbErr);
+  }
+
+  // 2. Not in database: Scrape live via ScrapeBadger
   const apiKey = process.env.SCRAPEBADGER_API_KEY || "sb_live_QR-G9wUe_Gd0CFztJtb_dAzkw3oxrXGVXTOjp1bliCw";
-  const client = new ScrapeBadger({ apiKey, timeout: 8000, maxRetries: 1 });
+  const client = new ScrapeBadger({ apiKey, timeout: 6000, maxRetries: 0 });
 
   const catLower = category.toLowerCase();
   const isDairy = catLower.includes("dairy");
@@ -134,6 +149,13 @@ export async function getGoogleAiCatchmentData(
     confidence: "high",
     references: [],
   };
+
+  // 3. Immediately store in persistent database so future selections never re-scrape
+  try {
+    saveScrapedCatchment(locationName, districtName, radiusKm, category, data);
+  } catch (saveErr) {
+    console.warn("[ScrapedDatabase] Error saving record to persistent database:", saveErr);
+  }
 
   cache.set(cacheKey, data);
   return data;

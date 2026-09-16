@@ -171,6 +171,52 @@ export const PUNJAB_DETAILED_LOCATIONS: PunjabLocationEntry[] = [
     distanceKm: 4.1,
   },
 
+  // Kapurthala District (including Phagwara & LPU Catchment)
+  {
+    villageOrTown: "Phagwara (Law Gate / LPU)",
+    block: "Phagwara",
+    district: "Kapurthala",
+    state: "Punjab",
+    pincode: "144411",
+    latitude: 31.2529,
+    longitude: 75.7040,
+    nearestMandi: "Phagwara APMC Grain & Dairy Mandi",
+    distanceKm: 3.2,
+  },
+  {
+    villageOrTown: "Phagwara",
+    block: "Phagwara",
+    district: "Kapurthala",
+    state: "Punjab",
+    pincode: "144401",
+    latitude: 31.224,
+    longitude: 75.771,
+    nearestMandi: "Phagwara APMC Mandi",
+    distanceKm: 1.5,
+  },
+  {
+    villageOrTown: "Kapurthala",
+    block: "Kapurthala",
+    district: "Kapurthala",
+    state: "Punjab",
+    pincode: "144601",
+    latitude: 31.380,
+    longitude: 75.380,
+    nearestMandi: "Kapurthala Grain Mandi",
+    distanceKm: 1.8,
+  },
+  {
+    villageOrTown: "Sultanpur Lodhi",
+    block: "Sultanpur Lodhi",
+    district: "Kapurthala",
+    state: "Punjab",
+    pincode: "144626",
+    latitude: 31.213,
+    longitude: 75.198,
+    nearestMandi: "Sultanpur Lodhi Mandi",
+    distanceKm: 2.0,
+  },
+
   // Sangrur & Malerkotla
   {
     villageOrTown: "Dhuri",

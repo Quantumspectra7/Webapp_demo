@@ -85,7 +85,7 @@ export const OnboardingLocationMap: React.FC<OnboardingLocationMapProps> = ({
     };
   }, [mapId]);
 
-  // Sync marker and pan smoothly when coordinates change from outside
+  // Sync marker and fly smoothly when coordinates change from outside (GPS, Search, Autocomplete)
   useEffect(() => {
     if (mapRef.current && markerRef.current) {
       const currentPos = markerRef.current.getLatLng();
@@ -94,18 +94,20 @@ export const OnboardingLocationMap: React.FC<OnboardingLocationMapProps> = ({
         Math.abs(currentPos.lng - longitude) > 0.0001
       ) {
         markerRef.current.setLatLng([latitude, longitude]);
-        mapRef.current.panTo([latitude, longitude], {
+        mapRef.current.flyTo([latitude, longitude], 15, {
           animate: true,
-          duration: 0.6,
+          duration: 1.0,
         });
+        mapRef.current.invalidateSize();
       }
     }
   }, [latitude, longitude]);
 
   const handleRecenter = () => {
     if (mapRef.current) {
-      mapRef.current.setView([latitude, longitude], 13, {
+      mapRef.current.flyTo([latitude, longitude], 15, {
         animate: true,
+        duration: 0.8,
       });
     }
   };

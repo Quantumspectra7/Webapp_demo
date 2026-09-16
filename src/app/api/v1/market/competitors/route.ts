@@ -16,19 +16,19 @@ export async function GET(request: NextRequest) {
   // 1. Determine tailored search query
   let query = "business";
   if (lowerCat.includes("dairy")) {
-    query = "dairy";
+    query = "dairy farm OR milk collection OR chilling center OR milk booth";
   } else if (lowerCat.includes("flour") || lowerCat.includes("chakki") || lowerCat.includes("grain")) {
-    query = "flour mill";
+    query = "flour mill OR atta chakki OR dal mill";
   } else if (lowerCat.includes("farm") || lowerCat.includes("equipment") || lowerCat.includes("machin") || lowerCat.includes("hiring")) {
-    query = "tractor";
+    query = "tractor repair OR farm implements OR tractor dealership OR agricultural machinery";
   } else if (lowerCat.includes("poultry")) {
-    query = "poultry";
+    query = "poultry farm OR egg store";
   } else if (lowerCat.includes("cold")) {
     query = "cold storage";
   } else if (lowerCat.includes("bakery")) {
-    query = "bakery";
+    query = "bakery OR confectionery";
   } else if (lowerCat.includes("spice")) {
-    query = "spice";
+    query = "spice mill OR masala grinding";
   }
   // 2. Try SerpApi Google Maps Engine
   if (serpApiKey) {
@@ -61,7 +61,6 @@ export async function GET(request: NextRequest) {
               const ratingScore = (rating / 5) * 30;
               const revScore = Math.min(20, (reviewCount / 100) * 20);
               const relevanceScore = Math.min(99, Math.round(distScore + ratingScore + revScore));
-
               // Clean address
               const addr = item.address || item.sub_title || `${village || "Local"} Area`;
 

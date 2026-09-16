@@ -5,9 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-// Archetype Data Model
+// Archetype Data Model for Rural Enterprise Simulator
 interface ArchetypeConfig {
   id: string;
+  businessId: string;
   title: string;
   emoji: string;
   unit: string;
@@ -15,6 +16,7 @@ interface ArchetypeConfig {
   baseCost: number;
   unmetDemand: string;
   subsidyPct: number;
+  maxSubsidy: number;
   subsidyName: string;
   marginBase: number;
   deficitPct: number;
@@ -23,80 +25,262 @@ interface ArchetypeConfig {
   maxScale: number;
   defaultScale: number;
   scaleStep: number;
+  dscrBenchmark: number;
 }
 
 const ARCHETYPES: Record<string, ArchetypeConfig> = {
   dairy: {
     id: "dairy",
-    title: "Dairy Chilling Unit",
+    businessId: "biz-dairy-processing",
+    title: "Dairy Chilling & Value Addition",
     emoji: "🥛",
     unit: "Liters / day",
-    subtitle: "Bulk coolers & testing",
+    subtitle: "Bulk milk chiller & paneer unit",
     baseCost: 1450000,
-    unmetDemand: "~3,800 Ltrs / Day",
+    unmetDemand: "~1,850 - 3,800 L/day Deficit",
     subsidyPct: 35,
-    subsidyName: "35% Capital Grant (PMEGP)",
-    marginBase: 68400,
-    deficitPct: 68,
-    costPerUnit: 180,
+    maxSubsidy: 1750000,
+    subsidyName: "35% PMEGP Sovereign Subsidy",
+    marginBase: 78000,
+    deficitPct: 74,
+    costPerUnit: 220,
     minScale: 500,
     maxScale: 5000,
-    defaultScale: 2000,
+    defaultScale: 1500,
     scaleStep: 250,
+    dscrBenchmark: 1.82,
   },
   flour: {
     id: "flour",
-    title: "Spice & Flour Mill",
+    businessId: "biz-flour-mill",
+    title: "Chakki Flour & Dal Processing",
     emoji: "🌾",
     unit: "Kg / day",
-    subtitle: "Chilli, turmeric, atta",
-    baseCost: 820000,
-    unmetDemand: "~1,450 Kg / Day",
+    subtitle: "Atta, pulses & grain milling",
+    baseCost: 850000,
+    unmetDemand: "~1,650 Kg/day Local Deficit",
     subsidyPct: 35,
-    subsidyName: "35% PMFME Micro Subsidy",
-    marginBase: 44200,
-    deficitPct: 54,
-    costPerUnit: 120,
-    minScale: 200,
-    maxScale: 3000,
-    defaultScale: 1000,
+    maxSubsidy: 1000000,
+    subsidyName: "35% PMFME Cluster Grant",
+    marginBase: 52000,
+    deficitPct: 62,
+    costPerUnit: 140,
+    minScale: 300,
+    maxScale: 3500,
+    defaultScale: 1200,
     scaleStep: 100,
+    dscrBenchmark: 1.76,
   },
   chc: {
     id: "chc",
-    title: "Custom Hiring Ctr",
+    businessId: "biz-farm-equipment",
+    title: "Custom Hiring & Farm Machinery",
     emoji: "🚜",
-    unit: "Acres / month",
-    subtitle: "Tractor implements & drone",
-    baseCost: 2200000,
-    unmetDemand: "~620 Acres Demand",
+    unit: "Acres served / mo",
+    subtitle: "Tractor, Super Seeder & Leveler",
+    baseCost: 2250000,
+    unmetDemand: "~750 Acres Seasonal Need",
     subsidyPct: 40,
-    subsidyName: "40% SMAM Farm Mechanization",
-    marginBase: 95000,
-    deficitPct: 75,
-    costPerUnit: 250,
-    minScale: 100,
+    maxSubsidy: 1000000,
+    subsidyName: "40% SMAM CHC Capital Grant",
+    marginBase: 110000,
+    deficitPct: 78,
+    costPerUnit: 350,
+    minScale: 150,
     maxScale: 1200,
-    defaultScale: 400,
+    defaultScale: 450,
     scaleStep: 50,
+    dscrBenchmark: 1.95,
   },
-  agro: {
-    id: "agro",
-    title: "Agro Supply Store",
-    emoji: "🌱",
-    unit: "Farmers served / mo",
-    subtitle: "Certified seed & bio-inputs",
-    baseCost: 950000,
-    unmetDemand: "~850 Farmers / Block",
-    subsidyPct: 20,
-    subsidyName: "20% Mudra + Margin Scheme",
-    marginBase: 51200,
-    deficitPct: 42,
-    costPerUnit: 90,
+  cold: {
+    id: "cold",
+    businessId: "biz-cold-storage",
+    title: "Micro Cold Storage & Pack House",
+    emoji: "❄️",
+    unit: "Metric Tonnes (MT)",
+    subtitle: "25-50 MT horticulture chamber",
+    baseCost: 2400000,
+    unmetDemand: "~35 MT Perishables Spoilage",
+    subsidyPct: 35,
+    maxSubsidy: 1200000,
+    subsidyName: "35% MIDH + 3% AIF Relief",
+    marginBase: 125000,
+    deficitPct: 81,
+    costPerUnit: 25000,
+    minScale: 10,
+    maxScale: 100,
+    defaultScale: 30,
+    scaleStep: 5,
+    dscrBenchmark: 1.88,
+  },
+  bakery: {
+    id: "bakery",
+    businessId: "biz-bakery",
+    title: "Bakery & Confectionery Unit",
+    emoji: "🍞",
+    unit: "Kg / day",
+    subtitle: "Rotary rack oven & mixer unit",
+    baseCost: 1150000,
+    unmetDemand: "~900 Kg/day Packaged Demand",
+    subsidyPct: 35,
+    maxSubsidy: 1000000,
+    subsidyName: "35% PMFME Micro Food Grant",
+    marginBase: 64000,
+    deficitPct: 58,
+    costPerUnit: 210,
     minScale: 200,
-    maxScale: 2500,
-    defaultScale: 800,
+    maxScale: 2000,
+    defaultScale: 600,
     scaleStep: 100,
+    dscrBenchmark: 1.74,
+  },
+  spices: {
+    id: "spices",
+    businessId: "biz-spice-processing",
+    title: "Automatic Spice Grinding Unit",
+    emoji: "🌶️",
+    unit: "Kg / day",
+    subtitle: "Turmeric, chilli & coriander lines",
+    baseCost: 920000,
+    unmetDemand: "~550 Kg/day Pure Spice Deficit",
+    subsidyPct: 35,
+    maxSubsidy: 1000000,
+    subsidyName: "35% PMEGP Agro Margin Money",
+    marginBase: 58000,
+    deficitPct: 65,
+    costPerUnit: 160,
+    minScale: 100,
+    maxScale: 1500,
+    defaultScale: 500,
+    scaleStep: 50,
+    dscrBenchmark: 1.79,
+  },
+};
+
+const PUNJAB_DISTRICTS: Record<
+  string,
+  {
+    name: string;
+    tehsils: { id: string; name: string; mandiDeficit: string; feederStatus: string; powerHours: number }[];
+  }
+> = {
+  ludhiana: {
+    name: "Ludhiana (Central Agri & Industrial Hub)",
+    tehsils: [
+      {
+        id: "jagraon",
+        name: "Jagraon Mandi & Catchment",
+        mandiDeficit: "1,850 L/day unchilled milk deficit in 5km perimeter; 420 Qtl wheat gap",
+        feederStatus: "PSPCL AP-Jagraon Feeder: 8.5 hrs day / 8 hrs night uninterrupted 3-phase supply. Commercial transformer within 140m.",
+        powerHours: 16.5,
+      },
+      {
+        id: "khanna",
+        name: "Khanna Mandi (Asia's Largest Grain Market)",
+        mandiDeficit: "Asia's premier foodgrain terminal: 450 Qtl/day grain & pulse processing gap",
+        feederStatus: "Khanna Industrial Mixed Feeder: 21.5 hrs high-reliability commercial 415V line. Zero transformer upgrade backlog.",
+        powerHours: 21.5,
+      },
+      {
+        id: "samrala",
+        name: "Samrala Agro Corridor",
+        mandiDeficit: "Dairy & cattle feed deficit: 1,350 L/day unserved in 7km perimeter",
+        feederStatus: "Samrala Rural Substation: 16 hrs stable supply, dedicated agro feeder line.",
+        powerHours: 16.0,
+      },
+      {
+        id: "raikot",
+        name: "Raikot Farming Perimeter",
+        mandiDeficit: "Spice grinding & flour gap: 900 kg/day local commercial chakki shortage",
+        feederStatus: "Raikot 66kV Grid: 15.5 hrs scheduled farm supply, 10kVA solar sync recommended.",
+        powerHours: 15.5,
+      },
+    ],
+  },
+  sangrur: {
+    name: "Sangrur (Malwa Food Processing Belt)",
+    tehsils: [
+      {
+        id: "dhuri",
+        name: "Dhuri Agro Industrial Cluster",
+        mandiDeficit: "Dhuri Sugarcane & Agro Belt: 2,400 L/day dairy deficit; PMEGP priority",
+        feederStatus: "Dhuri Agricultural Feeder: 18 hrs high-tension 415V line within 180m. DIC Special Category clearance active.",
+        powerHours: 18.0,
+      },
+      {
+        id: "sunam",
+        name: "Sunam Grain & Pulse Catchment",
+        mandiDeficit: "1,550 kg/day pulse splitting & flour demand; direct APMC mandi linkage",
+        feederStatus: "Sunam Substation: 17 hrs power supply with automated load balancing.",
+        powerHours: 17.0,
+      },
+      {
+        id: "malerkotla",
+        name: "Malerkotla (Vegetable Capital)",
+        mandiDeficit: "35 MT perishables spoilage risk; micro cold room demand peak in summer",
+        feederStatus: "Malerkotla Horticulture Feeder: 20 hrs continuous commercial 3-phase power line.",
+        powerHours: 20.0,
+      },
+      {
+        id: "lehragaga",
+        name: "Lehragaga Agricultural Belt",
+        mandiDeficit: "Farm equipment rental deficit: 650 acres unserved in stubble management",
+        feederStatus: "Lehragaga Feeder: 14 hrs daily agricultural power allocation.",
+        powerHours: 14.0,
+      },
+    ],
+  },
+  patiala: {
+    name: "Patiala (Dairy & Mechanization Corridor)",
+    tehsils: [
+      {
+        id: "nabha",
+        name: "Nabha Dairy & Farm Machinery Hub",
+        mandiDeficit: "Nabha milk corridor: 3,100 L/day bulk milk chilling deficit in 10km",
+        feederStatus: "Nabha Agro-Engineering Substation: 21 hrs 415V supply with low voltage fluctuation.",
+        powerHours: 21.0,
+      },
+      {
+        id: "rajpura",
+        name: "Rajpura Logistics Corridor",
+        mandiDeficit: "Food processing & bakery demand: 1,800 kg/day consumer reach gap",
+        feederStatus: "Rajpura Highway Feeder: 23 hrs continuous industrial grade power line.",
+        powerHours: 23.0,
+      },
+      {
+        id: "samana",
+        name: "Samana Paddy & Dairy Catchment",
+        mandiDeficit: "1,600 L/day chilling deficit; high cattle density in village clusters",
+        feederStatus: "Samana Rural Feeder: 16 hrs reliable agricultural power line.",
+        powerHours: 16.0,
+      },
+    ],
+  },
+  bathinda: {
+    name: "Bathinda (Southwest Cotton & Oilseed Belt)",
+    tehsils: [
+      {
+        id: "talwandi_sabo",
+        name: "Talwandi Sabo Rural Hub",
+        mandiDeficit: "Mustard & oil expelling deficit: 950 kg/day cold-press oil gap",
+        feederStatus: "Guru Kashi Rural Feeder: 16 hrs daily supply, high solar irradiance viability.",
+        powerHours: 16.0,
+      },
+      {
+        id: "rampura_phul",
+        name: "Rampura Phul Mandi Catchment",
+        mandiDeficit: "Grain milling & agro supply deficit: 1,200 kg/day packaged atta gap",
+        feederStatus: "Rampura 66kV Grid: 17 hrs stable agricultural 3-phase connection.",
+        powerHours: 17.0,
+      },
+      {
+        id: "maur",
+        name: "Maur Agro Processing Sector",
+        mandiDeficit: "Cottonseed cake & cattle feed deficit: 1,400 kg/day animal feed gap",
+        feederStatus: "Maur Commercial Feeder: 16.5 hrs uninterrupted 3-phase line within 160m.",
+        powerHours: 16.5,
+      },
+    ],
   },
 };
 
@@ -111,88 +295,96 @@ const STEP_DETAILS: Record<
     endpoint: string;
     logLines: string[];
     highlightResult: string;
+    auditMetric: string;
   }
 > = {
   1: {
-    badge: "Step 1 of 4 • Precision Setup",
-    title: "Enter your exact village location & intended enterprise type.",
-    desc: "GramVest looks up tehsil boundary definitions, distance to nearest state highway, high-tension power grid reliability, and primary agricultural produce clusters.",
+    badge: "Step 1 of 4 • Spatial Setup",
+    title: "Enter your exact village location & intended enterprise archetype.",
+    desc: "GramVest resolves tehsil boundary definitions, distance to nearest state highway, high-tension power grid feeder reliability, and primary agricultural crop surpluses.",
     checklist: [
       "Automatic pincode & tehsil boundary polygon extraction",
-      "Verification of primary & seasonal crop surplus",
-      "Applicant category classification (General, OBC, SC/ST, Women)",
+      "Verification of seasonal crop arrivals & unserved milk/grain pools",
+      "Applicant category classification (General 25%, SC/ST/Women/OBC 35%)",
     ],
     method: "POST",
     endpoint: "/api/v1/catchment/scan",
     logLines: [
-      '// Input location parameters',
-      '"state": "Punjab",',
-      '"tehsil": "Dhuri",',
-      '"trade": "Dairy Value Addition & Chilling",',
-      '"grid_category": "Rural Agricultural Feeder A-1"',
+      '// Input location parameters: Punjab Mandi Cluster',
+      '"state": "Punjab", "district": "Sangrur", "tehsil": "Dhuri",',
+      '"enterprise": "Dairy Value Addition & Chilling Hub",',
+      '"grid_category": "PSPCL Agricultural Mixed Feeder (18.0h/day)",',
+      '"nearest_apmc_mandi": "Dhuri Grain Terminal (3.2 km)"',
     ],
     highlightResult:
-      "✓ 14 Gram Panchayats Identified within 12km radius. Total estimated unserved volume: 3,840 liters/day.",
+      "✓ 14 Gram Panchayats Identified within 12km radius. Total unserved milk volume: 2,400 L/day.",
+    auditMetric: "14 Panchayats In Radius",
   },
   2: {
-    badge: "Step 2 of 4 • Spatial Analytics",
+    badge: "Step 2 of 4 • Geospatial Analytics",
     title: "360-Degree Catchment Scan & Competitor Radius Mapping.",
-    desc: "Analyzes actual farmer tractor movement routes, competing processing facilities in a 15km perimeter, and verifies existing unfulfilled Mandi trade inquiries.",
+    desc: "Analyzes actual farmer tractor transit routes, competing processing facilities in a 15km perimeter, and verifies existing unfulfilled Mandi trade procurement inquiries.",
     checklist: [
       "Real-time geofenced competition density audit",
-      "Historical APMC Mandi volume deficit analysis",
-      "Haat Day transaction patterns and weekly peak loads",
+      "Historical APMC Mandi volume deficit & price arbitrage",
+      "Haat Day transaction patterns and seasonal peak loads",
     ],
     method: "GET",
     endpoint: "/api/v1/catchment/competition-density",
     logLines: [
-      '// Geospatial competition scan',
-      '"active_competitors": 2 (operating at only 40% capacity),',
+      '// Geospatial competition scan: 15km perimeter',
+      '"active_competitors": 2 (operating at only 42% capacity),',
       '"unserved_catchment_radius": "12 km",',
-      '"deficit_confidence": "High (Mandi Board verified)"',
+      '"mandi_arrival_deficit": "2,400 L/day unchilled milk",',
+      '"feasibility_confidence": "91% (Agmarknet & DIC verified)"',
     ],
     highlightResult:
-      "✓ Active competitors found: 2 (operating at only 40% capacity). Local Market Deficit: 68% Unserved.",
+      "✓ 2 Competing units located (operating at 42% capacity). Local Market Deficit: 74% Unserved.",
+    auditMetric: "74% Unserved Deficit",
   },
   3: {
     badge: "Step 3 of 4 • Sovereign Grant Matching",
     title: "Automated Government Capital Subsidy Entitlement Check.",
-    desc: "Cross-checks central and state schemes including PMEGP, AIF, and PMFME to match your demographic and sector for maximum sovereign capital grants.",
+    desc: "Cross-checks central and state schemes including PMEGP, PMFME, SMAM, and AIF to match your demographic and sector for maximum non-repayable capital grants.",
     checklist: [
-      "PMEGP 25% to 35% margin money clearance",
-      "AIF 3% interest subvention loan qualification",
-      "Zero-broker direct DIC application readiness",
+      "PMEGP 25% to 35% margin money clearance (up to ₹17.5L)",
+      "AIF 3% interest subvention + CGTMSE collateral fee waiver",
+      "Zero-broker direct DIC application readiness & checklist",
     ],
     method: "CALCULATE",
     endpoint: "/api/v1/subsidies/pmegp-aif",
     logLines: [
-      '// Subsidy rules computation',
-      '"matched_scheme": "PMEGP Rural (Category: Special)",',
-      '"max_project_cost": "₹50,00,000",',
-      '"capital_grant_eligible": "₹5,07,500 non-repayable"',
+      '// Sovereign subsidy rules computation',
+      '"matched_scheme": "PMEGP Rural (Category: Special / Rural)",',
+      '"project_cost": "₹14,50,000", "promoter_equity_15pct": "₹2,17,500",',
+      '"capital_grant_eligible": "₹5,07,500 non-repayable margin money",',
+      '"interest_benefit": "CGTMSE guarantee covered (No land mortgage)"',
     ],
     highlightResult:
-      "✓ Matched scheme: PMEGP Rural (Category: Special). Capital grant eligible: ₹5,07,500 non-repayable.",
+      "✓ Matched scheme: PMEGP Rural (Special Category). Capital grant eligible: ₹5,07,500 non-repayable.",
+    auditMetric: "₹5.07L Capital Subsidy",
   },
   4: {
     badge: "Step 4 of 4 • Lender-Grade Output",
     title: "Export SBI, PNB, and NABARD-Compliant Project Dossier.",
     desc: "Generates a complete 12-page CMA report containing 5-year balance sheet projections, DSCR calculations, and quotation-backed machinery schedules.",
     checklist: [
-      "Pre-formatted DSCR (>1.75) financial solvency ratios",
+      "Pre-formatted DSCR (1.82x) financial solvency ratios",
       "Pre-cleared quotation layouts from vetted OEMs",
-      "One-click PDF download for instant bank branch review",
+      "One-click PDF download for Lead District Bank branch submission",
     ],
     method: "GENERATE",
     endpoint: "/api/v1/dossier/bank-cma.pdf",
     logLines: [
       '// CMA underwriting dossier compilation',
       '"status": "100% compliant with RBI Priority Sector Lending",',
-      '"dscr_average": "1.82x (comfortably above 1.30x hurdle)",',
-      '"bank_format": "PNB & SBI Lead District standard"',
+      '"dscr_benchmark": "1.82x (comfortably above 1.30x bank hurdle)",',
+      '"term_loan": "₹7,25,000", "emi_5yr": "₹15,047 / mo",',
+      '"bank_format": "PNB, SBI & Punjab Gramin Bank Lead Standard"',
     ],
     highlightResult:
       "✓ Status: 100% compliant with RBI Priority Sector Lending. Ready for Lead District Manager branch submission.",
+    auditMetric: "1.82x DSCR Benchmark",
   },
 };
 
@@ -216,11 +408,19 @@ export default function LandingPage() {
 
   // Simulator state
   const [activeArchetypeKey, setActiveArchetypeKey] = useState<string>("dairy");
-  const [scaleValue, setScaleValue] = useState<number>(2000);
-  const [selectedDistrict, setSelectedDistrict] = useState<string>("sangrur");
-  const [selectedTehsil, setSelectedTehsil] = useState<string>("dhuri");
+  const [selectedDistrict, setSelectedDistrict] = useState<string>("ludhiana");
+  const [selectedTehsil, setSelectedTehsil] = useState<string>("jagraon");
 
   const currentArchetype = ARCHETYPES[activeArchetypeKey] || ARCHETYPES.dairy;
+  const [scaleValue, setScaleValue] = useState<number>(currentArchetype.defaultScale);
+
+  const handleSelectDistrict = (districtKey: string) => {
+    setSelectedDistrict(districtKey);
+    const tehsils = PUNJAB_DISTRICTS[districtKey]?.tehsils;
+    if (tehsils && tehsils.length > 0) {
+      setSelectedTehsil(tehsils[0].id);
+    }
+  };
 
   const handleSelectArchetype = (key: string) => {
     setActiveArchetypeKey(key);
@@ -230,29 +430,43 @@ export default function LandingPage() {
     }
   };
 
+  const currentDistrictObj = PUNJAB_DISTRICTS[selectedDistrict] || PUNJAB_DISTRICTS.ludhiana;
+  const currentTehsilObj =
+    currentDistrictObj.tehsils.find((t) => t.id === selectedTehsil) || currentDistrictObj.tehsils[0];
+
   // Dynamic calculations for simulator
-  const calculatedCost =
+  const calculatedCost = Math.round(
     currentArchetype.baseCost +
-    (scaleValue - currentArchetype.defaultScale) * currentArchetype.costPerUnit;
-  const grantAmount = Math.round(
-    calculatedCost * (currentArchetype.subsidyPct / 100)
+    (scaleValue - currentArchetype.defaultScale) * currentArchetype.costPerUnit
   );
+  const grantAmount = Math.min(
+    currentArchetype.maxSubsidy,
+    Math.round(calculatedCost * (currentArchetype.subsidyPct / 100))
+  );
+  const promoterEquity = Math.round(calculatedCost * 0.15);
+  const bankLoan = Math.max(0, calculatedCost - grantAmount - promoterEquity);
+  const monthlyEmi = Math.round((bankLoan * 0.09 * (1.09 ** 5)) / ((1.09 ** 5) - 1) / 12);
   const projectedMargin = Math.round(
     currentArchetype.marginBase * (scaleValue / currentArchetype.defaultScale)
   );
-
-  let gridStatusText =
-    "Dhuri Agricultural Feeder: 8 hrs day / 8 hrs night uninterrupted supply. 3-Phase transformer line reachable within 180 meters.";
-  if (selectedDistrict === "nashik") {
-    gridStatusText =
-      "Dindori Industrial Express Feeder: 22 hrs continuous 415V supply. High post-harvest cold chain viability.";
-  } else if (selectedDistrict === "meerut") {
-    gridStatusText =
-      "Meerut Rural Substation: Moderate 14-hr supply, recommends 15kVA automated diesel or solar backup integration.";
-  }
-
+  const gridStatusText = currentTehsilObj.feederStatus;
+  const mandiDeficitText = currentTehsilObj.mandiDeficit;
+  const feasibilityScore = Math.min(94, Math.max(76, Math.round(78 + (currentArchetype.deficitPct / 10) + (currentArchetype.subsidyPct / 20))));
+  
   // 4-Step Engine state
   const [activeEngineStep, setActiveEngineStep] = useState<number>(1);
+  const [isSimulatingStep, setIsSimulatingStep] = useState<boolean>(false);
+  const [simulationComplete, setSimulationComplete] = useState<boolean>(false);
+
+  const handleTriggerSimulation = (stepNum: number) => {
+    setActiveEngineStep(stepNum);
+    setIsSimulatingStep(true);
+    setSimulationComplete(false);
+    setTimeout(() => {
+      setIsSimulatingStep(false);
+      setSimulationComplete(true);
+    }, 600);
+  };
   const stepData = STEP_DETAILS[activeEngineStep];
 
   // Accordion FAQ state
@@ -288,9 +502,6 @@ export default function LandingPage() {
             </a>
             <a className="hover:text-[#c75d3e] transition-colors" href="#engine">
               4-Step Engine
-            </a>
-            <a className="hover:text-[#c75d3e] transition-colors" href="#mandi-stories">
-              Mandi Stories
             </a>
             <a className="hover:text-[#c75d3e] transition-colors" href="#faqs">
               FAQs
@@ -336,15 +547,24 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
               {/* Left Column: Copy & CTAs */}
               <div className="lg:col-span-7 space-y-7">
-                {/* Live Status Pill */}
-                <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#ede3d8] shadow-xs">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3a6b4c] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#3a6b4c]"></span>
-                  </span>
-                  <span className="text-xs font-bold text-[#382f29] tracking-wide uppercase">
-                    Hyper-Local Rural Business Intelligence
-                  </span>
+                {/* Live Status Pill & Voice Search Announcement */}
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#ede3d8] shadow-xs">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3a6b4c] opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#3a6b4c]"></span>
+                    </span>
+                    <span className="text-xs font-bold text-[#382f29] tracking-wide uppercase">
+                      Hyper-Local Punjab Business Intelligence
+                    </span>
+                  </div>
+                  <Link
+                    href="/onboarding"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#fcedea] hover:bg-[#fbdad3] text-[#c75d3e] text-xs font-bold border border-[#c75d3e]/25 transition-all shadow-2xs"
+                  >
+                    <span>🎙️ Multilingual Voice Search Active</span>
+                    <span className="text-[10px] font-extrabold bg-[#c75d3e] text-white px-1.5 py-0.5 rounded-md">New</span>
+                  </Link>
                 </div>
 
                 {/* Main Question & Headline */}
@@ -487,7 +707,7 @@ export default function LandingPage() {
                     <img
                       alt="Rural Entrepreneur surveying modern agricultural venture feasibility in Punjab workshop"
                       className="w-full h-[470px] object-cover object-center transform hover:scale-102 transition-transform duration-500"
-                      src="https://lh3.googleusercontent.com/aida/AEtjO1WcB1OXWM2Lq0pj4TZHcgZH9chQXEFANp8oum0D3d6hUbs45_NDGzv6jyjYJiuxHwJg6z9HJB32V78bfuIUJ7_Wd63WlOPymdFBouifXchQGDG7BDBIEgVehTHslch1zAl_t0r51tSBC4WhKJ8XCZTOIU-hZmaLgMwbPLXimyRZa-NG6gkBJwwyp9T5uQ6GTwzIZ63v75bxsLt7QH3BnPPlhb1LO1q-51KJsvoXKpti9FX54t-vMFU44rB1"
+                      src="/dairy_entrepreneur.jpg"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#241b16]/80 via-transparent to-black/20 pointer-events-none"></div>
 
@@ -572,18 +792,62 @@ export default function LandingPage() {
         </section>
         {/* END: HeroSection */}
 
+        {/* BEGIN: RealTimeMetricsTicker */}
+        <section className="bg-white border-y border-[#ede3d8] py-8 relative shadow-2xs">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 divide-y md:divide-y-0 md:divide-x divide-[#ede3d8]">
+              <div className="text-center pt-2 md:pt-0">
+                <span className="text-2xl sm:text-3xl font-bold font-serif text-[#241b16]">₹18.4 Cr+</span>
+                <p className="text-xs font-bold text-[#786d65] mt-1">Sovereign Grants Mapped</p>
+                <span className="text-[10px] text-[#3a6b4c] font-extrabold uppercase tracking-wider block mt-0.5">
+                  PMEGP • PMFME • SMAM • AIF
+                </span>
+              </div>
+              <div className="text-center pt-4 md:pt-0 md:pl-4">
+                <span className="text-2xl sm:text-3xl font-bold font-serif text-[#241b16]">22 Mandis</span>
+                <p className="text-xs font-bold text-[#786d65] mt-1">Daily APMC Price Feeds</p>
+                <span className="text-[10px] text-[#3a6b4c] font-extrabold uppercase tracking-wider block mt-0.5">
+                  Arrival Deficit Radar
+                </span>
+              </div>
+              <div className="text-center pt-4 md:pt-0 md:pl-4">
+                <span className="text-2xl sm:text-3xl font-bold font-serif text-[#241b16]">14,200+</span>
+                <p className="text-xs font-bold text-[#786d65] mt-1">Panchayats Feeder Tracked</p>
+                <span className="text-[10px] text-[#3a6b4c] font-extrabold uppercase tracking-wider block mt-0.5">
+                  PSPCL 3-Phase Grid Telemetry
+                </span>
+              </div>
+              <div className="text-center pt-4 md:pt-0 md:pl-4">
+                <span className="text-2xl sm:text-3xl font-bold font-serif text-[#241b16]">1.82x DSCR</span>
+                <p className="text-xs font-bold text-[#786d65] mt-1">Average Solvency Ratio</p>
+                <span className="text-[10px] text-[#3a6b4c] font-extrabold uppercase tracking-wider block mt-0.5">
+                  Exceeds 1.30x Bank Hurdle
+                </span>
+              </div>
+              <div className="col-span-2 md:col-span-1 text-center pt-4 md:pt-0 md:pl-4">
+                <span className="text-2xl sm:text-3xl font-bold font-serif text-[#c75d3e]">&lt; 3 Mins</span>
+                <p className="text-xs font-bold text-[#786d65] mt-1">Bankable CMA Dossier</p>
+                <span className="text-[10px] text-[#c75d3e] font-extrabold uppercase tracking-wider block mt-0.5">
+                  Instant Lead Bank PDF
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* END: RealTimeMetricsTicker */}
+
         {/* BEGIN: StandoutSimulator */}
         <section className="py-20 bg-[#faf4ee] border-y border-[#ede3d8] relative" id="simulator">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#fcedea] text-[#c75d3e] uppercase tracking-wider">
-                Interactive Sandbox
+                Real-Time Sandbox • Punjab Mandi Intelligence
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-[#241b16] font-serif">
-                Instant Rural Catchment & Subsidy Simulator
+                Instant Rural Catchment &amp; Subsidy Simulator
               </h2>
               <p className="text-base text-[#786d65]">
-                Select your planned enterprise model, tehsil parameters, and initial capacity to evaluate real-time capital feasibility.
+                Select your intended enterprise archetype, Punjab tehsil catchment, and capacity to simulate live feasibility, sovereign grant entitlements, and lender underwriting metrics.
               </p>
             </div>
 
@@ -592,10 +856,15 @@ export default function LandingPage() {
               {/* Controls Panel (Left) */}
               <div className="p-6 sm:p-8 lg:col-span-6 border-b lg:border-b-0 lg:border-r border-[#ede3d8] space-y-6">
                 <div>
-                  <label className="block text-xs font-bold text-[#786d65] uppercase tracking-wider mb-2.5">
-                    1. Select Commercial Enterprise Archetype
-                  </label>
-                  <div className="grid grid-cols-2 gap-2.5">
+                  <div className="flex items-center justify-between mb-2.5">
+                    <label className="block text-xs font-bold text-[#786d65] uppercase tracking-wider">
+                      1. Select Commercial Enterprise Archetype
+                    </label>
+                    <span className="text-[10px] font-bold text-[#3a6b4c] bg-[#f0f6ec] px-2 py-0.5 rounded-full border border-[#3a6b4c]/20">
+                      6 Verified Sectors
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                     {Object.keys(ARCHETYPES).map((key) => {
                       const arch = ARCHETYPES[key];
                       const isSelected = activeArchetypeKey === key;
@@ -604,15 +873,16 @@ export default function LandingPage() {
                           key={key}
                           onClick={() => handleSelectArchetype(key)}
                           type="button"
-                          className={`p-3 rounded-xl border text-left flex items-start gap-2.5 transition-all cursor-pointer ${isSelected
-                              ? "border-[#c75d3e] bg-[#fcedea]/60 text-[#c75d3e]"
-                              : "border-[#ede3d8] bg-white text-[#382f29] hover:border-[#c75d3e]/50"
-                            }`}
+                          className={`p-3 rounded-2xl border text-left flex flex-col justify-between transition-all cursor-pointer ${
+                            isSelected
+                              ? "border-[#c75d3e] bg-[#fcedea]/60 text-[#c75d3e] shadow-2xs ring-1 ring-[#c75d3e]/30"
+                              : "border-[#ede3d8] bg-white text-[#382f29] hover:border-[#c75d3e]/50 hover:bg-[#faf4ee]/40"
+                          }`}
                         >
-                          <span className="text-lg">{arch.emoji}</span>
+                          <span className="text-2xl mb-1">{arch.emoji}</span>
                           <div>
-                            <p className="text-xs font-bold">{arch.title}</p>
-                            <p className="text-[10px] text-[#786d65]">
+                            <p className="text-xs font-bold leading-tight">{arch.title}</p>
+                            <p className="text-[10px] text-[#786d65] mt-0.5 line-clamp-1">
                               {arch.subtitle}
                             </p>
                           </div>
@@ -623,23 +893,25 @@ export default function LandingPage() {
                 </div>
 
                 {/* District & Tehsil Selector */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                   <div>
                     <label
                       className="block text-xs font-bold text-[#786d65] uppercase tracking-wider mb-2"
                       htmlFor="district-select"
                     >
-                      Target District
+                      Target Punjab District
                     </label>
                     <select
                       id="district-select"
                       value={selectedDistrict}
-                      onChange={(e) => setSelectedDistrict(e.target.value)}
-                      className="w-full rounded-xl border-[#ede3d8] bg-[#faf4ee]/40 text-sm font-semibold text-[#382f29] focus:border-[#c75d3e] focus:ring-[#c75d3e] p-2.5"
+                      onChange={(e) => handleSelectDistrict(e.target.value)}
+                      className="w-full rounded-xl border-[#ede3d8] bg-[#faf4ee]/40 text-xs sm:text-sm font-semibold text-[#382f29] focus:border-[#c75d3e] focus:ring-[#c75d3e] p-2.5 cursor-pointer"
                     >
-                      <option value="sangrur">Ludhiana / Sangrur (Punjab)</option>
-                      <option value="nashik">Nashik (Maharashtra)</option>
-                      <option value="meerut">Meerut (Uttar Pradesh)</option>
+                      {Object.keys(PUNJAB_DISTRICTS).map((dKey) => (
+                        <option key={dKey} value={dKey}>
+                          {PUNJAB_DISTRICTS[dKey].name}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
@@ -648,17 +920,19 @@ export default function LandingPage() {
                       className="block text-xs font-bold text-[#786d65] uppercase tracking-wider mb-2"
                       htmlFor="tehsil-select"
                     >
-                      Target Tehsil / Block
+                      Target Mandi / Tehsil
                     </label>
                     <select
                       id="tehsil-select"
                       value={selectedTehsil}
                       onChange={(e) => setSelectedTehsil(e.target.value)}
-                      className="w-full rounded-xl border-[#ede3d8] bg-[#faf4ee]/40 text-sm font-semibold text-[#382f29] focus:border-[#c75d3e] focus:ring-[#c75d3e] p-2.5"
+                      className="w-full rounded-xl border-[#ede3d8] bg-[#faf4ee]/40 text-xs sm:text-sm font-semibold text-[#382f29] focus:border-[#c75d3e] focus:ring-[#c75d3e] p-2.5 cursor-pointer"
                     >
-                      <option value="dhuri">Jagraon / Dhuri Block</option>
-                      <option value="malerkotla">Malerkotla Border</option>
-                      <option value="sunam">Sunam Catchment</option>
+                      {currentDistrictObj.tehsils.map((tObj) => (
+                        <option key={tObj.id} value={tObj.id}>
+                          {tObj.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -672,7 +946,7 @@ export default function LandingPage() {
                     >
                       Target Operating Volume / Scale
                     </label>
-                    <span className="text-sm font-bold text-[#c75d3e] bg-[#fcedea] px-2.5 py-0.5 rounded-lg">
+                    <span className="text-xs sm:text-sm font-bold text-[#c75d3e] bg-[#fcedea] px-3 py-1 rounded-xl border border-[#c75d3e]/20">
                       {scaleValue.toLocaleString()} {currentArchetype.unit}
                     </span>
                   </div>
@@ -684,109 +958,149 @@ export default function LandingPage() {
                     step={currentArchetype.scaleStep}
                     value={scaleValue}
                     onChange={(e) => setScaleValue(Number(e.target.value))}
-                    className="w-full h-2 bg-[#ede3d8] rounded-lg appearance-none cursor-pointer accent-[#c75d3e]"
+                    className="w-full h-2.5 bg-[#ede3d8] rounded-lg appearance-none cursor-pointer accent-[#c75d3e]"
                   />
                   <div className="flex justify-between text-[11px] font-medium text-[#786d65]">
-                    <span>Micro ({currentArchetype.minScale})</span>
-                    <span>Commercial Scale ({currentArchetype.defaultScale})</span>
-                    <span>Max Hub ({currentArchetype.maxScale})</span>
+                    <span>Micro Unit ({currentArchetype.minScale} {currentArchetype.unit})</span>
+                    <span>Commercial Hub ({currentArchetype.defaultScale} {currentArchetype.unit})</span>
+                    <span>Cluster Scale ({currentArchetype.maxScale} {currentArchetype.unit})</span>
                   </div>
                 </div>
 
-                {/* Real-time Feasibility Highlights Checklist */}
-                <div className="p-4 rounded-xl bg-[#f0f6ec] border border-[#3a6b4c]/20 space-y-2">
-                  <p className="text-xs font-bold text-[#3a6b4c] uppercase tracking-wider flex items-center gap-1.5">
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
-                    Current Grid & Mandi Clearance
-                  </p>
-                  <p className="text-xs text-[#382f29] font-medium">
+                {/* Real-time Feasibility & Grid Clearance Box */}
+                <div className="p-4 rounded-2xl bg-[#f0f6ec] border border-[#3a6b4c]/20 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-bold text-[#3a6b4c] uppercase tracking-wider flex items-center gap-1.5">
+                      <svg
+                        className="w-4 h-4 text-[#3a6b4c]"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                      </svg>
+                      PSPCL Grid &amp; Mandi Feeder Intel
+                    </p>
+                    <span className="text-[10px] font-bold text-[#3a6b4c] bg-white px-2 py-0.5 rounded-md border border-[#3a6b4c]/20">
+                      {currentTehsilObj.powerHours}h/day Power
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#241b16] font-medium leading-relaxed">
                     {gridStatusText}
+                  </p>
+                  <p className="text-[11px] text-[#786d65] pt-1 border-t border-[#3a6b4c]/15">
+                    <strong>Local Market Gap:</strong> {mandiDeficitText}
                   </p>
                 </div>
               </div>
 
               {/* Output Results Dossier Card (Right) */}
-              <div className="p-6 sm:p-8 lg:col-span-6 bg-gradient-to-br from-white to-[#faf4ee] flex flex-col justify-between space-y-6">
+              <div className="p-6 sm:p-8 lg:col-span-6 bg-gradient-to-br from-white via-[#faf4ee]/40 to-[#fff8f2] flex flex-col justify-between space-y-6">
                 <div className="space-y-6">
                   <div className="flex items-center justify-between border-b border-[#ede3d8] pb-4">
                     <div>
                       <span className="text-[10px] font-bold uppercase tracking-wider text-[#786d65]">
-                        Feasibility Ledger
+                        Live Capital Ledger • {currentTehsilObj.name}
                       </span>
                       <h3 className="text-xl font-bold font-serif text-[#241b16]">
-                        {currentArchetype.title} ({scaleValue.toLocaleString()} scale)
+                        {currentArchetype.title}
                       </h3>
+                      <p className="text-xs text-[#786d65] mt-0.5">
+                        Capacity: {scaleValue.toLocaleString()} {currentArchetype.unit}
+                      </p>
                     </div>
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#3a6b4c] text-white">
-                      Feasible (81/100)
-                    </span>
+                    <div className="text-right">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#3a6b4c] text-white shadow-xs">
+                        Feasible ({feasibilityScore}/100)
+                      </span>
+                      <span className="text-[10px] block text-[#786d65] mt-0.5 font-medium">PSL Tier-1 Match</span>
+                    </div>
                   </div>
 
                   {/* Metric Matrix Cards */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl bg-white border border-[#ede3d8] shadow-xs">
-                      <span className="text-[11px] font-semibold text-[#786d65]">
-                        Machinery & Shed Cost
+                  <div className="grid grid-cols-2 gap-3.5">
+                    <div className="p-4 rounded-2xl bg-white border border-[#ede3d8] shadow-xs hover:border-[#c75d3e]/30 transition-colors">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#786d65] block">
+                        Total Project CaPEx
                       </span>
                       <p className="text-lg font-serif font-bold text-[#241b16] mt-1">
                         ₹{calculatedCost.toLocaleString("en-IN")}
                       </p>
-                      <p className="text-[10px] text-[#786d65]">
-                        3-Phase Equipment + Setup
+                      <p className="text-[10px] text-[#786d65] mt-0.5">
+                        Machinery + Shed + Power
                       </p>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-white border border-[#ede3d8] shadow-xs">
-                      <span className="text-[11px] font-semibold text-[#786d65]">
-                        Unmet Local Demand
-                      </span>
-                      <p className="text-lg font-serif font-bold text-[#241b16] mt-1">
-                        {currentArchetype.unmetDemand}
-                      </p>
-                      <p className="text-[10px] text-[#3a6b4c] font-medium">
-                        {currentArchetype.deficitPct}% Unserved Catchment
-                      </p>
-                    </div>
-
-                    <div className="p-4 rounded-xl bg-white border border-[#ede3d8] shadow-xs">
-                      <span className="text-[11px] font-semibold text-[#786d65]">
+                    <div className="p-4 rounded-2xl bg-white border border-[#ede3d8] shadow-xs hover:border-[#3a6b4c]/30 transition-colors">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#3a6b4c] block">
                         Eligible Sovereign Grant
                       </span>
-                      <p className="text-lg font-serif font-bold text-[#c75d3e] mt-1">
+                      <p className="text-lg font-serif font-bold text-[#3a6b4c] mt-1">
                         ₹{grantAmount.toLocaleString("en-IN")}
                       </p>
-                      <p className="text-[10px] text-[#c75d3e] font-medium">
+                      <p className="text-[10px] text-[#3a6b4c] font-semibold truncate mt-0.5" title={currentArchetype.subsidyName}>
                         {currentArchetype.subsidyName}
                       </p>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-white border border-[#ede3d8] shadow-xs">
-                      <span className="text-[11px] font-semibold text-[#786d65]">
-                        Projected Net Margin
+                    <div className="p-4 rounded-2xl bg-white border border-[#ede3d8] shadow-xs">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#786d65] block">
+                        Promoter Margin (15%)
                       </span>
-                      <p className="text-lg font-serif font-bold text-[#3a6b4c] mt-1">
+                      <p className="text-lg font-serif font-bold text-[#241b16] mt-1">
+                        ₹{promoterEquity.toLocaleString("en-IN")}
+                      </p>
+                      <p className="text-[10px] text-[#786d65] mt-0.5">
+                        Mandatory Equity Buffer
+                      </p>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-white border border-[#ede3d8] shadow-xs">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#786d65] block">
+                        Net Bank Term Loan
+                      </span>
+                      <p className="text-lg font-serif font-bold text-[#c75d3e] mt-1">
+                        ₹{bankLoan.toLocaleString("en-IN")}
+                      </p>
+                      <p className="text-[10px] text-[#786d65] mt-0.5">
+                        EMI: ~₹{monthlyEmi.toLocaleString("en-IN")}/mo (5 Yrs)
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Net Monthly Margin & DSCR row */}
+                  <div className="p-4 rounded-2xl bg-white border border-[#ede3d8] shadow-xs flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#786d65] block">
+                        Projected Monthly Net Profit
+                      </span>
+                      <p className="text-xl font-serif font-extrabold text-[#3a6b4c] mt-0.5">
                         ₹{projectedMargin.toLocaleString("en-IN")} / mo
                       </p>
                       <p className="text-[10px] text-[#786d65]">
-                        Est. Break-Even: 7 - 9 Months
+                        Estimated Break-Even: 7 - 9 Months
                       </p>
+                    </div>
+                    <div className="text-right border-l border-[#ede3d8] pl-4">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#786d65] block">
+                        Lender DSCR Ratio
+                      </span>
+                      <p className="text-xl font-serif font-extrabold text-[#241b16] mt-0.5">
+                        {currentArchetype.dscrBenchmark}x
+                      </p>
+                      <span className="text-[10px] text-[#3a6b4c] font-bold">
+                        Exceeds 1.30x Bank Hurdle
+                      </span>
                     </div>
                   </div>
 
                   {/* Deficit Visual Bar */}
                   <div className="space-y-1.5">
                     <div className="flex justify-between text-xs font-semibold text-[#382f29]">
-                      <span>Local Catchment Deficit</span>
-                      <span>{currentArchetype.deficitPct}% Unserved Demand</span>
+                      <span>Catchment Deficit Coverage</span>
+                      <span className="font-bold text-[#c75d3e]">{currentArchetype.deficitPct}% Unserved Demand</span>
                     </div>
                     <div className="w-full bg-[#ede3d8]/70 rounded-full h-2.5 overflow-hidden">
                       <div
@@ -794,166 +1108,210 @@ export default function LandingPage() {
                         style={{ width: `${currentArchetype.deficitPct}%` }}
                       ></div>
                     </div>
+                    <div className="flex justify-between text-[10px] text-[#786d65]">
+                      <span>Mandi Arrival Deficit: {currentArchetype.unmetDemand}</span>
+                      <span>Target: {scaleValue.toLocaleString()} {currentArchetype.unit}</span>
+                    </div>
                   </div>
                 </div>
 
-                {/* PDF Download & Action */}
+                {/* Action CTA Buttons */}
                 <div className="pt-4 border-t border-[#ede3d8] flex flex-col sm:flex-row items-center gap-3">
                   <Link
-                    href="/report"
-                    className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#241b16] hover:bg-black text-white text-sm font-bold shadow transition-all"
+                    href="/onboarding"
+                    className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#c75d3e] hover:bg-[#bd5537] text-white text-xs sm:text-sm font-bold shadow-warm-md transition-all transform hover:-translate-y-0.5"
                   >
+                    <span>Configure in Full 6-Step Wizard</span>
                     <svg
-                      className="w-4 h-4 text-[#d4e6c1]"
+                      className="w-4 h-4"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="2.2"
+                      strokeWidth="2.5"
                       viewBox="0 0 24 24"
                     >
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                      <polyline points="7 10 12 15 17 10"></polyline>
-                      <line x1="12" x2="12" y1="15" y2="3"></line>
+                      <path d="M5 12h14M12 5l7 7-7 7"></path>
                     </svg>
-                    Download Full 12-Page Feasibility PDF
                   </Link>
                   <Link
-                    href="/onboarding"
-                    className="w-full sm:w-auto px-5 py-3.5 rounded-xl border border-[#ede3d8] bg-white text-[#382f29] text-xs font-bold hover:bg-[#ede3d8]/30 transition-colors text-center"
+                    href="/report"
+                    className="w-full sm:w-auto px-5 py-3.5 rounded-xl border border-[#ede3d8] bg-white text-[#382f29] text-xs font-bold hover:bg-[#faf4ee] transition-colors text-center"
                   >
-                    Configure My Enterprise →
+                    Pre-Vetted CMA Ledger (PDF)
                   </Link>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        {/* END: StandoutSimulator */}
 
         {/* BEGIN: ComparativeSection */}
         <section className="py-20 bg-[#fff8f2]" id="ground-truth">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mb-14">
-              <span className="text-xs font-bold text-[#3a6b4c] uppercase tracking-wider">
+            <div className="max-w-3xl mb-14 space-y-3">
+              <span className="text-xs font-bold text-[#3a6b4c] uppercase tracking-wider bg-[#f0f6ec] px-3 py-1 rounded-full border border-[#3a6b4c]/20">
                 Ground Truth vs Rural Myths
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#241b16] mt-2 mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#241b16] mt-2">
                 Why 80% of rural ventures struggle vs how GramVest protects you
               </h2>
               <p className="text-base text-[#786d65]">
-                Most village businesses fail not because of lack of hard work, but because of inaccurate footfall assumptions, unvetted power loads, and broker cuts on government subsidies.
+                Most village businesses fail not due to lack of hard work, but from inaccurate footfall estimates, unvetted power loads, broker cuts on sovereign subsidies, and generic handwritten loan files.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Contrast Card 1 */}
-              <div className="bg-white rounded-2xl border border-[#ede3d8] p-6 shadow-xs flex flex-col justify-between space-y-6">
-                <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="15" x2="9" y1="9" y2="15"></line>
-                      <line x1="9" x2="15" y1="9" y2="15"></line>
-                    </svg>
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-red-600 bg-red-50 px-2 py-0.5 rounded">
+              <div className="bg-white rounded-3xl border border-[#ede3d8] p-6 shadow-xs flex flex-col justify-between space-y-5 hover:shadow-md transition-shadow">
+                <div className="space-y-3.5">
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" x2="9" y1="9" y2="15"></line>
+                        <line x1="9" x2="15" y1="9" y2="15"></line>
+                      </svg>
+                    </div>
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-red-600 bg-red-50 px-2 py-0.5 rounded-full">
                       Common Trap
                     </span>
-                    <h3 className="text-lg font-serif font-bold text-[#241b16] mt-2">
+                  </div>
+                  <div>
+                    <h3 className="text-base font-serif font-bold text-[#241b16]">
                       The &ldquo;Radius Footfall&rdquo; Illusion
                     </h3>
-                    <p className="text-sm text-[#786d65] mt-1 leading-relaxed">
-                      Assuming everyone within 10km will buy from you. In reality, existing informal credit chains (arhtiyas) and weekly Haat schedules lock in consumer behavior.
+                    <p className="text-xs text-[#786d65] mt-1.5 leading-relaxed">
+                      Assuming everyone within a 10km circle will buy from you. In reality, existing informal credit chains (arhtiyas) and weekly haat schedules dictate true rural trade.
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#ede3d8]/60 bg-[#f0f6ec] -mx-6 -mb-6 p-6 rounded-b-2xl">
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3a6b4c]">
-                    GramVest Ground Truth
-                  </span>
-                  <p className="text-xs font-semibold text-[#241b16] mt-1 leading-relaxed">
-                    We map 14-panchayat daily mandi traffic vectors, tractor route intersections, and existing informal ledger debts to predict exact actual footfall.
+                <div className="pt-4 border-t border-[#ede3d8]/80 bg-[#f0f6ec] -mx-6 -mb-6 p-5 rounded-b-3xl space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3a6b4c]">
+                      GramVest Ground Truth
+                    </span>
+                    <span className="text-[10px] font-bold text-[#3a6b4c] bg-white px-1.5 py-0.5 rounded border border-[#3a6b4c]/20">
+                      +42% Accuracy
+                    </span>
+                  </div>
+                  <p className="text-xs font-semibold text-[#241b16] leading-relaxed">
+                    Maps 14-panchayat daily mandi traffic vectors, tractor intersections, and informal ledger debts to predict genuine customer capture.
                   </p>
                 </div>
               </div>
 
               {/* Contrast Card 2 */}
-              <div className="bg-white rounded-2xl border border-[#ede3d8] p-6 shadow-xs flex flex-col justify-between space-y-6">
-                <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                    </svg>
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-red-600 bg-red-50 px-2 py-0.5 rounded">
+              <div className="bg-white rounded-3xl border border-[#ede3d8] p-6 shadow-xs flex flex-col justify-between space-y-5 hover:shadow-md transition-shadow">
+                <div className="space-y-3.5">
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                      </svg>
+                    </div>
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-red-600 bg-red-50 px-2 py-0.5 rounded-full">
                       Common Trap
                     </span>
-                    <h3 className="text-lg font-serif font-bold text-[#241b16] mt-2">
-                      Unplanned 3-Phase & Diesel Burn
+                  </div>
+                  <div>
+                    <h3 className="text-base font-serif font-bold text-[#241b16]">
+                      Unplanned 3-Phase &amp; Diesel Burn
                     </h3>
-                    <p className="text-sm text-[#786d65] mt-1 leading-relaxed">
-                      Buying heavy machinery only to discover local village feeder provides low voltage during peak processing hours, burning profits on costly diesel generators.
+                    <p className="text-xs text-[#786d65] mt-1.5 leading-relaxed">
+                      Purchasing heavy 3-phase machinery only to discover your local rural feeder supplies low voltage during daytime milling hours, burning cash on diesel generators.
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#ede3d8]/60 bg-[#f0f6ec] -mx-6 -mb-6 p-6 rounded-b-2xl">
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3a6b4c]">
-                    GramVest Ground Truth
-                  </span>
-                  <p className="text-xs font-semibold text-[#241b16] mt-1 leading-relaxed">
-                    Substation feeder schedules, historical voltage drops, and hybrid solar-diesel sizing are pre-calculated to ensure your margin survives power cuts.
+                <div className="pt-4 border-t border-[#ede3d8]/80 bg-[#f0f6ec] -mx-6 -mb-6 p-5 rounded-b-3xl space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3a6b4c]">
+                      GramVest Ground Truth
+                    </span>
+                    <span className="text-[10px] font-bold text-[#3a6b4c] bg-white px-1.5 py-0.5 rounded border border-[#3a6b4c]/20">
+                      Saves ₹1.85L/yr
+                    </span>
+                  </div>
+                  <p className="text-xs font-semibold text-[#241b16] leading-relaxed">
+                    Audits PSPCL substation feeder schedules, historical voltage stability, and sizes hybrid solar-diesel setups to protect operational margin.
                   </p>
                 </div>
               </div>
 
               {/* Contrast Card 3 */}
-              <div className="bg-white rounded-2xl border border-[#ede3d8] p-6 shadow-xs flex flex-col justify-between space-y-6">
-                <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                      <circle cx="8.5" cy="7" r="4"></circle>
-                      <line x1="18" x2="23" y1="8" y2="13"></line>
-                      <line x1="23" x2="18" y1="8" y2="13"></line>
-                    </svg>
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-red-600 bg-red-50 px-2 py-0.5 rounded">
+              <div className="bg-white rounded-3xl border border-[#ede3d8] p-6 shadow-xs flex flex-col justify-between space-y-5 hover:shadow-md transition-shadow">
+                <div className="space-y-3.5">
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="18" x2="23" y1="8" y2="13"></line>
+                        <line x1="23" x2="18" y1="8" y2="13"></line>
+                      </svg>
+                    </div>
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-red-600 bg-red-50 px-2 py-0.5 rounded-full">
                       Common Trap
                     </span>
-                    <h3 className="text-lg font-serif font-bold text-[#241b16] mt-2">
-                      Middleman Subsidy Cuts & Rejections
+                  </div>
+                  <div>
+                    <h3 className="text-base font-serif font-bold text-[#241b16]">
+                      Middleman Subsidy Cuts (15%)
                     </h3>
-                    <p className="text-sm text-[#786d65] mt-1 leading-relaxed">
-                      Paying 10% to 15% commissions to touts for PMEGP/AIF proposals that end up rejected at the District Industries Centre (DIC) due to non-standard DPR formats.
+                    <p className="text-xs text-[#786d65] mt-1.5 leading-relaxed">
+                      Paying 10% to 15% commissions to touts for PMEGP/PMFME dossiers that get rejected at the District Industries Centre (DIC) due to amateur DPR formatting.
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#ede3d8]/60 bg-[#f0f6ec] -mx-6 -mb-6 p-6 rounded-b-2xl">
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3a6b4c]">
-                    GramVest Ground Truth
-                  </span>
-                  <p className="text-xs font-semibold text-[#241b16] mt-1 leading-relaxed">
-                    Auto-generates 100% compliant Detailed Project Reports (DPR) adhering strictly to SBI, PNB, and NABARD bank underwriting standards with zero bribes.
+                <div className="pt-4 border-t border-[#ede3d8]/80 bg-[#f0f6ec] -mx-6 -mb-6 p-5 rounded-b-3xl space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3a6b4c]">
+                      GramVest Ground Truth
+                    </span>
+                    <span className="text-[10px] font-bold text-[#3a6b4c] bg-white px-1.5 py-0.5 rounded border border-[#3a6b4c]/20">
+                      0% Broker Fee
+                    </span>
+                  </div>
+                  <p className="text-xs font-semibold text-[#241b16] leading-relaxed">
+                    Auto-generates 100% compliant Detailed Project Reports directly aligned with official KVIC/DIC checklists for direct portal submission.
+                  </p>
+                </div>
+              </div>
+
+              {/* Contrast Card 4 */}
+              <div className="bg-white rounded-3xl border border-[#ede3d8] p-6 shadow-xs flex flex-col justify-between space-y-5 hover:shadow-md transition-shadow">
+                <div className="space-y-3.5">
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                      </svg>
+                    </div>
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-red-600 bg-red-50 px-2 py-0.5 rounded-full">
+                      Common Trap
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-base font-serif font-bold text-[#241b16]">
+                      Generic Handwritten Loan Files
+                    </h3>
+                    <p className="text-xs text-[#786d65] mt-1.5 leading-relaxed">
+                      70% of rural enterprise loan requests are rejected at bank branches due to missing Debt Service Coverage Ratios (DSCR) or unverified machinery proformas.
+                    </p>
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-[#ede3d8]/80 bg-[#f0f6ec] -mx-6 -mb-6 p-5 rounded-b-3xl space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3a6b4c]">
+                      GramVest Ground Truth
+                    </span>
+                    <span className="text-[10px] font-bold text-[#3a6b4c] bg-white px-1.5 py-0.5 rounded border border-[#3a6b4c]/20">
+                      1.82x Solvency
+                    </span>
+                  </div>
+                  <p className="text-xs font-semibold text-[#241b16] leading-relaxed">
+                    Compiles 12-page CMA reports strictly formatted for SBI, PNB, and Lead District Bank branch managers with pre-vetted OEM quotations.
                   </p>
                 </div>
               </div>
@@ -965,22 +1323,22 @@ export default function LandingPage() {
         {/* BEGIN: FourStepEngine */}
         <section className="py-20 bg-[#faf4ee] border-t border-[#ede3d8]" id="engine">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-              <span className="text-xs font-bold text-[#c75d3e] uppercase tracking-wider">
-                Methodology
+            <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+              <span className="text-xs font-bold text-[#c75d3e] uppercase tracking-wider bg-[#fcedea] px-3 py-1 rounded-full border border-[#c75d3e]/20">
+                Institutional Methodology
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#241b16]">
                 The 4-Step Feasibility Engine
               </h2>
               <p className="text-base text-[#786d65]">
-                From raw village trade intention to lender-grade loan sanction in under three minutes.
+                From raw village enterprise intention to lender-grade loan sanction dossier in under three minutes.
               </p>
             </div>
 
             {/* 4 Step Interactive Tabs */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
               {[
-                { stepNum: 1, label: "01. Input Trade & Village", title: "Specify Location" },
+                { stepNum: 1, label: "01. Input Village & Trade", title: "Specify Location" },
                 { stepNum: 2, label: "02. Catchment Scan", title: "Deficit & Competition" },
                 { stepNum: 3, label: "03. Grant Matching", title: "PMEGP & AIF Schemes" },
                 { stepNum: 4, label: "04. Bank-Vetted Dossier", title: "Lender-Grade Output" },
@@ -989,15 +1347,18 @@ export default function LandingPage() {
                 return (
                   <button
                     key={t.stepNum}
-                    onClick={() => setActiveEngineStep(t.stepNum)}
-                    className={`text-left p-4 rounded-xl border-2 transition-all cursor-pointer ${isActive
-                        ? "border-[#c75d3e] bg-white shadow-sm"
-                        : "border-transparent bg-white/60 hover:bg-white text-[#786d65]"
-                      }`}
+                    onClick={() => handleTriggerSimulation(t.stepNum)}
+                    type="button"
+                    className={`text-left p-4 rounded-2xl border-2 transition-all cursor-pointer ${
+                      isActive
+                        ? "border-[#c75d3e] bg-white shadow-sm ring-1 ring-[#c75d3e]/30"
+                        : "border-transparent bg-white/70 hover:bg-white text-[#786d65]"
+                    }`}
                   >
                     <span
-                      className={`text-xs font-bold block mb-1 ${isActive ? "text-[#c75d3e]" : "text-[#786d65]"
-                        }`}
+                      className={`text-xs font-bold block mb-1 ${
+                        isActive ? "text-[#c75d3e]" : "text-[#786d65]"
+                      }`}
                     >
                       {t.label}
                     </span>
@@ -1010,11 +1371,13 @@ export default function LandingPage() {
             </div>
 
             {/* Dynamic Step Content Presentation Card */}
-            <div className="bg-white rounded-3xl border border-[#ede3d8] p-8 sm:p-12 shadow-md">
+            <div className="bg-white rounded-3xl border border-[#ede3d8] p-6 sm:p-10 lg:p-12 shadow-md">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-6 space-y-4">
-                  <div className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-[#fcedea] text-[#c75d3e]">
-                    {stepData.badge}
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-[#fcedea] text-[#c75d3e]">
+                    <span>{stepData.badge}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#c75d3e]"></span>
+                    <span className="text-[10px] font-extrabold uppercase">{stepData.auditMetric}</span>
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-bold font-serif text-[#241b16] leading-tight">
                     {stepData.title}
@@ -1024,50 +1387,98 @@ export default function LandingPage() {
                   </p>
                   <ul className="space-y-2.5 pt-2 text-sm text-[#382f29]">
                     {stepData.checklist.map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-2">
-                        <svg
-                          className="w-4 h-4 text-[#3a6b4c] flex-shrink-0"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          viewBox="0 0 24 24"
-                        >
-                          <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        <span>{item}</span>
+                      <li key={idx} className="flex items-center gap-2.5">
+                        <div className="w-5 h-5 rounded-full bg-[#f0f6ec] text-[#3a6b4c] flex items-center justify-center flex-shrink-0">
+                          <svg
+                            className="w-3.5 h-3.5 text-[#3a6b4c]"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="3"
+                            viewBox="0 0 24 24"
+                          >
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </div>
+                        <span className="font-medium text-xs sm:text-sm">{item}</span>
                       </li>
                     ))}
                   </ul>
+
+                  <div className="pt-4 flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => handleTriggerSimulation(activeEngineStep)}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#faf4ee] hover:bg-[#ede3d8] text-[#241b16] text-xs font-bold border border-[#ede3d8] transition-colors cursor-pointer"
+                    >
+                      <svg className={`w-3.5 h-3.5 text-[#c75d3e] ${isSimulatingStep ? "animate-spin" : ""}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                      </svg>
+                      <span>{isSimulatingStep ? "Simulating Pipeline..." : "Re-Run Step Audit"}</span>
+                    </button>
+                    <Link
+                      href="/onboarding"
+                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#c75d3e] hover:bg-[#bd5537] text-white text-xs font-bold transition-all shadow-xs"
+                    >
+                      <span>Try Step in 6-Step Wizard</span>
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                      </svg>
+                    </Link>
+                  </div>
                 </div>
 
-                {/* Simulated Graphic Card */}
-                <div className="lg:col-span-6 bg-[#faf4ee] rounded-2xl p-6 border border-[#ede3d8] space-y-4">
-                  <div className="flex items-center justify-between pb-3 border-b border-[#ede3d8]">
+                {/* Simulated Telemetry Graphic Card */}
+                <div className="lg:col-span-6 bg-[#1f1915] rounded-3xl p-6 border border-[#382f29] shadow-xl space-y-4 text-white">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#382f29]">
                     <div className="flex items-center gap-2">
-                      <span className="w-3 h-3 rounded-full bg-red-400"></span>
-                      <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
-                      <span className="w-3 h-3 rounded-full bg-green-400"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+                      <span className="text-[11px] font-mono text-[#ede3d8]/60 ml-2">
+                        gramvest_engine_v3.2.live
+                      </span>
                     </div>
-                    <span className="text-xs font-mono text-[#786d65]">
-                      feasibility_engine_v3.2
+                    <span className="text-[10px] font-mono font-bold text-[#d4e6c1] bg-[#3a6b4c]/30 px-2 py-0.5 rounded border border-[#3a6b4c]/50">
+                      {isSimulatingStep ? "PROCESSING..." : "VERIFIED 200 OK"}
                     </span>
                   </div>
-                  <div className="font-mono text-xs text-[#382f29] space-y-2">
-                    <p>
-                      <span className="text-[#c75d3e] font-bold">
+
+                  <div className="font-mono text-xs space-y-2.5">
+                    <p className="flex items-center gap-2">
+                      <span className="text-[#c75d3e] font-bold px-1.5 py-0.5 rounded bg-white/10 text-[10px]">
                         {stepData.method}
-                      </span>{" "}
-                      {stepData.endpoint}
+                      </span>
+                      <span className="text-[#ede3d8]/80">{stepData.endpoint}</span>
                     </p>
-                    <div className="p-3 bg-white rounded-lg border border-[#ede3d8]/80 space-y-1">
-                      {stepData.logLines.map((line, idx) => (
-                        <p key={idx} className={idx === 0 ? "text-[#786d65]" : ""}>
-                          {line}
-                        </p>
-                      ))}
+
+                    <div className="p-4 bg-black/40 rounded-xl border border-[#382f29]/80 space-y-1.5 font-mono text-[11px] leading-relaxed">
+                      {isSimulatingStep ? (
+                        <div className="py-4 text-center text-[#d4e6c1] animate-pulse">
+                          Syncing Agmarknet Punjab Mandi &amp; PSPCL Grid Feeder Logs...
+                        </div>
+                      ) : (
+                        stepData.logLines.map((line, idx) => (
+                          <p
+                            key={idx}
+                            className={
+                              idx === 0
+                                ? "text-[#ede3d8]/50 italic"
+                                : line.includes("✓") || line.includes("compliant") || line.includes("100%")
+                                ? "text-[#d4e6c1] font-semibold"
+                                : "text-[#ede3d8]/90"
+                            }
+                          >
+                            {line}
+                          </p>
+                        ))
+                      )}
                     </div>
-                    <div className="p-3 bg-[#f0f6ec] rounded-lg border border-[#3a6b4c]/30 text-[#3a6b4c] text-[11px] font-semibold">
-                      {stepData.highlightResult}
+
+                    <div className="p-3.5 bg-[#3a6b4c]/20 rounded-xl border border-[#3a6b4c]/40 text-[#d4e6c1] text-[11px] font-semibold flex items-center gap-2">
+                      <svg className="w-4 h-4 text-[#d4e6c1] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>{stepData.highlightResult}</span>
                     </div>
                   </div>
                 </div>
@@ -1077,88 +1488,201 @@ export default function LandingPage() {
         </section>
         {/* END: FourStepEngine */}
 
-        {/* BEGIN: MandiStories */}
-        <section className="py-20 bg-[#fff8f2]" id="mandi-stories">
+        {/* BEGIN: SchemeShowcaseSection */}
+        <section className="py-20 bg-white border-t border-[#ede3d8]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
-              <span className="text-xs font-bold text-[#3a6b4c] uppercase tracking-wider">
-                Ground Proof
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#241b16]">
-                Voices from the Mandi Belt
-              </h2>
-              <p className="text-base text-[#786d65]">
-                Real village entrepreneurs who stress-tested their blueprints on GramVest prior to equipment purchases.
-              </p>
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+              <div className="max-w-2xl space-y-3">
+                <span className="text-xs font-bold text-[#3a6b4c] uppercase tracking-wider bg-[#f0f6ec] px-3 py-1 rounded-full border border-[#3a6b4c]/20">
+                  Direct Institutional Linkage
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#241b16]">
+                  Pre-Integrated Sovereign Grants &amp; Institutional Credit
+                </h2>
+                <p className="text-base text-[#786d65]">
+                  GramVest maps your rural venture directly against central &amp; state subsidy guidelines with zero broker fees. Every scheme is cross-checked against Punjab Lead District Bank requirements.
+                </p>
+              </div>
+              <Link
+                href="/financing"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#c75d3e] hover:text-[#bd5537] hover:underline"
+              >
+                <span>View All 10 Schemes on Financing Desk</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Editorial Testimonial 1 */}
-              <article className="bg-white rounded-3xl p-8 border border-[#ede3d8] shadow-xs flex flex-col justify-between space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-1 text-amber-500">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <svg key={s} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                      </svg>
-                    ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Scheme Card 1 */}
+              <div className="rounded-3xl border border-[#ede3d8] bg-[#faf4ee]/40 p-6 flex flex-col justify-between hover:border-[#c75d3e]/50 hover:bg-white hover:shadow-md transition-all space-y-5">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#c75d3e] bg-[#fcedea] px-2 py-0.5 rounded-full border border-[#c75d3e]/20">
+                      35% Margin Money
+                    </span>
+                    <span className="text-xs font-mono font-bold text-[#786d65]">MoMSME / KVIC</span>
                   </div>
-                  <blockquote className="text-base sm:text-lg font-serif italic text-[#382f29] leading-relaxed">
-                    &ldquo;I was about to spend ₹8 lakhs on an oil expeller. GramVest showed me that two larger mills were already operating at only 40% capacity 6 kilometers away. Instead, it recommended a chilli pulverizer unit with a 35% PMEGP subsidy. My loan was approved in 19 days without a broker.&rdquo;
-                  </blockquote>
-                </div>
-                <div className="pt-4 border-t border-[#ede3d8] flex items-center justify-between">
-                  <div>
-                    <p className="font-bold text-[#241b16] text-sm">Hardeep Singh Sandhu</p>
-                    <p className="text-xs text-[#786d65]">Spice Processing Unit, Sangrur</p>
+                  <h3 className="text-lg font-serif font-bold text-[#241b16]">
+                    PMEGP Rural Credit Subsidy
+                  </h3>
+                  <p className="text-xs text-[#786d65] leading-relaxed">
+                    Sovereign non-repayable capital grant for rural micro-manufacturing and agro-processing up to ₹50 Lakhs project cost.
+                  </p>
+                  <div className="pt-2 space-y-1.5 text-xs text-[#382f29] font-medium">
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Grant Cap:</span>
+                      <span className="font-bold text-[#3a6b4c]">Up to ₹17,50,000</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Tenure:</span>
+                      <span>60 Months (6 Mo Moratorium)</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Guarantee:</span>
+                      <span className="text-[#3a6b4c] font-semibold">CGTMSE Collateral-Free</span>
+                    </div>
                   </div>
-                  <span className="text-xs font-bold text-[#3a6b4c] bg-[#f0f6ec] px-2.5 py-1 rounded-full border border-[#3a6b4c]/20">
-                    ₹14.2L Project Sanctioned
-                  </span>
                 </div>
-              </article>
+                <Link
+                  href="/financing"
+                  className="w-full py-2.5 rounded-xl border border-[#ede3d8] bg-white text-center text-xs font-bold text-[#241b16] hover:bg-[#faf4ee] hover:border-[#c75d3e] transition-colors"
+                >
+                  Verify PMEGP Fit →
+                </Link>
+              </div>
 
-              {/* Editorial Testimonial 2 */}
-              <article className="bg-white rounded-3xl p-8 border border-[#ede3d8] shadow-xs flex flex-col justify-between space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-1 text-amber-500">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <svg key={s} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                      </svg>
-                    ))}
+              {/* Scheme Card 2 */}
+              <div className="rounded-3xl border border-[#ede3d8] bg-[#faf4ee]/40 p-6 flex flex-col justify-between hover:border-[#c75d3e]/50 hover:bg-white hover:shadow-md transition-all space-y-5">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3a6b4c] bg-[#f0f6ec] px-2 py-0.5 rounded-full border border-[#3a6b4c]/20">
+                      35% Cluster Grant
+                    </span>
+                    <span className="text-xs font-mono font-bold text-[#786d65]">MOFPI / Punjab Agro</span>
                   </div>
-                  <blockquote className="text-base sm:text-lg font-serif italic text-[#382f29] leading-relaxed">
-                    &ldquo;The power breakdown calculator saved our cold storage project. It warned us that the Baramati secondary line suffered 3.2-hour afternoon trip frequencies. We re-budgeted for a hybrid solar inverter directly into the bank DPR, which the branch manager commended.&rdquo;
-                  </blockquote>
-                </div>
-                <div className="pt-4 border-t border-[#ede3d8] flex items-center justify-between">
-                  <div>
-                    <p className="font-bold text-[#241b16] text-sm">Sunita Ravindra More</p>
-                    <p className="text-xs text-[#786d65]">Vegetable Grading & Pre-Cooler, Nashik</p>
+                  <h3 className="text-lg font-serif font-bold text-[#241b16]">
+                    PMFME Micro Food Processing
+                  </h3>
+                  <p className="text-xs text-[#786d65] leading-relaxed">
+                    Credit-linked capital grant for flour mills, spice units, bakeries, and ODOP (One District One Product) micro-units.
+                  </p>
+                  <div className="pt-2 space-y-1.5 text-xs text-[#382f29] font-medium">
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Grant Cap:</span>
+                      <span className="font-bold text-[#3a6b4c]">Up to ₹10,000,000</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Tenure:</span>
+                      <span>84 Months (Extended)</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Coverage:</span>
+                      <span className="text-[#3a6b4c] font-semibold">PAIC Punjab Priority</span>
+                    </div>
                   </div>
-                  <span className="text-xs font-bold text-[#3a6b4c] bg-[#f0f6ec] px-2.5 py-1 rounded-full border border-[#3a6b4c]/20">
-                    ₹8.8L Project Sanctioned
-                  </span>
                 </div>
-              </article>
+                <Link
+                  href="/financing"
+                  className="w-full py-2.5 rounded-xl border border-[#ede3d8] bg-white text-center text-xs font-bold text-[#241b16] hover:bg-[#faf4ee] hover:border-[#c75d3e] transition-colors"
+                >
+                  Verify PMFME Fit →
+                </Link>
+              </div>
+
+              {/* Scheme Card 3 */}
+              <div className="rounded-3xl border border-[#ede3d8] bg-[#faf4ee]/40 p-6 flex flex-col justify-between hover:border-[#c75d3e]/50 hover:bg-white hover:shadow-md transition-all space-y-5">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#241b16] bg-[#ede3d8] px-2 py-0.5 rounded-full">
+                      40% - 50% Capital Grant
+                    </span>
+                    <span className="text-xs font-mono font-bold text-[#786d65]">DA&amp;FW / Punjab Agri</span>
+                  </div>
+                  <h3 className="text-lg font-serif font-bold text-[#241b16]">
+                    SMAM Custom Hiring Centre (CHC)
+                  </h3>
+                  <p className="text-xs text-[#786d65] leading-relaxed">
+                    Sub-Mission on Agricultural Mechanization grant for farm tractors, laser levelers, and crop residue straw equipment.
+                  </p>
+                  <div className="pt-2 space-y-1.5 text-xs text-[#382f29] font-medium">
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Grant Cap:</span>
+                      <span className="font-bold text-[#3a6b4c]">Up to ₹10,000,000</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Tenure:</span>
+                      <span>60 Months</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Focus:</span>
+                      <span className="text-[#3a6b4c] font-semibold">Stubble &amp; Tillage Service</span>
+                    </div>
+                  </div>
+                </div>
+                <Link
+                  href="/financing"
+                  className="w-full py-2.5 rounded-xl border border-[#ede3d8] bg-white text-center text-xs font-bold text-[#241b16] hover:bg-[#faf4ee] hover:border-[#c75d3e] transition-colors"
+                >
+                  Verify SMAM Fit →
+                </Link>
+              </div>
+
+              {/* Scheme Card 4 */}
+              <div className="rounded-3xl border border-[#ede3d8] bg-[#faf4ee]/40 p-6 flex flex-col justify-between hover:border-[#c75d3e]/50 hover:bg-white hover:shadow-md transition-all space-y-5">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3a6b4c] bg-[#f0f6ec] px-2 py-0.5 rounded-full border border-[#3a6b4c]/20">
+                      3% Interest Subvention
+                    </span>
+                    <span className="text-xs font-mono font-bold text-[#786d65]">MoA&amp;FW / NABARD</span>
+                  </div>
+                  <h3 className="text-lg font-serif font-bold text-[#241b16]">
+                    Agriculture Infrastructure Fund (AIF)
+                  </h3>
+                  <p className="text-xs text-[#786d65] leading-relaxed">
+                    Long-term debt financing with 3% p.a. interest subvention up to ₹2 Crore for post-harvest cold chains and pack houses.
+                  </p>
+                  <div className="pt-2 space-y-1.5 text-xs text-[#382f29] font-medium">
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Subvention:</span>
+                      <span className="font-bold text-[#3a6b4c]">3.0% for 7 Years</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Tenure:</span>
+                      <span>Up to 120 Months</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#786d65]">Moratorium:</span>
+                      <span className="text-[#3a6b4c] font-semibold">Up to 24 Months</span>
+                    </div>
+                  </div>
+                </div>
+                <Link
+                  href="/financing"
+                  className="w-full py-2.5 rounded-xl border border-[#ede3d8] bg-white text-center text-xs font-bold text-[#241b16] hover:bg-[#faf4ee] hover:border-[#c75d3e] transition-colors"
+                >
+                  Verify AIF Fit →
+                </Link>
+              </div>
             </div>
           </div>
         </section>
-        {/* END: MandiStories */}
+        {/* END: SchemeShowcaseSection */}
 
         {/* BEGIN: AccordionFAQs */}
         <section className="py-20 bg-[#faf4ee] border-t border-[#ede3d8]" id="faqs">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-xl mx-auto mb-14 space-y-2">
-              <span className="text-xs font-bold text-[#c75d3e] uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#c75d3e] uppercase tracking-wider bg-[#fcedea] px-3 py-1 rounded-full border border-[#c75d3e]/20">
                 Clear Clarity
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#241b16]">
                 Frequently Asked Questions
               </h2>
               <p className="text-base text-[#786d65]">
-                Transparent answers on data sources, sovereign subsidies, and bank acceptance.
+                Transparent answers on Punjab mandi datasets, sovereign subsidies, and bank acceptance.
               </p>
             </div>
 
@@ -1170,10 +1694,11 @@ export default function LandingPage() {
                   onClick={() => toggleFaq(1)}
                   type="button"
                 >
-                  <span>Do I need to enter my Aadhaar or bank account number?</span>
+                  <span>Do I need to enter my Aadhaar or personal bank account number?</span>
                   <svg
-                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${openFaq === 1 ? "rotate-180" : ""
-                      }`}
+                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${
+                      openFaq === 1 ? "rotate-180" : ""
+                    }`}
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2.5"
@@ -1198,8 +1723,9 @@ export default function LandingPage() {
                 >
                   <span>How accurate is the local tehsil competition and mandi data?</span>
                   <svg
-                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${openFaq === 2 ? "rotate-180" : ""
-                      }`}
+                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${
+                      openFaq === 2 ? "rotate-180" : ""
+                    }`}
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2.5"
@@ -1210,7 +1736,7 @@ export default function LandingPage() {
                 </button>
                 {openFaq === 2 && (
                   <div className="px-5 pb-5 text-sm text-[#786d65] leading-relaxed">
-                    Our data pipeline synchronizes weekly with Agmarknet arrival registries, State Discom rural feeder bulletins, and registered Udyam MSME license registrations at the tehsil tier. Margin estimations reflect prevailing local APMC prices within a 7-day trailing average.
+                    Our data pipeline synchronizes weekly with Agmarknet arrival registries, Punjab Mandi Board bulletin logs, State Discom (PSPCL) rural feeder bulletins, and registered Udyam MSME license registrations at the tehsil tier. Margin estimations reflect prevailing local APMC prices within a 7-day trailing average.
                   </div>
                 )}
               </div>
@@ -1222,10 +1748,11 @@ export default function LandingPage() {
                   onClick={() => toggleFaq(3)}
                   type="button"
                 >
-                  <span>Will public sector banks (SBI, PNB, NABARD) accept this dossier?</span>
+                  <span>Will public sector banks (SBI, PNB, Punjab Gramin Bank) accept this dossier?</span>
                   <svg
-                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${openFaq === 3 ? "rotate-180" : ""
-                      }`}
+                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${
+                      openFaq === 3 ? "rotate-180" : ""
+                    }`}
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2.5"
@@ -1236,7 +1763,7 @@ export default function LandingPage() {
                 </button>
                 {openFaq === 3 && (
                   <div className="px-5 pb-5 text-sm text-[#786d65] leading-relaxed">
-                    Yes. The generated 12-page Feasibility Dossier format strictly follows the PMEGP/CMA (Credit Monitoring Arrangement) layout required by Lead District Managers (LDMs) and nationalized bank branch managers, complete with Debt Service Coverage Ratio (DSCR) calculations.
+                    Yes. The generated 12-page Feasibility Dossier format strictly follows the PMEGP/CMA (Credit Monitoring Arrangement) layout required by Lead District Managers (LDMs) and nationalized bank branch managers, complete with Debt Service Coverage Ratio (DSCR) calculations and itemized vendor equipment quotations.
                   </div>
                 )}
               </div>
@@ -1248,10 +1775,11 @@ export default function LandingPage() {
                   onClick={() => toggleFaq(4)}
                   type="button"
                 >
-                  <span>How are the PMEGP subsidies (25% to 35%) calculated?</span>
+                  <span>How are the PMEGP subsidies (25% to 35%) and PMFME grants calculated?</span>
                   <svg
-                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${openFaq === 4 ? "rotate-180" : ""
-                      }`}
+                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${
+                      openFaq === 4 ? "rotate-180" : ""
+                    }`}
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2.5"
@@ -1262,7 +1790,61 @@ export default function LandingPage() {
                 </button>
                 {openFaq === 4 && (
                   <div className="px-5 pb-5 text-sm text-[#786d65] leading-relaxed">
-                    Under the Prime Minister&apos;s Employment Generation Programme (PMEGP), general category promoters in rural areas qualify for 25% margin money capital subsidy, while special category promoters (Women, SC/ST, Ex-Servicemen, OBC) qualify for up to 35% on projects up to ₹50 Lakhs.
+                    Under the Prime Minister&apos;s Employment Generation Programme (PMEGP), general category promoters in rural areas qualify for 25% margin money capital subsidy, while special category promoters (Women, SC/ST, Ex-Servicemen, OBC) qualify for up to 35% on projects up to ₹50 Lakhs. Under PMFME, micro food processing units qualify for 35% credit-linked capital grants capped at ₹10 Lakhs.
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 5 */}
+              <div className="bg-white rounded-2xl border border-[#ede3d8] shadow-xs overflow-hidden">
+                <button
+                  className="w-full p-5 text-left font-bold text-[#241b16] text-base flex justify-between items-center hover:text-[#c75d3e] transition-colors cursor-pointer"
+                  onClick={() => toggleFaq(5)}
+                  type="button"
+                >
+                  <span>How does Voice Search work in Punjabi and Hindi?</span>
+                  <svg
+                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${
+                      openFaq === 5 ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                {openFaq === 5 && (
+                  <div className="px-5 pb-5 text-sm text-[#786d65] leading-relaxed">
+                    Entrepreneurs can speak directly in Punjabi (e.g. &ldquo;ਮੈਂ ਡੇਅਰੀ ਪ੍ਰੋਸੈਸਿੰਗ ਦਾ ਕੰਮ ਸ਼ੁਰੂ ਕਰਨਾ ਚਾਹੁੰਦਾ ਹਾਂ&rdquo;), Hindi, or English. Our integrated voice matching engine uses browser speech recognition to automatically parse rural trade keywords and map them directly to verified business archetypes.
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 6 */}
+              <div className="bg-white rounded-2xl border border-[#ede3d8] shadow-xs overflow-hidden">
+                <button
+                  className="w-full p-5 text-left font-bold text-[#241b16] text-base flex justify-between items-center hover:text-[#c75d3e] transition-colors cursor-pointer"
+                  onClick={() => toggleFaq(6)}
+                  type="button"
+                >
+                  <span>What happens if my village feeder has frequent power cuts?</span>
+                  <svg
+                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${
+                      openFaq === 6 ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                {openFaq === 6 && (
+                  <div className="px-5 pb-5 text-sm text-[#786d65] leading-relaxed">
+                    GramVest correlates PSPCL power schedules with your chosen machinery load. If daytime 3-phase supply is under 16 hours, the system automatically factors in hybrid solar synchronization or backup generator fuel costs to verify whether your monthly net profit remains solvent above the 1.30x bank debt hurdle.
                   </div>
                 )}
               </div>
@@ -1272,14 +1854,17 @@ export default function LandingPage() {
         {/* END: AccordionFAQs */}
 
         {/* BEGIN: TerracottaClosingCTA */}
-        <section className="py-16 bg-[#c75d3e] text-white relative overflow-hidden">
-          <div className="absolute -right-10 -bottom-10 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+        <section className="py-20 bg-[#c75d3e] text-white relative overflow-hidden">
+          <div className="absolute -right-10 -bottom-10 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/15 text-white uppercase tracking-wider">
+              SIH 2026 Innovation • Punjab Agro Feasibility
+            </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif leading-tight">
               Don&apos;t invest your hard-earned savings blindly.
             </h2>
-            <p className="text-base sm:text-lg text-[#ede3d8]/90 max-w-2xl mx-auto">
-              Evaluate demand deficits, local power reliability, and qualifying government capital subsidies in your exact village block.
+            <p className="text-base sm:text-lg text-[#ede3d8]/90 max-w-2xl mx-auto leading-relaxed">
+              Evaluate real demand deficits, local 3-phase power reliability, and qualifying government capital subsidies (PMEGP, PMFME, SMAM) in your exact village block.
             </p>
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -1288,9 +1873,17 @@ export default function LandingPage() {
               >
                 Run Free 3-Minute Viability Check →
               </Link>
-              <span className="text-xs text-[#ede3d8] font-medium">
-                Free instant assessment • No commitment required
-              </span>
+              <Link
+                className="w-full sm:w-auto px-6 py-4 rounded-xl border border-white/30 hover:bg-white/10 text-white text-base font-semibold transition-colors"
+                href="/financing"
+              >
+                Explore Government Schemes
+              </Link>
+            </div>
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-xs text-[#ede3d8]/80 font-medium">
+              <span>✓ Agmarknet Real-Time Sync</span>
+              <span>✓ Lead District Bank Formats</span>
+              <span>✓ No Aadhaar / Bank KYC Required</span>
             </div>
           </div>
         </section>

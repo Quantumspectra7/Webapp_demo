@@ -42,9 +42,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${notoSerif.variable} ${plusJakarta.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#fff8f2] text-[#1d1b18]">
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-[#fff8f2] text-[#1d1b18]"
+      >
         <GoogleTranslate />
         <AppProvider>{children}</AppProvider>
       </body>

@@ -164,70 +164,60 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
       name: t.dashboard,
       href: "/dashboard",
       icon: LayoutDashboard,
-      hint: "Control Center",
       stepKey: "dashboard",
     },
     {
       name: t.market,
       href: "/market",
       icon: Store,
-      hint: "Reach & Saturation",
       stepKey: "market",
     },
     {
       name: t.opportunity,
       href: "/opportunity",
       icon: Compass,
-      hint: "Why Here?",
       stepKey: "opportunity",
     },
     {
       name: t.risks,
       href: "/risks",
       icon: AlertTriangle,
-      hint: "Threats & Mitigations",
       stepKey: "risks",
     },
     {
       name: t.feasibility,
       href: "/feasibility",
       icon: Scale,
-      hint: "Pillar Verdict",
       stepKey: "feasibility",
     },
     {
       name: t.money,
       href: "/money",
       icon: Wallet,
-      hint: "Capacity & Cash Flow",
       stepKey: "money",
     },
     {
       name: t.financing,
       href: "/financing",
       icon: Coins,
-      hint: "Schemes & Subsidies",
       stepKey: "financing",
     },
     {
       name: t.advisor,
       href: "/advisor",
       icon: MessageSquareQuote,
-      hint: "Gemini 3.6 AI",
       stepKey: "advisor",
     },
     {
       name: t.whatIf,
       href: "/what-if",
       icon: SlidersHorizontal,
-      hint: "Stress Test",
       stepKey: "what-if",
     },
     {
       name: t.report,
       href: "/report",
       icon: FileText,
-      hint: "Bank-Ready DPR",
       stepKey: "report",
     },
   ];
@@ -274,7 +264,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
   }
 
   return (
-    <div className="min-h-screen bg-[#fff8f2] text-[#1d1b18] flex flex-col selection:bg-[#c75d3e] selection:text-white">
+    <div suppressHydrationWarning className="min-h-screen bg-[#fff8f2] text-[#1d1b18] flex flex-col selection:bg-[#c75d3e] selection:text-white">
       {/* Mobile Top Header */}
       <div className="lg:hidden sticky top-0 z-50 flex h-16 items-center justify-between border-b border-[#e7ded5] bg-[#fff8f2]/95 px-4 backdrop-blur-md">
         <Link href="/" className="flex items-center py-1 group">
@@ -298,6 +288,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
 
       {/* Desktop Fixed Sidebar */}
       <aside
+        suppressHydrationWarning
         className={`fixed left-0 top-0 h-full w-72 bg-[#faf4ee] z-50 flex flex-col justify-between border-r border-[#ede3d8] shadow-[0_1px_8px_rgba(0,0,0,0.02)] transition-transform lg:translate-x-0 ${
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
@@ -339,24 +330,17 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center justify-between px-3.5 py-2 rounded-xl transition-all font-medium text-[13px] ${
+                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all font-medium text-[13px] ${
                     isActive
                       ? "bg-[#fcedea] text-[#c75d3e] font-bold shadow-xs border border-[#c75d3e]/20"
                       : "text-[#382f29] hover:bg-white hover:text-[#1d1b18]"
                   }`}
                 >
-                  <span className="flex items-center gap-2.5">
-                    <Icon
-                      size={17}
-                      className={isActive ? "text-[#c75d3e]" : "text-[#786d65]"}
-                    />
-                    <span>{item.name}</span>
-                  </span>
-                  {item.hint && (
-                    <span className="text-[11px] opacity-70 font-normal">
-                      {item.hint}
-                    </span>
-                  )}
+                  <Icon
+                    size={18}
+                    className={isActive ? "text-[#c75d3e]" : "text-[#786d65]"}
+                  />
+                  <span>{item.name}</span>
                 </Link>
               );
             })}
@@ -364,10 +348,11 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
         </div>
 
         {/* Sidebar Footer Controls */}
-        <div className="p-3 border-t border-[#ede3d8] flex flex-col gap-1 bg-[#faf4ee]">
+        <div suppressHydrationWarning className="p-3 border-t border-[#ede3d8] flex flex-col gap-1 bg-[#faf4ee]">
           <button
+            suppressHydrationWarning
             onClick={() => reloadDemoData()}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[#56423d] hover:bg-white hover:text-[#1d1b18] text-[12px] font-medium transition-colors w-full text-left"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[#56423d] hover:bg-white hover:text-[#1d1b18] text-[12px] font-medium transition-colors w-full text-left cursor-pointer"
             title="Reset to Gurpreet Singh (Dairy Jagraon) demo baseline"
           >
             <RotateCcw size={14} className="text-[#786d65]" />
@@ -425,11 +410,11 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
       </aside>
 
       {/* Main Content Area */}
-      <div className="lg:pl-72 flex-1 flex flex-col">
+      <div suppressHydrationWarning className="lg:pl-72 flex-1 flex flex-col">
         {/* ========================================================
             PERMANENT ANALYSIS CONTEXT STRIP
            ======================================================== */}
-        <div className="sticky top-0 z-40 bg-[#fff8f2]/95 backdrop-blur-md border-b border-[#ede3d8] px-4 sm:px-8 py-2.5 flex flex-wrap items-center justify-between gap-3 shadow-2xs">
+        <div suppressHydrationWarning className="sticky top-0 z-40 bg-[#fff8f2]/95 backdrop-blur-md border-b border-[#ede3d8] px-4 sm:px-8 py-2.5 flex flex-wrap items-center justify-between gap-3 shadow-2xs">
           {/* Left: Location · Business · Own Capital · Radius Context */}
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-[#241b16]" suppressHydrationWarning>
             <span className="font-bold flex items-center gap-1 text-[#c75d3e]">

@@ -277,18 +277,28 @@ export interface FinancialScenario {
   metadata: ConfidenceMetadata;
 }
 
+export type SchemeProviderType = "central_government" | "state_government" | "bank" | "other";
+export type SchemeCategoryType = "subsidy" | "bank_loan" | "credit_guarantee" | "state_scheme";
+
 export interface Scheme {
   id: string;
-  code: "PMEGP" | "AIF" | "MUDRA" | "DEDS";
+  code: string;
   name: string;
   fullName: string;
   governingMinistry: string;
+  providerType?: SchemeProviderType;
+  supportType?: string;
+  categoryType?: SchemeCategoryType;
   subsidyRatePct: number; // e.g. 35% for PMEGP rural
   maxProjectCost: number;
   maxSubsidyAmount: number;
   interestSubventionPct: number; // e.g. 3% for AIF
+  indicativeInterestRatePct?: number; // e.g. 8.85%
+  tenureMonths?: number;
+  moratoriumMonths?: number;
   creditGuaranteeCover: string; // e.g. "CGTMSE up to ₹2 Cr"
   keyFitReason: string;
+  highlightBadge?: string;
   eligibilityCriteria: string[];
   mandatoryDocuments: {
     id: string;
@@ -297,6 +307,7 @@ export interface Scheme {
     description: string;
   }[];
   officialPortalUrl: string;
+  sourceReference?: string;
   statusNotes: string;
   isPrimaryRecommendation: boolean;
 }
@@ -304,6 +315,7 @@ export interface Scheme {
 export interface SchemeRouteRecommendation {
   recommendedScheme: Scheme;
   secondaryScheme: Scheme;
+  allSchemes?: Scheme[];
   indicativeSubsidyBenefit: number;
   indicativeEmiReduction: number;
   appraisalCheckpoints: string[];

@@ -1459,7 +1459,7 @@
       }
     ],
     "scrapedAt": "2026-09-16T06:03:40.720Z",
-    "hitsCount": 2
+    "hitsCount": 3
   },
   {
     "key": "phagwaralawgatelpu-kapurthala-10-dairy",
@@ -1799,7 +1799,7 @@
       }
     ],
     "scrapedAt": "2026-09-16T06:03:40.720Z",
-    "hitsCount": 2
+    "hitsCount": 5
   },
   {
     "key": "phagwaralawgatelpu-kapurthala-10-bakery",
@@ -3826,7 +3826,7 @@
     "radiusKm": 5,
     "category": "Dairy",
     "scrapedAt": "2026-09-16T06:09:23.264Z",
-    "hitsCount": 1
+    "hitsCount": 3
   },
   {
     "population": 43240,

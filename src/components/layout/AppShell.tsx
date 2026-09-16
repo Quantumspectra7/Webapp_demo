@@ -66,11 +66,8 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
   // Route Protection: enforce completion of the 6-step analysis form before entering workspace
   useEffect(() => {
     if (isLoading) return;
-    const isRegistered =
-      (userAccount && userAccount.authenticated && !userAccount.isGuest) ||
-      (typeof window !== "undefined" && !!localStorage.getItem("gramvest_user_account"));
-    if (!isRegistered) {
-      router.replace("/onboarding");
+    if (!userAccount?.authenticated || userAccount.isGuest) {
+      router.replace("/auth");
     }
   }, [userAccount, isLoading, router]);
 

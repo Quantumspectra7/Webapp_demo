@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { supabase } from "@/lib/supabase";
 import { translateText, SupportedLanguage } from "@/lib/i18n";
 import {
   EntrepreneurProfile,
@@ -27,12 +28,6 @@ interface AppContextType {
   setSelectedRadius: (radius: 5 | 10) => void;
   setLanguage: (lang: "EN" | "PA" | "HI") => void;
   setUserAccount: (account: UserAccount | null) => void;
-  registerUserAccount: (accountData: {
-    name: string;
-    phone: string;
-    email: string;
-    businessName?: string;
-  }) => void;
   logoutUserAccount: () => void;
   setAnalysisProfile: (profile: AnalysisProfile | null) => void;
   applyAnalysisProfile: (profile: AnalysisProfile) => Promise<void>;
@@ -43,7 +38,19 @@ interface AppContextType {
   isLoading: boolean;
 }
 
-const STORAGE_KEY_USER = "gramvest_user_account";
+const accountFromUser = (user: { id: string; email?: string; user_metadata?: Record<string, unknown>; created_at: string } | null): UserAccount | null => {
+  if (!user?.email) return null;
+
+  return {
+    id: user.id || user.email,
+    name: (user.user_metadata?.full_name as string | undefined) || user.email.split("@")[0],
+    contact: user.email,
+    email: user.email,
+    registeredAt: user.created_at,
+    isGuest: false,
+    authenticated: true,
+  };
+};
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -72,22 +79,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setProfile(prof);
       setLocation(loc);
 
-      // Restore user account from local storage if registered
-      let currentUser: UserAccount | null = null;
-      if (typeof window !== "undefined") {
-        const storedUser = localStorage.getItem(STORAGE_KEY_USER);
-        if (storedUser) {
-          try {
-            const parsed = JSON.parse(storedUser);
-            if (parsed && parsed.authenticated) {
-              setUserAccount(parsed);
-              currentUser = parsed;
-            }
-          } catch (e) {
-            console.error("Failed to parse saved user account", e);
-          }
-        }
-      }
+      const { data: sessionData } = await supabase.auth.getSession();
+      const currentUser = accountFromUser(sessionData.session?.user || null);
+      setUserAccount(currentUser);
 
       // If user had previously saved an analysis profile, restore business, location, profile & financials
       if (savedAnalysis) {
@@ -219,6 +213,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   useEffect(() => {
     loadInitialData();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUserAccount(accountFromUser(session?.user || null));
+    });
+
+    return () => authListener.subscription.unsubscribe();
   }, []);
 
   const updateProfile = async (data: Partial<EntrepreneurProfile>) => {
@@ -321,34 +321,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   };
 
-  const registerUserAccount = (accountData: {
-    name: string;
-    phone: string;
-    email: string;
-    businessName?: string;
-  }) => {
-    const newUser: UserAccount = {
-      id: `usr-${Date.now()}`,
-      name: accountData.name.trim(),
-      contact: accountData.phone.trim() || accountData.email.trim(),
-      phone: accountData.phone.trim(),
-      email: accountData.email.trim(),
-      businessName: accountData.businessName?.trim(),
-      registeredAt: new Date().toISOString(),
-      isGuest: false,
-      authenticated: true,
-    };
-    setUserAccount(newUser);
-    if (typeof window !== "undefined") {
-      localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(newUser));
-    }
-  };
-
   const logoutUserAccount = () => {
-    setUserAccount(null);
-    if (typeof window !== "undefined") {
-      localStorage.removeItem(STORAGE_KEY_USER);
-    }
+    void supabase.auth.signOut();
   };
 
   const t = useCallback(
@@ -371,7 +345,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setSelectedRadius,
         setLanguage,
         setUserAccount,
-        registerUserAccount,
         logoutUserAccount,
         setAnalysisProfile,
         applyAnalysisProfile,

@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { User, Phone, Mail, Users, ArrowRight, CheckCircle2 } from "lucide-react";
+import { User, Phone, Users, ArrowRight, CheckCircle2 } from "lucide-react";
 
 export interface PersonalDetails {
   name: string;
   phone: string;
-  email: string;
   entrepreneurCategory: string;
   businessName: string;
 }
@@ -31,7 +30,6 @@ export const PersonalDetailsStep: React.FC<PersonalDetailsStepProps> = ({
 }) => {
   const [name, setName] = useState(initialDetails?.name || "");
   const [phone, setPhone] = useState(initialDetails?.phone || "");
-  const [email, setEmail] = useState(initialDetails?.email || "");
   const [category, setCategory] = useState(initialDetails?.entrepreneurCategory || "");
   const [businessName, setBusinessName] = useState(initialDetails?.businessName || "");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -43,9 +41,6 @@ export const PersonalDetailsStep: React.FC<PersonalDetailsStepProps> = ({
     }
     if (!phone.trim() || !/^[6-9]\d{9}$/.test(phone.replace(/\s+/g, ""))) {
       e.phone = "Please enter a valid 10-digit Indian mobile number.";
-    }
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      e.email = "Please enter a valid email address.";
     }
     if (!category) {
       e.category = "Please select your entrepreneur category.";
@@ -60,7 +55,6 @@ export const PersonalDetailsStep: React.FC<PersonalDetailsStepProps> = ({
     onConfirmDetails({
       name: name.trim(),
       phone: phone.trim(),
-      email: email.trim(),
       entrepreneurCategory: category,
       businessName: businessName.trim(),
     });
@@ -133,30 +127,6 @@ export const PersonalDetailsStep: React.FC<PersonalDetailsStepProps> = ({
               />
             </div>
             {errors.phone && <p className="text-xs text-red-600 mt-1">{errors.phone}</p>}
-          </div>
-
-          {/* Email (optional) */}
-          <div>
-            <label className="block text-xs font-bold text-[#786d65] uppercase tracking-wider mb-1.5">
-              Email Address{" "}
-              <span className="text-[10px] font-normal normal-case text-[#786d65]">(Optional — for PDF report)</span>
-            </label>
-            <div className="relative">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                autoComplete="email"
-                className={`w-full rounded-xl border pl-9 pr-3 py-2.5 text-sm text-[#241b16] focus:outline-none transition-colors ${
-                  errors.email
-                    ? "border-red-400 bg-red-50 focus:border-red-400"
-                    : "border-[#ede3d8] focus:border-[#c75d3e] focus:ring-1 focus:ring-[#c75d3e]/20"
-                }`}
-              />
-              <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#786d65]" />
-            </div>
-            {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
           </div>
 
           {/* Entrepreneur Category */}

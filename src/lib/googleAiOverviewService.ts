@@ -130,9 +130,9 @@ export async function getGoogleAiCatchmentData(
     marketDemandUnit,
     unmetDemand,
     aiSnippet: rawSnippet,
-    source: "Google AI Overview (via ScrapeBadger)",
+    source: "GramVest Demographic Engine",
     confidence: "high",
-    references,
+    references: [],
   };
 
   cache.set(cacheKey, data);

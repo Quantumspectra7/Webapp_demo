@@ -34,6 +34,13 @@ const DISTANCE_OPTIONS = [
   { label: "5–10 km", value: "5-10km" },
 ];
 
+const DENSITY_OPTIONS = [
+  { label: "All Densities", value: "all" },
+  { label: "High Density", value: "high" },
+  { label: "Moderate Density", value: "moderate" },
+  { label: "Low Density", value: "low" },
+];
+
 export const TopCompetitorsTable: React.FC<TopCompetitorsTableProps> = ({
   competitors,
   selectedCompetitorId,
@@ -45,8 +52,49 @@ export const TopCompetitorsTable: React.FC<TopCompetitorsTableProps> = ({
   onCategoryFilterChange,
   onDistanceFilterChange,
 }) => {
-  // Top 10 Slice per specification
-  const top10 = competitors.slice(0, 10);
+  const [densityFilter, setDensityFilter] = React.useState<string>("all");
+
+  const getCompetitorDensityLevel = (comp: Competitor): "high" | "moderate" | "low" => {
+    if (comp.distanceKm <= 2.5 || comp.dailyCapacityLiters >= 1500) return "high";
+    if (comp.distanceKm <= 5.0 || comp.dailyCapacityLiters >= 800) return "moderate";
+    return "low";
+  };
+
+  const getDensityBadge = (comp: Competitor) => {
+    const level = getCompetitorDensityLevel(comp);
+    if (level === "high") {
+      return (
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-red-50 text-red-700 border border-red-200 shrink-0">
+          <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+          High Density
+        </span>
+      );
+    }
+    if (level === "moderate") {
+      return (
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200 shrink-0">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+          Moderate Density
+        </span>
+      );
+    }
+    return (
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        Low Density
+      </span>
+    );
+  };
+
+  // Filtered by density + Slice
+  const displayedCompetitors = React.useMemo(() => {
+    if (densityFilter === "all") return competitors.slice(0, 10);
+    return competitors
+      .filter((c) => getCompetitorDensityLevel(c) === densityFilter)
+      .slice(0, 10);
+  }, [competitors, densityFilter]);
+
+  const top10 = displayedCompetitors;
 
   // Derive dynamic category filter options based on competitors present
   const categoryOptions = React.useMemo(() => {
@@ -110,21 +158,42 @@ export const TopCompetitorsTable: React.FC<TopCompetitorsTableProps> = ({
   return (
     <div className="w-full bg-white rounded-3xl border border-[#ede3d8] p-5 sm:p-7 shadow-sm">
       {/* Header & Title */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-[#ede3d8]">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-[#ede3d8]">
         <div>
           <div className="flex items-center gap-2">
             <Building2 size={18} className="text-[#c75d3e]" />
             <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#241b16]">
-              Top 10 Relevant Businesses
+              Relevant Competitor Businesses
             </h3>
           </div>
           <p className="text-xs text-[#786d65] mt-1">
-            Ranked by proximity, operational capacity, and market overlap with your venture.
+            Ranked by proximity and local cluster density (High: &lt;2.5 km, Moderate: 2.5–5 km, Low: &gt;5 km).
           </p>
         </div>
 
         {/* Filter Controls Bar */}
         <div className="flex flex-wrap items-center gap-2">
+          {/* Density Filter */}
+          <div className="flex items-center gap-1 bg-[#faf4ee] p-1 rounded-xl border border-[#ede3d8]">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#786d65] px-1.5">
+              Density:
+            </span>
+            {DENSITY_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => setDensityFilter(opt.value)}
+                className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                  densityFilter === opt.value
+                    ? "bg-white text-[#c75d3e] shadow-2xs font-bold ring-1 ring-[#c75d3e]/20"
+                    : "text-[#786d65] hover:text-[#241b16]"
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+
           {/* Category Filter */}
           <div className="flex items-center gap-1 bg-[#faf4ee] p-1 rounded-xl border border-[#ede3d8]">
             {categoryOptions.map((opt) => (
@@ -168,7 +237,7 @@ export const TopCompetitorsTable: React.FC<TopCompetitorsTableProps> = ({
         {top10.length === 0 ? (
           <div className="py-10 text-center text-xs text-[#786d65]">
             <p className="font-bold text-[#241b16]">No matching businesses in this filter</p>
-            <p className="mt-1">Try expanding distance to 5–10 km or reset category filters.</p>
+            <p className="mt-1">Try switching density or expanding distance filter to view all nearby facilities.</p>
           </div>
         ) : (
           top10.map((comp, idx) => {
@@ -216,8 +285,8 @@ export const TopCompetitorsTable: React.FC<TopCompetitorsTableProps> = ({
                   </div>
                 </div>
 
-                {/* Right: Distance + Capacity + Fly to map */}
-                <div className="flex items-center justify-between sm:justify-end gap-5 text-xs shrink-0 pl-9 sm:pl-0">
+                {/* Right: Distance + Capacity + Competition Density Badge */}
+                <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-5 text-xs shrink-0 pl-9 sm:pl-0">
                   <div className="text-left sm:text-right">
                     <span className="text-sm font-bold text-[#c75d3e] font-mono block">
                       {formatDistance(comp.distanceKm)}
@@ -232,9 +301,8 @@ export const TopCompetitorsTable: React.FC<TopCompetitorsTableProps> = ({
                     <span className="text-[10px] text-[#786d65]">operating cap</span>
                   </div>
 
-                  <div className="flex items-center gap-1 text-[#786d65] hover:text-[#c75d3e] text-xs font-semibold">
-                    <span className="hidden md:inline">Focus</span>
-                    <ArrowUpRight size={14} />
+                  <div className="shrink-0">
+                    {getDensityBadge(comp)}
                   </div>
                 </div>
               </div>

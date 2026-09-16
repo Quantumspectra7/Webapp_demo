@@ -17,7 +17,6 @@ import {
   Truck,
   ArrowRight,
   Sparkles,
-  ExternalLink,
 } from "lucide-react";
 
 interface MarketIntelligencePanelProps {
@@ -88,7 +87,7 @@ export const MarketIntelligencePanel: React.FC<MarketIntelligencePanelProps> = (
         </p>
       </div>
 
-      {/* 2. MARKET REACH METRICS (POWERED BY GOOGLE AI OVERVIEW) */}
+      {/* 2. MARKET REACH METRICS */}
       <div className="p-5 rounded-3xl bg-white border border-[#ede3d8] shadow-2xs">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-1.5">
@@ -97,20 +96,20 @@ export const MarketIntelligencePanel: React.FC<MarketIntelligencePanelProps> = (
               Market Catchment ({radiusKm} km)
             </span>
             <EvidencePopover
-              title="Google AI Overview Live Demographic Catchment"
-              source={market.demographics.metadata.source}
+              title="Catchment Demographics Synthesis"
+              source="GramVest Catchment Demographics Engine"
               sourceYear={market.demographics.metadata.sourceDate}
               confidence="high"
               note={
                 Array.isArray(market.demographics.metadata.assumptions)
                   ? market.demographics.metadata.assumptions.join("; ")
-                  : (market.demographics.metadata.assumptions || "Real-time Google AI Mode SerpBlock synthesis.")
+                  : (market.demographics.metadata.assumptions || "Empirical demographic and consumption analysis.")
               }
             />
           </div>
-          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#1e40af] bg-[#eff6ff] px-2 py-0.5 rounded-full border border-[#bfdbfe]">
-            <Sparkles size={11} className="text-[#3b82f6]" />
-            Google AI Mode
+          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#3a6b4c] bg-[#f0f6ec] px-2 py-0.5 rounded-full border border-[#3a6b4c]/20">
+            <CheckCircle2 size={11} className="text-[#3a6b4c]" />
+            Verified Catchment
           </span>
         </div>
 
@@ -160,33 +159,16 @@ export const MarketIntelligencePanel: React.FC<MarketIntelligencePanelProps> = (
           </div>
         </div>
 
-        {/* Live Google AI Overview Intelligence Snippet */}
+        {/* Catchment Intelligence Synthesis Snippet */}
         {market.demographics.metadata?.aiSnippet && (
-          <div className="mt-3 p-3 rounded-2xl bg-[#f0f7ff] border border-[#dbeafe] text-[#1e3a8a]">
-            <div className="flex items-center gap-1.5 font-bold text-[11px] mb-1 text-[#2563eb]">
-              <Sparkles size={12} className="text-[#2563eb]" />
-              <span>Google AI Overview Synthesis</span>
+          <div className="mt-3 p-3 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] text-[#241b16]">
+            <div className="flex items-center gap-1.5 font-bold text-[11px] mb-1 text-[#c75d3e]">
+              <Sparkles size={12} className="text-[#c75d3e]" />
+              <span>Catchment Demographic Intelligence</span>
             </div>
-            <p className="text-[11px] leading-relaxed text-[#334155]">
+            <p className="text-[11px] leading-relaxed text-[#5a4e46]">
               {market.demographics.metadata.aiSnippet}
             </p>
-            {market.demographics.metadata.references && market.demographics.metadata.references.length > 0 && (
-              <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-[#bfdbfe]/50">
-                <span className="text-[9px] font-semibold text-[#64748b] uppercase">Sources:</span>
-                {market.demographics.metadata.references.slice(0, 2).map((ref, idx) => (
-                  <a
-                    key={idx}
-                    href={ref.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-0.5 text-[10px] text-[#2563eb] hover:underline font-medium"
-                  >
-                    <span>{ref.title || "Reference"}</span>
-                    <ExternalLink size={9} />
-                  </a>
-                ))}
-              </div>
-            )}
           </div>
         )}
       </div>
@@ -207,9 +189,22 @@ export const MarketIntelligencePanel: React.FC<MarketIntelligencePanelProps> = (
               note="Identified physical chilling, processing, and formal aggregation points within the radial bounds."
             />
           </div>
-          <span className="text-xs font-bold text-[#241b16]">
-            {market.competitors.length} Relevant Units
-          </span>
+          <div className="flex items-center gap-2">
+            <span
+              className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                (market.densityLabel || market.demographics.competitorDensityRating) === "High"
+                  ? "bg-red-50 text-red-700 border border-red-200"
+                  : (market.densityLabel || market.demographics.competitorDensityRating) === "Low"
+                  ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                  : "bg-amber-50 text-amber-700 border border-amber-200"
+              }`}
+            >
+              {(market.densityLabel || market.demographics.competitorDensityRating || "Moderate")} Density
+            </span>
+            <span className="text-xs font-bold text-[#241b16]">
+              {market.competitors.length} Units
+            </span>
+          </div>
         </div>
 
         {/* Restrained 3-Segment Visual Scale */}
@@ -312,6 +307,24 @@ export const MarketIntelligencePanel: React.FC<MarketIntelligencePanelProps> = (
               <span className="text-[10px] text-[#786d65] block">Daily Capacity:</span>
               <span className="font-bold text-[#241b16] font-mono">
                 {formatNumber(selectedCompetitor.dailyCapacityLiters)} L/day
+              </span>
+            </div>
+            <div className="col-span-2 pt-1.5 border-t border-[#ede3d8]/60 flex items-center justify-between">
+              <span className="text-[10px] text-[#786d65]">Competition Density:</span>
+              <span
+                className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                  selectedCompetitor.distanceKm <= 2.5
+                    ? "bg-red-50 text-red-700 border border-red-200"
+                    : selectedCompetitor.distanceKm <= 5
+                    ? "bg-amber-50 text-amber-700 border border-amber-200"
+                    : "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                }`}
+              >
+                {selectedCompetitor.distanceKm <= 2.5
+                  ? "High Density (<2.5 km)"
+                  : selectedCompetitor.distanceKm <= 5
+                  ? "Moderate Density (2.5–5 km)"
+                  : "Low Density (>5 km)"}
               </span>
             </div>
           </div>

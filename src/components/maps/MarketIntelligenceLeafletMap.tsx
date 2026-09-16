@@ -259,17 +259,17 @@ export const MarketIntelligenceLeafletMap: React.FC<MarketIntelligenceLeafletMap
           <div style="font-size: 11px; color: #786d65; margin-top: 2px;">${
             comp.businessType || comp.primaryArea
           }</div>
-          <div style="font-size: 10px; color: #786d65; margin-top: 6px; padding-top: 6px; border-top: 1px solid #ede3d8; display: flex; justify-content: space-between;">
-            <span>Source: ${comp.source || "Map data"}</span>
-            <span style="color: #3a6b4c; font-weight: 600;">Verified</span>
+          <div style="margin-top: 6px; padding-top: 5px; border-top: 1px solid #ede3d8; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 9999px; background: ${
+              comp.distanceKm <= 2.5 ? "#fef2f2; color: #b91c1c; border: 1px solid #fecaca;" : comp.distanceKm <= 5 ? "#fffbeb; color: #b45309; border: 1px solid #fde68a;" : "#ecfdf5; color: #047857; border: 1px solid #a7f3d0;"
+            }">Density: ${comp.distanceKm <= 2.5 ? "High" : comp.distanceKm <= 5 ? "Moderate" : "Low"}</span>
+            <span style="font-size: 10px; color: #3a6b4c; font-weight: 600;">Verified</span>
           </div>
         </div>
       `);
-
       marker.on("click", () => {
         onSelectCompetitor(comp);
       });
-
       competitorMarkersRef.current.set(comp.id, marker);
     });
   }, [
@@ -279,7 +279,6 @@ export const MarketIntelligenceLeafletMap: React.FC<MarketIntelligenceLeafletMap
     filters,
     onSelectCompetitor,
   ]);
-
   // Render Market / Mandi Markers
   useEffect(() => {
     if (!mapRef.current) return;
@@ -287,9 +286,7 @@ export const MarketIntelligenceLeafletMap: React.FC<MarketIntelligenceLeafletMap
 
     marketMarkersRef.current.forEach((marker) => map.removeLayer(marker));
     marketMarkersRef.current.clear();
-
     if (!filters.showMarkets) return;
-
     markets.forEach((mkt) => {
       const marketPinHtml = `
         <div style="position: relative; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer;">

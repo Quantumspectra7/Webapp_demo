@@ -295,7 +295,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
       >
         <div className="flex flex-col flex-1 overflow-y-auto no-scrollbar">
           {/* Logo Header */}
-          <div className="px-5 py-4 border-b border-[#ede3d8] flex items-center justify-between bg-white/40">
+          <div className="px-5 py-4 border-b border-[#ede3d8] flex items-center bg-white/40">
             <Link href="/" className="flex items-center group">
               <Image
                 src="/gramvest_logo3.png"
@@ -306,9 +306,6 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
                 priority
               />
             </Link>
-            <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-[#fcedea] text-[#c75d3e] border border-[#c75d3e]/20">
-              SIH 2026
-            </span>
           </div>
 
           {/* Navigation Links */}

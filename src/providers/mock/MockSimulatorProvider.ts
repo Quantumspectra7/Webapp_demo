@@ -157,15 +157,15 @@ export class MockSimulatorProvider implements ISimulatorProvider {
 
     let strategicSummary = "";
     if (projectedRiskLevel === "Critical" || projectedRiskLevel === "Stressed") {
-      strategicSummary = `Stress scenario triggers significant margin tightening. At a DSCR of ${simOp.annualDSCR}x and net monthly cash flow of ₹${simOp.monthlyNetCashFlow.toLocaleString("en-IN")}, the business is sensitive to unhedged milk procurement cost spikes.`;
+      strategicSummary = `Stress scenario triggers significant margin tightening. At a DSCR of ${simOp.annualDSCR}x and net monthly cash flow of ₹${simOp.monthlyNetCashFlow.toLocaleString("en-IN")}, the business is sensitive to unhedged input cost spikes. Immediate mitigation measures are strongly recommended.`;
     } else {
-      strategicSummary = `Under this scenario, the venture maintains sturdy cash coverage (DSCR ${simOp.annualDSCR}x) and steady monthly earnings (₹${simOp.monthlyNetProfit.toLocaleString("en-IN")}), confirming strong structural resilience for Sidhwan Bet.`;
+      strategicSummary = `Under this scenario, the venture maintains sturdy cash coverage (DSCR ${simOp.annualDSCR}x) and steady monthly earnings (₹${simOp.monthlyNetProfit.toLocaleString("en-IN")}), confirming strong structural resilience for your selected business.`;
     }
 
     const suggestedPivots = [
-      "Negotiate floor-and-ceiling contract prices with Jagraon sweet confectioners to cap procurement downside.",
-      "Diversify into higher-margin retail pouch milk (₹64/L) for 20% of daily throughput to lift blended realization.",
-      "Incorporate dry silage supply support for dairy farmers to dampen summer green fodder cost surges.",
+      "Negotiate floor-and-ceiling price contracts with your primary buyers to reduce revenue downside risk.",
+      "Diversify into at least one higher-margin product or service variant to lift blended realization.",
+      "Build a 45-day emergency working capital reserve to absorb seasonal input cost surges.",
     ];
 
     return {

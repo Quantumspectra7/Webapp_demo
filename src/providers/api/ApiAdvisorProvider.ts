@@ -31,19 +31,11 @@ export class ApiAdvisorProvider implements IAdvisorProvider {
     this.messages.push(userMsg);
 
     try {
-      // Build context for the API
-      const business = context?.business || { title: "Dairy Processing & Milk Chilling", sector: "Agro-Processing" };
-      const location = context?.location || { villageOrTown: "Sidhwan Bet", block: "Jagraon", district: "Ludhiana", state: "Punjab" };
-      const financial = context?.financial || {
-        totalProjectCost: 860000,
-        ownContribution: 300000,
-        termLoan: 560000,
-        monthlyEMI: 11500,
-        dscr: 1.42,
-        breakEven: 380,
-        monthlyRevenue: 185000,
-        monthlyNetProfit: 38500,
-      };
+      // Build context for the API — no hardcoded fallbacks
+      // If context is missing, the Gemini API will provide general guidance
+      const business = context?.business || null;
+      const location = context?.location || null;
+      const financial = context?.financial || null;
 
       // Auto-fetch deep context from other domain services to send to AI
       let market = null;
@@ -81,6 +73,7 @@ export class ApiAdvisorProvider implements IAdvisorProvider {
           viability,
           schemes,
           language,
+          isVoiceQuery: !!context?.isVoiceQuery,
         }),
       });
 
@@ -121,11 +114,12 @@ export class ApiAdvisorProvider implements IAdvisorProvider {
 
   async getSuggestedQuestions(): Promise<string[]> {
     return [
-      "Why is my viability score 78?",
-      "Can I afford this with my current capital?",
-      "Which scheme may fit me?",
+      "What is my viability score and what affects it?",
+      "Can I afford this venture with my current capital?",
+      "Which government scheme best fits my business?",
       "What is my biggest financial risk?",
-      "What happens if revenue falls 20%?",
+      "What happens if my revenue falls by 20%?",
+      "What licenses and approvals do I need?",
     ];
   }
 }

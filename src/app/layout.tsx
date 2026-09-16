@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import { AppProvider } from "@/context/AppContext";
+import { GoogleTranslate } from "@/components/common/GoogleTranslate";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
 
@@ -44,6 +45,7 @@ export default function RootLayout({
       className={`${notoSerif.variable} ${plusJakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#fff8f2] text-[#1d1b18]">
+        <GoogleTranslate />
         <AppProvider>{children}</AppProvider>
       </body>
     </html>

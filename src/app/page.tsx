@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 // Archetype Data Model
@@ -265,38 +266,16 @@ export default function LandingPage() {
       {/* Top Navigation Bar */}
       <header className="sticky top-0 z-50 bg-[#fff8f2]/90 backdrop-blur-md border-b border-[#ede3d8]/70 transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          {/* Brand Logo & Radar Tag */}
-          <Link aria-label="GramVest Home" className="flex items-center gap-3 group" href="/">
-            <div className="w-10 h-10 rounded-xl bg-[#c75d3e] flex items-center justify-center text-white shadow-md shadow-[#c75d3e]/20 group-hover:scale-105 transition-transform">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2.2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M3 21h18"></path>
-                <path d="M5 21V7l7-4 7 4v14"></path>
-                <path d="M9 10a3 3 0 1 0 6 0"></path>
-                <path d="M9 21v-4a3 3 0 0 1 6 0v4"></path>
-              </svg>
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-serif font-bold text-xl text-[#241b16] tracking-tight">
-                  GramVest
-                </span>
-                <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#d4e6c1]/60 text-[#3a6b4c] border border-[#3a6b4c]/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#3a6b4c] animate-ping mr-1"></span>
-                  LIVE
-                </span>
-              </div>
-              <p className="text-xs font-medium text-[#786d65] tracking-wide">
-                Rural Feasibility Radar
-              </p>
-            </div>
+          {/* Brand Logo */}
+          <Link aria-label="GramVest Home" className="flex items-center py-1 group" href="/">
+            <Image
+              src="/gramvest_logo3.png"
+              alt="GramVest"
+              width={160}
+              height={56}
+              className="h-12 sm:h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation Links */}
@@ -400,11 +379,10 @@ export default function LandingPage() {
                       <button
                         key={idx}
                         onClick={() => setCurrentHeroIdx(idx)}
-                        className={`h-1.5 rounded-full transition-all duration-300 ${
-                          currentHeroIdx === idx
+                        className={`h-1.5 rounded-full transition-all duration-300 ${currentHeroIdx === idx
                             ? "bg-[#c75d3e] w-6"
                             : "bg-[#ede3d8] w-2"
-                        }`}
+                          }`}
                         aria-label={`Show benefit ${idx + 1}`}
                       />
                     ))}
@@ -626,11 +604,10 @@ export default function LandingPage() {
                           key={key}
                           onClick={() => handleSelectArchetype(key)}
                           type="button"
-                          className={`p-3 rounded-xl border text-left flex items-start gap-2.5 transition-all cursor-pointer ${
-                            isSelected
+                          className={`p-3 rounded-xl border text-left flex items-start gap-2.5 transition-all cursor-pointer ${isSelected
                               ? "border-[#c75d3e] bg-[#fcedea]/60 text-[#c75d3e]"
                               : "border-[#ede3d8] bg-white text-[#382f29] hover:border-[#c75d3e]/50"
-                          }`}
+                            }`}
                         >
                           <span className="text-lg">{arch.emoji}</span>
                           <div>
@@ -1013,16 +990,14 @@ export default function LandingPage() {
                   <button
                     key={t.stepNum}
                     onClick={() => setActiveEngineStep(t.stepNum)}
-                    className={`text-left p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                      isActive
+                    className={`text-left p-4 rounded-xl border-2 transition-all cursor-pointer ${isActive
                         ? "border-[#c75d3e] bg-white shadow-sm"
                         : "border-transparent bg-white/60 hover:bg-white text-[#786d65]"
-                    }`}
+                      }`}
                   >
                     <span
-                      className={`text-xs font-bold block mb-1 ${
-                        isActive ? "text-[#c75d3e]" : "text-[#786d65]"
-                      }`}
+                      className={`text-xs font-bold block mb-1 ${isActive ? "text-[#c75d3e]" : "text-[#786d65]"
+                        }`}
                     >
                       {t.label}
                     </span>
@@ -1197,9 +1172,8 @@ export default function LandingPage() {
                 >
                   <span>Do I need to enter my Aadhaar or bank account number?</span>
                   <svg
-                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${
-                      openFaq === 1 ? "rotate-180" : ""
-                    }`}
+                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${openFaq === 1 ? "rotate-180" : ""
+                      }`}
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2.5"
@@ -1224,9 +1198,8 @@ export default function LandingPage() {
                 >
                   <span>How accurate is the local tehsil competition and mandi data?</span>
                   <svg
-                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${
-                      openFaq === 2 ? "rotate-180" : ""
-                    }`}
+                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${openFaq === 2 ? "rotate-180" : ""
+                      }`}
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2.5"
@@ -1251,9 +1224,8 @@ export default function LandingPage() {
                 >
                   <span>Will public sector banks (SBI, PNB, NABARD) accept this dossier?</span>
                   <svg
-                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${
-                      openFaq === 3 ? "rotate-180" : ""
-                    }`}
+                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${openFaq === 3 ? "rotate-180" : ""
+                      }`}
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2.5"
@@ -1278,9 +1250,8 @@ export default function LandingPage() {
                 >
                   <span>How are the PMEGP subsidies (25% to 35%) calculated?</span>
                   <svg
-                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${
-                      openFaq === 4 ? "rotate-180" : ""
-                    }`}
+                    className={`w-5 h-5 text-[#786d65] transform transition-transform duration-200 ${openFaq === 4 ? "rotate-180" : ""
+                      }`}
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2.5"
@@ -1332,14 +1303,15 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#382f29]/80">
             {/* Brand & Vision */}
             <div className="md:col-span-4 space-y-4">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[#c75d3e] flex items-center justify-center text-white font-bold text-sm">
-                  GV
-                </div>
-                <span className="font-serif font-bold text-xl text-white tracking-tight">
-                  GramVest
-                </span>
-              </div>
+              <Link href="/" className="inline-flex items-center group">
+                <Image
+                  src="/gramvest_logo3.png"
+                  alt="GramVest"
+                  width={150}
+                  height={48}
+                  className="h-11 w-auto object-contain brightness-105 group-hover:scale-105 transition-transform duration-200"
+                />
+              </Link>
               <p className="text-xs text-[#ede3d8]/70 leading-relaxed max-w-sm">
                 Rural Commercial Ledger &amp; Feasibility Radar. Ground-truthed analytics, power stability audits, and bank-vetted DPR generation for India&apos;s next generational rural enterprises.
               </p>

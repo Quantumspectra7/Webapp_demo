@@ -41,14 +41,10 @@ const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE !== "false";
 
 // Provider Singletons
 const profileProvider: IProfileProvider = new MockProfileProvider();
-const marketProvider: IMarketProvider = isDemo
-  ? new MockMarketProvider()
-  : new ApiMarketProvider();
+const marketProvider: IMarketProvider = new ApiMarketProvider();
 const financeProvider: IFinanceProvider = new MockFinanceProvider();
 const schemeProvider: ISchemeProvider = new MockSchemeProvider();
-const advisorProvider: IAdvisorProvider = isDemo
-  ? new MockAdvisorProvider()
-  : new ApiAdvisorProvider();
+const advisorProvider: IAdvisorProvider = new ApiAdvisorProvider();
 const simulatorProvider: ISimulatorProvider = new MockSimulatorProvider();
 const reportProvider: IReportProvider = new MockReportProvider();
 const locationProvider: ILocationProvider = new MockLocationProvider();
@@ -81,6 +77,7 @@ export const marketService = {
   getSwot: () => marketProvider.getSwotAnalysis(),
   getRisks: () => marketProvider.getRisks(),
   getViabilityScore: () => marketProvider.getViabilityScore(),
+  setActiveCategory: (categoryId: string) => marketProvider.setActiveCategory?.(categoryId),
 };
 
 export const financeService = {
@@ -90,9 +87,11 @@ export const financeService = {
 };
 
 export const schemeService = {
-  getRecommendations: () => schemeProvider.getRecommendedSchemes(),
+  getRecommendations: (categoryId?: string, projectCost?: number, ownCapital?: number) =>
+    schemeProvider.getRecommendedSchemes(categoryId, projectCost, ownCapital),
   calculateSubsidy: (projectCost: number, schemeCode: string, isRuralSpecial = true) =>
     schemeProvider.calculateSubsidy(projectCost, schemeCode, isRuralSpecial),
+  setActiveCategory: (categoryId: string) => schemeProvider.setActiveCategory?.(categoryId),
 };
 
 export const advisorService = {

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { AppShell } from "@/components/layout/AppShell";
 import { SourceBadge } from "@/components/common/SourceBadge";
 import { ConfidenceBadge } from "@/components/common/ConfidenceBadge";
@@ -141,13 +142,15 @@ export default function ReportPage() {
           {/* Document Header */}
           <div className="border-b-2 border-[#241b16] pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2.5 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-[#c75d3e] flex items-center justify-center text-white font-bold text-base">
-                  GV
-                </div>
-                <span className="font-serif text-[22px] font-bold text-[#241b16]">
-                  GramVest
-                </span>
+              <div className="flex items-center gap-3 mb-2">
+                <Image
+                  src="/gramvest_logo3.png"
+                  alt="GramVest"
+                  width={140}
+                  height={44}
+                  className="h-10 w-auto object-contain"
+                  priority
+                />
                 <span className="text-[11px] uppercase font-bold tracking-widest text-[#786d65] px-2 py-0.5 rounded bg-[#faf4ee] border border-[#ede3d8]">
                   Credit Appraisal Format
                 </span>

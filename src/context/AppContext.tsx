@@ -1,6 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { translateText, SupportedLanguage } from "@/lib/i18n";
 import {
   EntrepreneurProfile,
   VentureLocation,
@@ -9,7 +10,7 @@ import {
   AnalysisProfile,
   UserAccount,
 } from "@/domain";
-import { profileService, financeService, onboardingProfileService } from "@/services";
+import { profileService, financeService, onboardingProfileService, marketService, schemeService } from "@/services";
 
 import { getScenarioForBusiness } from "@/data/real/business_scenarios";
 
@@ -22,9 +23,17 @@ interface AppContextType {
   userAccount: UserAccount | null;
   selectedRadius: 5 | 10;
   language: "EN" | "PA" | "HI";
+  t: (text: string) => string;
   setSelectedRadius: (radius: 5 | 10) => void;
   setLanguage: (lang: "EN" | "PA" | "HI") => void;
   setUserAccount: (account: UserAccount | null) => void;
+  registerUserAccount: (accountData: {
+    name: string;
+    phone: string;
+    email: string;
+    businessName?: string;
+  }) => void;
+  logoutUserAccount: () => void;
   setAnalysisProfile: (profile: AnalysisProfile | null) => void;
   applyAnalysisProfile: (profile: AnalysisProfile) => Promise<void>;
   updateProfile: (data: Partial<EntrepreneurProfile>) => Promise<void>;
@@ -34,6 +43,8 @@ interface AppContextType {
   isLoading: boolean;
 }
 
+const STORAGE_KEY_USER = "gramvest_user_account";
+
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -42,13 +53,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [business, setBusiness] = useState<BusinessCategory | null>(null);
   const [financialScenario, setFinancialScenario] = useState<FinancialScenario | null>(null);
   const [analysisProfile, setAnalysisProfile] = useState<AnalysisProfile | null>(null);
-  const [userAccount, setUserAccount] = useState<UserAccount | null>({
-    id: "guest-user-01",
-    name: "Guest Explorer",
-    contact: "guest@gramvest.in",
-    isGuest: true,
-    authenticated: false,
-  });
+  const [userAccount, setUserAccount] = useState<UserAccount | null>(null);
   const [selectedRadius, setSelectedRadius] = useState<5 | 10>(5);
   const [language, setLanguage] = useState<"EN" | "PA" | "HI">("EN");
   const [isLoading, setIsLoading] = useState(true);
@@ -67,15 +72,51 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setProfile(prof);
       setLocation(loc);
 
-      // If user had previously saved an analysis profile, restore business & financials
+      // Restore user account from local storage if registered
+      let currentUser: UserAccount | null = null;
+      if (typeof window !== "undefined") {
+        const storedUser = localStorage.getItem(STORAGE_KEY_USER);
+        if (storedUser) {
+          try {
+            const parsed = JSON.parse(storedUser);
+            if (parsed && parsed.authenticated) {
+              setUserAccount(parsed);
+              currentUser = parsed;
+            }
+          } catch (e) {
+            console.error("Failed to parse saved user account", e);
+          }
+        }
+      }
+
+      // If user had previously saved an analysis profile, restore business, location, profile & financials
       if (savedAnalysis) {
         setAnalysisProfile(savedAnalysis);
+
+        // 1. Restore & sync Location
+        const restoredLoc: VentureLocation = {
+          id: savedAnalysis.location?.id || loc?.id || "loc-custom-active",
+          state: savedAnalysis.location?.state || "Punjab",
+          district: savedAnalysis.location?.district || "Ludhiana",
+          block: savedAnalysis.location?.block || "Khanna",
+          villageOrTown: savedAnalysis.location?.villageOrTown || "Khanna",
+          pincode: savedAnalysis.location?.pincode || "141401",
+          latitude: savedAnalysis.location?.latitude || 30.702,
+          longitude: savedAnalysis.location?.longitude || 76.22,
+          marketCatchmentName: `${savedAnalysis.location?.block || "Khanna"} Agro Catchment`,
+          nearestMandi: `${savedAnalysis.location?.block || "Khanna"} APMC Mandi`,
+          distanceToMandiKm: 5.4,
+        };
+        setLocation(restoredLoc);
+        await profileService.updateLocation(restoredLoc);
+
+        // 2. Restore & sync Business
         const scenario = getScenarioForBusiness(savedAnalysis.business?.categoryId);
         const syncedBiz: BusinessCategory = {
           id: scenario.id,
-          title: savedAnalysis.business.customBusinessName || scenario.title,
+          title: savedAnalysis.business?.customBusinessName || scenario.title,
           slug: scenario.categoryId,
-          description: savedAnalysis.business.businessDescription || scenario.description,
+          description: savedAnalysis.business?.businessDescription || scenario.description,
           typicalInvestmentRange: [
             Math.round(scenario.indicativeProjectCost * 0.8),
             Math.round(scenario.indicativeProjectCost * 1.2),
@@ -87,6 +128,29 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         };
         setBusiness(syncedBiz);
         setSelectedRadius(savedAnalysis.analysisRadius || 5);
+
+        // 3. Restore & sync Entrepreneur Profile
+        const restoredProf: EntrepreneurProfile = {
+          ...prof,
+          id: prof?.id || "user-active",
+          fullName: currentUser?.name || prof?.fullName || "",
+          phone: currentUser?.phone || prof?.phone || "",
+          initials: ((currentUser?.name || prof?.fullName || "User").substring(0, 2)).toUpperCase(),
+          ownCapitalAvailable: savedAnalysis.capital || prof?.ownCapitalAvailable || 100000,
+          experienceLevel:
+            savedAnalysis.experience === "beginner"
+              ? "beginner"
+              : savedAnalysis.experience === "intermediate"
+              ? "intermediate"
+              : "experienced",
+          targetMonthlyIncome: savedAnalysis.desiredMonthlyIncome || prof?.targetMonthlyIncome || 45000,
+          riskTolerance: savedAnalysis.riskPreference || prof?.riskTolerance || "balanced",
+        };
+        setProfile(restoredProf);
+        await profileService.updateProfile(restoredProf);
+
+        marketService.setActiveCategory(scenario.categoryId);
+        schemeService.setActiveCategory(scenario.categoryId);
 
         // Recalculate financial scenario to match saved business
         try {
@@ -107,8 +171,44 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           setFinancialScenario(fin);
         }
       } else {
+        // If user is registered but no explicit savedAnalysis yet, ensure valid non-empty location
+        if (currentUser && (!loc?.district || loc.district.trim() === "")) {
+          const defaultLoc: VentureLocation = {
+            id: loc?.id || "loc-khanna-01",
+            state: loc?.state || "Punjab",
+            district: "Ludhiana",
+            block: "Khanna",
+            villageOrTown: "Khanna",
+            pincode: loc?.pincode || "141401",
+            latitude: loc?.latitude || 30.702,
+            longitude: loc?.longitude || 76.22,
+            marketCatchmentName: "Khanna Agro Catchment",
+            nearestMandi: "Khanna APMC Mandi",
+            distanceToMandiKm: 5.4,
+          };
+          setLocation(defaultLoc);
+          await profileService.updateLocation(defaultLoc);
+
+          if (currentUser.name) {
+            const updatedProf: EntrepreneurProfile = {
+              ...prof,
+              id: prof?.id || "user-active",
+              fullName: currentUser.name,
+              phone: currentUser.phone || "",
+              initials: currentUser.name.substring(0, 2).toUpperCase(),
+              ownCapitalAvailable: prof?.ownCapitalAvailable || 100000,
+            };
+            setProfile(updatedProf);
+            await profileService.updateProfile(updatedProf);
+          }
+        }
+
         setBusiness(biz);
         setFinancialScenario(fin);
+        if (biz?.id) {
+          marketService.setActiveCategory(biz.id);
+          schemeService.setActiveCategory(biz.id);
+        }
       }
     } catch (err) {
       console.error("Failed to load initial context data", err);
@@ -198,6 +298,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     setSelectedRadius(newProfile.analysisRadius);
 
+    marketService.setActiveCategory(scenarioData.categoryId);
+    schemeService.setActiveCategory(scenarioData.categoryId);
+
     // Recalculate Financial Scenario with verified domain parameters
     try {
       const recalculated = await financeService.recalculateScenario({
@@ -210,12 +313,48 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         sellingPrice: scenarioData.sellingPricePerUnit,
         purchasePrice: scenarioData.purchasePricePerUnit,
         powerAndDiesel: scenarioData.monthlyPowerCost,
+        categoryId: scenarioData.id,
       });
       setFinancialScenario(recalculated);
     } catch (e) {
       console.warn("Failed to dynamically recalculate scenario", e);
     }
   };
+
+  const registerUserAccount = (accountData: {
+    name: string;
+    phone: string;
+    email: string;
+    businessName?: string;
+  }) => {
+    const newUser: UserAccount = {
+      id: `usr-${Date.now()}`,
+      name: accountData.name.trim(),
+      contact: accountData.phone.trim() || accountData.email.trim(),
+      phone: accountData.phone.trim(),
+      email: accountData.email.trim(),
+      businessName: accountData.businessName?.trim(),
+      registeredAt: new Date().toISOString(),
+      isGuest: false,
+      authenticated: true,
+    };
+    setUserAccount(newUser);
+    if (typeof window !== "undefined") {
+      localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(newUser));
+    }
+  };
+
+  const logoutUserAccount = () => {
+    setUserAccount(null);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(STORAGE_KEY_USER);
+    }
+  };
+
+  const t = useCallback(
+    (text: string) => translateText(text, language as SupportedLanguage),
+    [language]
+  );
 
   return (
     <AppContext.Provider
@@ -228,9 +367,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         userAccount,
         selectedRadius,
         language,
+        t,
         setSelectedRadius,
         setLanguage,
         setUserAccount,
+        registerUserAccount,
+        logoutUserAccount,
         setAnalysisProfile,
         applyAnalysisProfile,
         updateProfile,
@@ -244,7 +386,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     </AppContext.Provider>
   );
 };
-
 export const useApp = () => {
   const ctx = useContext(AppContext);
   if (!ctx) {

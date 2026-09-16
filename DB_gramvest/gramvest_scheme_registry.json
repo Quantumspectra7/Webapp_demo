@@ -1,0 +1,1133 @@
+{
+  "registry_version": "1.0",
+  "last_checked": "2026-09-16",
+  "scope": "India national + Punjab + selected bank products",
+  "note": "Initial source-traceable registry. It is not an exhaustive list of every scheme/product in India.",
+  "schemes": [
+    {
+      "scheme_id": "PMEGP",
+      "name": "Prime Minister's Employment Generation Programme",
+      "provider_type": "central_government",
+      "support_type": "credit_linked_subsidy",
+      "business_tags": [
+        "dairy",
+        "flour_processing",
+        "farm_equipment",
+        "manufacturing",
+        "services",
+        "rural_nonfarm"
+      ],
+      "summary": "Credit-linked subsidy support for eligible new micro-enterprises in the non-farm sector.",
+      "eligibility_summary": "Applicant and project conditions apply; age, education, category and rural/urban location affect matching.",
+      "location_scope": "India",
+      "business_stage": [
+        "new"
+      ],
+      "status": "active_verify_current",
+      "source_url": "https://www.common-pmegp.msme.gov.in/",
+      "source_reference": "MSME/KVIC PMEGP portal",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "PMMY",
+      "name": "Pradhan Mantri MUDRA Yojana",
+      "provider_type": "central_government",
+      "support_type": "collateral_free_credit",
+      "business_tags": [
+        "dairy",
+        "flour_processing",
+        "farm_equipment",
+        "manufacturing",
+        "trading",
+        "services",
+        "allied_agriculture"
+      ],
+      "summary": "Institutional collateral-free credit for eligible micro enterprises through lending institutions.",
+      "eligibility_summary": "Eligible individuals/businesses and lender appraisal apply. Categories include Shishu, Kishor, Tarun and Tarun Plus.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active",
+      "source_url": "https://www.financialservices.gov.in/node/3467",
+      "source_reference": "Department of Financial Services, Ministry of Finance",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "PMFME",
+      "name": "PM Formalisation of Micro Food Processing Enterprises",
+      "provider_type": "central_government",
+      "support_type": "credit_linked_subsidy",
+      "business_tags": [
+        "flour_processing",
+        "food_processing",
+        "agri_processing",
+        "dairy_processing"
+      ],
+      "summary": "Credit-linked capital subsidy and ecosystem support for eligible micro food-processing enterprises, including ODOP-linked support.",
+      "eligibility_summary": "Food-processing activity, applicant/entity and state/ODOP conditions must be checked against current guidelines.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active_verify_current",
+      "source_url": "https://pmfme.mofpi.gov.in/",
+      "source_reference": "Ministry of Food Processing Industries",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "AHIDF",
+      "name": "Animal Husbandry Infrastructure Development Fund",
+      "provider_type": "central_government",
+      "support_type": "interest_subvention_credit",
+      "business_tags": [
+        "dairy_processing",
+        "dairy",
+        "animal_feed",
+        "poultry",
+        "meat_processing",
+        "animal_husbandry"
+      ],
+      "summary": "Infrastructure financing support for dairy processing/value addition, animal feed and other eligible animal-husbandry infrastructure.",
+      "eligibility_summary": "Individual entrepreneurs, private companies, MSMEs, FPOs, Section 8 companies and dairy cooperatives may qualify subject to current operational guidelines.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "verify_current_extension",
+      "source_url": "https://dahd.gov.in/schemes/programmes/ahidf",
+      "source_reference": "Department of Animal Husbandry & Dairying",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "CGTMSE",
+      "name": "Credit Guarantee Scheme for Micro & Small Enterprises",
+      "provider_type": "central_government",
+      "support_type": "credit_guarantee",
+      "business_tags": [
+        "dairy",
+        "flour_processing",
+        "farm_equipment",
+        "manufacturing",
+        "services",
+        "trading",
+        "msme"
+      ],
+      "summary": "Credit guarantee support to eligible lenders for credit facilities to eligible MSEs.",
+      "eligibility_summary": "MSE and lender eligibility apply; the guarantee is provided to the lender rather than directly paid to the borrower.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active",
+      "source_url": "https://www.cgtmse.in/",
+      "source_reference": "CGTMSE / Ministry of MSME",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "STANDUP_INDIA",
+      "name": "Stand-Up India",
+      "provider_type": "central_government",
+      "support_type": "bank_loan",
+      "business_tags": [
+        "manufacturing",
+        "services",
+        "trading",
+        "greenfield_enterprise"
+      ],
+      "summary": "Bank finance for eligible greenfield enterprises promoted by women and SC/ST entrepreneurs.",
+      "eligibility_summary": "Applicant category, greenfield status, ownership/control and bank appraisal conditions apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new"
+      ],
+      "status": "verify_current",
+      "source_url": "https://www.standupmitra.in/",
+      "source_reference": "Stand-Up India portal",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "PM_VISHWAKARMA",
+      "name": "PM Vishwakarma",
+      "provider_type": "central_government",
+      "support_type": "credit_plus_support",
+      "business_tags": [
+        "traditional_trades",
+        "artisan",
+        "manufacturing",
+        "services"
+      ],
+      "summary": "Credit and non-credit support package for eligible artisans/craftspeople in notified traditional trades.",
+      "eligibility_summary": "Trade must be in the notified list and beneficiary conditions must be satisfied.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active_verify_current",
+      "source_url": "https://pmvishwakarma.gov.in/",
+      "source_reference": "PM Vishwakarma portal",
+      "verification": "official_source_not_independently_retrieved"
+    },
+    {
+      "scheme_id": "NLM",
+      "name": "National Livestock Mission",
+      "provider_type": "central_government",
+      "support_type": "capital_subsidy",
+      "business_tags": [
+        "poultry",
+        "sheep_goat",
+        "piggery",
+        "fodder",
+        "livestock"
+      ],
+      "summary": "Entrepreneurship and breed-development support for livestock, poultry and feed/fodder activities.",
+      "eligibility_summary": "Activity-specific eligibility and beneficiary/entity rules apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active_verify_current",
+      "source_url": "https://dahd.gov.in/schemes/programmes/national_livestock_mission",
+      "source_reference": "Department of Animal Husbandry & Dairying",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "AIF",
+      "name": "Agriculture Infrastructure Fund",
+      "provider_type": "central_government",
+      "support_type": "interest_subvention_credit_guarantee",
+      "business_tags": [
+        "agri_processing",
+        "warehousing",
+        "cold_storage",
+        "post_harvest",
+        "farm_infrastructure",
+        "food_processing"
+      ],
+      "summary": "Financing support for eligible post-harvest management infrastructure and community farming assets.",
+      "eligibility_summary": "Eligible beneficiary, asset and project conditions must be checked under the current operational guidelines.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "verify_current",
+      "source_url": "https://agriinfra.dac.gov.in/",
+      "source_reference": "Agriculture Infrastructure Fund portal",
+      "verification": "official_source_not_independently_retrieved"
+    },
+    {
+      "scheme_id": "PM_KUSUM",
+      "name": "PM-KUSUM",
+      "provider_type": "central_government",
+      "support_type": "capital_subsidy",
+      "business_tags": [
+        "solar_pumps",
+        "renewable_energy",
+        "agriculture"
+      ],
+      "summary": "Support for solar pumps, solarisation of agricultural pumps and eligible solar power projects.",
+      "eligibility_summary": "Farmer/project/location and state implementation conditions apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active_verify_state_rules",
+      "source_url": "https://pmkusum.mnre.gov.in/",
+      "source_reference": "National PM-KUSUM Portal",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "PMMSY",
+      "name": "Pradhan Mantri Matsya Sampada Yojana",
+      "provider_type": "central_government",
+      "support_type": "capital_support",
+      "business_tags": [
+        "fisheries",
+        "aquaculture",
+        "fish_processing"
+      ],
+      "summary": "Support for fisheries, aquaculture infrastructure and value-chain activities.",
+      "eligibility_summary": "Activity and beneficiary eligibility under current fisheries guidelines apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "verify_current",
+      "source_url": "https://dof.gov.in/",
+      "source_reference": "Department of Fisheries",
+      "verification": "official_source_not_independently_retrieved"
+    },
+    {
+      "scheme_id": "ACABC",
+      "name": "Agri-Clinics and Agri-Business Centres",
+      "provider_type": "central_government",
+      "support_type": "training_credit_subsidy",
+      "business_tags": [
+        "agri_services",
+        "farm_equipment",
+        "custom_hiring",
+        "agri_consultancy",
+        "input_services"
+      ],
+      "summary": "Support for eligible trained agriculture professionals establishing agri-clinics/agri-business centres.",
+      "eligibility_summary": "Education/training and activity-specific eligibility rules apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new"
+      ],
+      "status": "verify_current",
+      "source_url": "https://www.acabcmis.gov.in/",
+      "source_reference": "ACABC portal",
+      "verification": "official_source_not_independently_retrieved"
+    },
+    {
+      "scheme_id": "DAY_NULM_SEP",
+      "name": "DAY-NULM Self Employment Programme",
+      "provider_type": "central_government",
+      "support_type": "interest_subsidy_credit",
+      "business_tags": [
+        "micro_enterprise",
+        "services",
+        "trading",
+        "urban_livelihood"
+      ],
+      "summary": "Self-employment support for eligible urban poor through individual/group enterprises.",
+      "eligibility_summary": "Urban-poor and current SEP eligibility conditions apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "verify_current",
+      "source_url": "https://nulm.gov.in/",
+      "source_reference": "DAY-NULM",
+      "verification": "official_source_not_independently_retrieved"
+    },
+    {
+      "scheme_id": "DAY_NRLM",
+      "name": "DAY-NRLM",
+      "provider_type": "central_government",
+      "support_type": "livelihood_credit",
+      "business_tags": [
+        "rural_livelihood",
+        "shg",
+        "food_processing",
+        "livestock",
+        "agri_services"
+      ],
+      "summary": "Rural livelihood and enterprise support through SHGs, federations and financial inclusion mechanisms.",
+      "eligibility_summary": "Primarily relevant to eligible rural SHG/livelihood ecosystems; state implementation varies.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "verify_current",
+      "source_url": "https://nrlm.gov.in/",
+      "source_reference": "DAY-NRLM",
+      "verification": "official_source_not_independently_retrieved"
+    },
+    {
+      "scheme_id": "PM_SVANIDHI",
+      "name": "PM Street Vendor's AtmaNirbhar Nidhi",
+      "provider_type": "central_government",
+      "support_type": "working_capital_credit",
+      "business_tags": [
+        "street_vending",
+        "micro_trading",
+        "services"
+      ],
+      "summary": "Working-capital credit support for eligible street vendors.",
+      "eligibility_summary": "Street-vendor status and scheme-specific eligibility are required.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "verify_current",
+      "source_url": "https://pmsvanidhi.mohua.gov.in/",
+      "source_reference": "PM SVANidhi portal",
+      "verification": "official_source_not_independently_retrieved"
+    },
+    {
+      "scheme_id": "SISFS",
+      "name": "Startup India Seed Fund Scheme",
+      "provider_type": "central_government",
+      "support_type": "seed_funding",
+      "business_tags": [
+        "startup",
+        "technology",
+        "agri_tech",
+        "food_tech",
+        "innovation"
+      ],
+      "summary": "Financial assistance for proof of concept, prototype, trials, market entry and commercialization through eligible incubators.",
+      "eligibility_summary": "DPIIT recognition, incorporation age and other scheme criteria apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "startup"
+      ],
+      "status": "application_deadline_passed_2026_verify_reopening",
+      "source_url": "https://seedfund.startupindia.gov.in/",
+      "source_reference": "Startup India Seed Fund portal",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "CGSS",
+      "name": "Credit Guarantee Scheme for Startups",
+      "provider_type": "central_government",
+      "support_type": "credit_guarantee",
+      "business_tags": [
+        "startup",
+        "technology",
+        "innovation"
+      ],
+      "summary": "Credit guarantee support for debt extended by eligible member institutions to DPIIT-recognised startups.",
+      "eligibility_summary": "DPIIT-recognised startup, lender/member-institution and current framework conditions apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "startup"
+      ],
+      "status": "active_verify_current",
+      "source_url": "https://www.startupindia.gov.in/santhali/content/sih/en/credit-guarantee-scheme-for-startups.html",
+      "source_reference": "Startup India / DPIIT",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "ASPIRE",
+      "name": "A Scheme for Promotion of Innovation, Rural Industry & Entrepreneurship",
+      "provider_type": "central_government",
+      "support_type": "grant_support",
+      "business_tags": [
+        "rural_industry",
+        "incubation",
+        "innovation",
+        "agri_processing",
+        "livelihood"
+      ],
+      "summary": "Support for innovation, rural industry and entrepreneurship through approved mechanisms such as livelihood business incubators.",
+      "eligibility_summary": "Beneficiary/institution and component-specific project conditions apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active_verify_component",
+      "source_url": "https://www.dashboard.msme.gov.in/aspire.aspx",
+      "source_reference": "Ministry of MSME",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "SFURTI",
+      "name": "Scheme of Fund for Regeneration of Traditional Industries",
+      "provider_type": "central_government",
+      "support_type": "cluster_support",
+      "business_tags": [
+        "traditional_industry",
+        "artisan",
+        "handicraft",
+        "rural_industry"
+      ],
+      "summary": "Cluster-based support for traditional industries and artisan ecosystems.",
+      "eligibility_summary": "Cluster/institution/entity and component-specific conditions apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "existing",
+        "cluster"
+      ],
+      "status": "active_verify_current",
+      "source_url": "https://my.msme.gov.in/mymsme/Scheme.aspx",
+      "source_reference": "MyMSME / Ministry of MSME",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "NATIONAL_SC_ST_HUB",
+      "name": "National SC-ST Hub",
+      "provider_type": "central_government",
+      "support_type": "procurement_capacity_support",
+      "business_tags": [
+        "sc_st_mse",
+        "manufacturing",
+        "services",
+        "msme"
+      ],
+      "summary": "Support ecosystem for SC/ST entrepreneurs and MSEs, including procurement and capacity-building support.",
+      "eligibility_summary": "SC/ST-owned MSE and component-specific rules apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active_verify_current",
+      "source_url": "https://my.msme.gov.in/mymsme/Scheme.aspx",
+      "source_reference": "MyMSME / Ministry of MSME",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "PUNJAB_STARTUP_INCENTIVES",
+      "name": "Punjab Startup Incentives / Industrial & Business Development Policy",
+      "provider_type": "state_government",
+      "support_type": "interest_subsidy_incentives",
+      "business_tags": [
+        "startup",
+        "manufacturing",
+        "services",
+        "innovation"
+      ],
+      "summary": "Punjab policy framework contains startup incentives; the exact current policy/version must be checked before matching.",
+      "eligibility_summary": "Punjab location plus startup registration/recognition and current policy conditions.",
+      "location_scope": "Punjab",
+      "business_stage": [
+        "startup"
+      ],
+      "status": "verify_current_policy_version",
+      "source_url": "https://punjab.gov.in/wp-content/uploads/2021/10/Guidelines-of-Industrial-and-Business-Development-Policy-2017-2018-PDF-2.3MB.pdf",
+      "source_reference": "Government of Punjab policy document",
+      "verification": "official_source_checked_but_legacy_version"
+    },
+    {
+      "scheme_id": "PUNJAB_SC_TERM_LOAN",
+      "name": "Punjab Term Loan to SC",
+      "provider_type": "state_government",
+      "support_type": "term_loan",
+      "business_tags": [
+        "sc_entrepreneur",
+        "micro_enterprise",
+        "services",
+        "manufacturing",
+        "trading"
+      ],
+      "summary": "Punjab government service listing for term-loan assistance to eligible SC beneficiaries.",
+      "eligibility_summary": "SC category plus Punjab implementing-agency income/asset/loan conditions must be verified.",
+      "location_scope": "Punjab",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "verify_current_rules",
+      "source_url": "https://punjab.gov.in/forms/",
+      "source_reference": "Government of Punjab service listing",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "PUNJAB_OBC_TERM_LOAN",
+      "name": "Punjab Term Loan to OBC",
+      "provider_type": "state_government",
+      "support_type": "term_loan",
+      "business_tags": [
+        "obc_entrepreneur",
+        "micro_enterprise",
+        "services",
+        "manufacturing",
+        "trading"
+      ],
+      "summary": "Punjab government service listing for term-loan assistance to eligible OBC beneficiaries.",
+      "eligibility_summary": "OBC category plus Punjab implementing-agency income/asset/loan conditions must be verified.",
+      "location_scope": "Punjab",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "verify_current_rules",
+      "source_url": "https://punjab.gov.in/forms/",
+      "source_reference": "Government of Punjab service listing",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "SBI_PMMY",
+      "name": "SBI PMMY",
+      "provider_type": "bank",
+      "support_type": "term_loan_working_capital",
+      "business_tags": [
+        "dairy",
+        "flour_processing",
+        "farm_equipment",
+        "manufacturing",
+        "trading",
+        "services",
+        "allied_agriculture"
+      ],
+      "summary": "SBI lending channel for PMMY; lender-specific appraisal and pricing apply.",
+      "eligibility_summary": "PMMY eligibility plus SBI credit appraisal and current bank terms.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active_verify_bank_terms",
+      "source_url": "https://sbi.co.in/web/business/sme/sme-government-schemes/pmmy",
+      "source_reference": "State Bank of India",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "SBI_FOOD_PROCESSING",
+      "name": "SBI Food Processing Industry Loan",
+      "provider_type": "bank",
+      "support_type": "term_loan",
+      "business_tags": [
+        "food_processing",
+        "dairy_processing",
+        "flour_processing"
+      ],
+      "summary": "Industry-specific SBI lending product for food-processing businesses.",
+      "eligibility_summary": "Bank credit appraisal, security, project and financial conditions apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active_verify_bank_terms",
+      "source_url": "https://sbi.co.in/web/business/sme/sme-loans/industry-specific-loans",
+      "source_reference": "State Bank of India",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "SBI_CONSTRUCTION_EQUIPMENT",
+      "name": "SBI Construction Equipment Loan",
+      "provider_type": "bank",
+      "support_type": "asset_finance",
+      "business_tags": [
+        "construction_equipment",
+        "equipment"
+      ],
+      "summary": "Industry-specific equipment finance product listed by SBI.",
+      "eligibility_summary": "Asset, borrower and bank credit appraisal conditions apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active_verify_bank_terms",
+      "source_url": "https://sbi.co.in/web/business/sme/sme-loans/industry-specific-loans",
+      "source_reference": "State Bank of India",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "PNB_DIGI_MSME",
+      "name": "PNB Digi MSME Loan",
+      "provider_type": "bank",
+      "support_type": "msme_loan",
+      "business_tags": [
+        "msme",
+        "manufacturing",
+        "services",
+        "trading"
+      ],
+      "summary": "PNB digital MSME lending product listed in its MSME scheme catalogue.",
+      "eligibility_summary": "Current PNB product eligibility and credit appraisal apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active_verify_bank_terms",
+      "source_url": "https://www.pnbindia.in/misc.aspx",
+      "source_reference": "Punjab National Bank",
+      "verification": "official_source_checked"
+    },
+    {
+      "scheme_id": "PNB_EMUDRA",
+      "name": "PNB e-Mudra",
+      "provider_type": "bank",
+      "support_type": "mudra",
+      "business_tags": [
+        "micro_enterprise",
+        "dairy",
+        "flour_processing",
+        "services",
+        "trading"
+      ],
+      "summary": "PNB channel/product for MUDRA lending.",
+      "eligibility_summary": "Current PMMY and PNB product rules apply.",
+      "location_scope": "India",
+      "business_stage": [
+        "new",
+        "existing"
+      ],
+      "status": "active_verify_bank_terms",
+      "source_url": "https://www.pnbindia.in/misc.aspx",
+      "source_reference": "Punjab National Bank",
+      "verification": "official_source_checked"
+    }
+  ],
+  "eligibility_rules": [
+    {
+      "scheme_id": "PMEGP",
+      "field": "applicant_age_min",
+      "operator": ">=",
+      "value": 18,
+      "unit": "years",
+      "notes": "Any individual 18+ may apply; other conditions apply.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "PMEGP",
+      "field": "business_stage",
+      "operator": "IN",
+      "value": [
+        "new"
+      ],
+      "unit": null,
+      "notes": "New micro-enterprise focus.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "PMEGP",
+      "field": "location_scope",
+      "operator": "IN",
+      "value": [
+        "India"
+      ],
+      "unit": null,
+      "notes": "National scheme.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "PMMY",
+      "field": "loan_amount_max",
+      "operator": "<=",
+      "value": 2000000,
+      "unit": "INR",
+      "notes": "Tarun Plus up to ₹20 lakh has additional prior-loan condition.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "PMMY",
+      "field": "business_activity",
+      "operator": "IN",
+      "value": [
+        "manufacturing",
+        "trading",
+        "services",
+        "allied_agriculture"
+      ],
+      "unit": null,
+      "notes": "Official DFS description.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "PMFME",
+      "field": "business_activity",
+      "operator": "IN",
+      "value": [
+        "food_processing",
+        "flour_processing",
+        "agri_processing",
+        "dairy_processing"
+      ],
+      "unit": null,
+      "notes": "Food-processing focus.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "PMFME",
+      "field": "individual_subsidy_rate",
+      "operator": "=",
+      "value": 0.35,
+      "unit": "ratio",
+      "notes": "35% credit-linked subsidy for eligible individual micro food-processing units.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "PMFME",
+      "field": "individual_subsidy_max",
+      "operator": "=",
+      "value": 1000000,
+      "unit": "INR",
+      "notes": "Maximum stated on official portal.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "AHIDF",
+      "field": "business_activity",
+      "operator": "IN",
+      "value": [
+        "dairy_processing",
+        "animal_feed",
+        "animal_husbandry",
+        "poultry",
+        "meat_processing"
+      ],
+      "unit": null,
+      "notes": "Eligible activity categories on DAHD page.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "CGTMSE",
+      "field": "beneficiary_type",
+      "operator": "IN",
+      "value": [
+        "micro_small_enterprise"
+      ],
+      "unit": null,
+      "notes": "Guarantee is to eligible lenders for MSE credit.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "STANDUP_INDIA",
+      "field": "applicant_category",
+      "operator": "IN",
+      "value": [
+        "woman",
+        "sc",
+        "st"
+      ],
+      "unit": null,
+      "notes": "Current exact conditions require verification.",
+      "confidence": "medium"
+    },
+    {
+      "scheme_id": "STANDUP_INDIA",
+      "field": "business_stage",
+      "operator": "IN",
+      "value": [
+        "new"
+      ],
+      "unit": null,
+      "notes": "Greenfield enterprise requirement.",
+      "confidence": "medium"
+    },
+    {
+      "scheme_id": "NLM",
+      "field": "business_activity",
+      "operator": "IN",
+      "value": [
+        "poultry",
+        "sheep_goat",
+        "piggery",
+        "fodder"
+      ],
+      "unit": null,
+      "notes": "Official DAHD activity categories.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "PM_KUSUM",
+      "field": "business_activity",
+      "operator": "IN",
+      "value": [
+        "solar_pumps",
+        "renewable_energy",
+        "agriculture"
+      ],
+      "unit": null,
+      "notes": "Agricultural solar support.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "SISFS",
+      "field": "startup_recognition",
+      "operator": "=",
+      "value": "DPIIT_recognised",
+      "unit": null,
+      "notes": "DPIIT recognition required.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "SISFS",
+      "field": "incorporation_age_max",
+      "operator": "<=",
+      "value": 2,
+      "unit": "years",
+      "notes": "Startup not more than 2 years old at application, per FAQ.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "CGSS",
+      "field": "startup_recognition",
+      "operator": "=",
+      "value": "DPIIT_recognised",
+      "unit": null,
+      "notes": "DPIIT-recognised startup required.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "CGSS",
+      "field": "loan_guarantee_max",
+      "operator": "<=",
+      "value": 200000000,
+      "unit": "INR",
+      "notes": "Maximum debt eligible for guarantee cover per current Startup India page.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "PUNJAB_STARTUP_INCENTIVES",
+      "field": "location_scope",
+      "operator": "=",
+      "value": [
+        "Punjab"
+      ],
+      "unit": null,
+      "notes": "Punjab location requirement.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "PUNJAB_SC_TERM_LOAN",
+      "field": "social_category",
+      "operator": "=",
+      "value": "SC",
+      "unit": null,
+      "notes": "Punjab service listing; detailed current rules need verification.",
+      "confidence": "medium"
+    },
+    {
+      "scheme_id": "PUNJAB_OBC_TERM_LOAN",
+      "field": "social_category",
+      "operator": "=",
+      "value": "OBC",
+      "unit": null,
+      "notes": "Punjab service listing; detailed current rules need verification.",
+      "confidence": "medium"
+    },
+    {
+      "scheme_id": "SBI_PMMY",
+      "field": "business_activity",
+      "operator": "IN",
+      "value": [
+        "manufacturing",
+        "trading",
+        "services",
+        "allied_agriculture"
+      ],
+      "unit": null,
+      "notes": "SBI PMMY page.",
+      "confidence": "high"
+    },
+    {
+      "scheme_id": "SBI_FOOD_PROCESSING",
+      "field": "business_activity",
+      "operator": "=",
+      "value": [
+        "food_processing"
+      ],
+      "unit": null,
+      "notes": "Industry-specific SBI category.",
+      "confidence": "medium"
+    },
+    {
+      "scheme_id": "PNB_EMUDRA",
+      "field": "business_activity",
+      "operator": "IN",
+      "value": [
+        "micro_enterprise"
+      ],
+      "unit": null,
+      "notes": "PNB lists e-Mudra under MSME schemes.",
+      "confidence": "medium"
+    }
+  ],
+  "business_mappings": [
+    {
+      "business_tag": "dairy",
+      "business_name": "Dairy & Milk Processing",
+      "scheme_ids": [
+        "PMEGP",
+        "PMMY",
+        "PMFME",
+        "AHIDF",
+        "CGTMSE",
+        "SBI_PMMY"
+      ]
+    },
+    {
+      "business_tag": "flour_processing",
+      "business_name": "Flour / Agro-Food Processing",
+      "scheme_ids": [
+        "PMEGP",
+        "PMMY",
+        "PMFME",
+        "CGTMSE",
+        "SBI_PMMY",
+        "SBI_FOOD_PROCESSING",
+        "PNB_EMUDRA"
+      ]
+    },
+    {
+      "business_tag": "farm_equipment",
+      "business_name": "Farm Equipment / Custom Hiring",
+      "scheme_ids": [
+        "PMEGP",
+        "PMMY",
+        "CGTMSE",
+        "ACABC",
+        "SBI_PMMY"
+      ]
+    },
+    {
+      "business_tag": "poultry",
+      "business_name": "Poultry",
+      "scheme_ids": [
+        "PMEGP",
+        "PMMY",
+        "NLM",
+        "AHIDF",
+        "CGTMSE"
+      ]
+    },
+    {
+      "business_tag": "sheep_goat",
+      "business_name": "Sheep / Goat",
+      "scheme_ids": [
+        "PMMY",
+        "NLM",
+        "CGTMSE"
+      ]
+    },
+    {
+      "business_tag": "startup",
+      "business_name": "Startup / Innovation",
+      "scheme_ids": [
+        "CGSS",
+        "SISFS",
+        "PUNJAB_STARTUP_INCENTIVES",
+        "CGTMSE"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "SRC001",
+      "name": "Ministry of MSME / MyMSME",
+      "url": "https://my.msme.gov.in/mymsme/Scheme.aspx",
+      "provider_type": "central_government",
+      "coverage": "Scheme list and guidelines",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC002",
+      "name": "Department of Financial Services - PMMY",
+      "url": "https://www.financialservices.gov.in/node/3467",
+      "provider_type": "central_government",
+      "coverage": "PMMY current structure",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC003",
+      "name": "PMFME - MoFPI",
+      "url": "https://pmfme.mofpi.gov.in/",
+      "provider_type": "central_government",
+      "coverage": "PMFME features and portal",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC004",
+      "name": "DAHD - AHIDF",
+      "url": "https://dahd.gov.in/schemes/programmes/ahidf",
+      "provider_type": "central_government",
+      "coverage": "AHIDF scope and operational documents",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC005",
+      "name": "DAHD - National Livestock Mission",
+      "url": "https://dahd.gov.in/schemes/programmes/national_livestock_mission",
+      "provider_type": "central_government",
+      "coverage": "NLM activities and guidelines",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC006",
+      "name": "National PM-KUSUM Portal",
+      "url": "https://pmkusum.mnre.gov.in/",
+      "provider_type": "central_government",
+      "coverage": "PM-KUSUM scheme",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC007",
+      "name": "Startup India",
+      "url": "https://www.startupindia.gov.in/",
+      "provider_type": "central_government",
+      "coverage": "Startup schemes and policies",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC008",
+      "name": "Startup India Seed Fund",
+      "url": "https://seedfund.startupindia.gov.in/faq",
+      "provider_type": "central_government",
+      "coverage": "SISFS eligibility and funding",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC009",
+      "name": "Punjab Government",
+      "url": "https://punjab.gov.in/forms/",
+      "provider_type": "state_government",
+      "coverage": "State service/scheme listings",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC010",
+      "name": "Punjab Government - Industries & Commerce",
+      "url": "https://punjab.gov.in/department-of-industries-commerce/",
+      "provider_type": "state_government",
+      "coverage": "Department and public records",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC011",
+      "name": "SBI",
+      "url": "https://sbi.co.in/web/business/sme/sme-loans",
+      "provider_type": "bank",
+      "coverage": "MSME loan catalogue",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC012",
+      "name": "SBI Industry Specific Loans",
+      "url": "https://sbi.co.in/web/business/sme/sme-loans/industry-specific-loans",
+      "provider_type": "bank",
+      "coverage": "Industry-specific loan products",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC013",
+      "name": "PNB MSME",
+      "url": "https://www.pnbindia.in/misc.aspx",
+      "provider_type": "bank",
+      "coverage": "PNB MSME scheme catalogue",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC014",
+      "name": "SIDBI",
+      "url": "https://www.sidbi.in/home-product",
+      "provider_type": "financial_institution",
+      "coverage": "MSME loan/product catalogue",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    },
+    {
+      "source_id": "SRC015",
+      "name": "Stand-Up India",
+      "url": "https://www.standupmitra.in/",
+      "provider_type": "central_government",
+      "coverage": "Stand-Up India portal",
+      "source_class": "official",
+      "checked_on": "2026-09-16"
+    }
+  ]
+}

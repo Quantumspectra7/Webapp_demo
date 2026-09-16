@@ -19,7 +19,6 @@ PIN_COORDS = {
     "141001": {"lat": 30.9010, "lng": 75.8573, "area": "Ludhiana City", "district": "Ludhiana"},
     "141002": {"lat": 30.8850, "lng": 75.8450, "area": "Ludhiana Industrial Area", "district": "Ludhiana"},
     "141003": {"lat": 30.9120, "lng": 75.8320, "area": "Ludhiana Civil Lines", "district": "Ludhiana"},
-
     # Moga
     "142001": {"lat": 30.8160, "lng": 75.1720, "area": "Moga City", "district": "Moga"},
     "142055": {"lat": 30.5900, "lng": 75.2800, "area": "Nihal Singh Wala", "district": "Moga"},

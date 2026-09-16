@@ -42,9 +42,9 @@ export const PriceSignalsSection: React.FC<PriceSignalsSectionProps> = ({
 
       {/* Grid of Price Range Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {priceSignals.map((item) => (
+        {priceSignals.map((item, idx) => (
           <div
-            key={item.commodity}
+            key={`${item.commodity || "signal"}-${item.unit || ""}-${idx}`}
             className="p-4 rounded-2xl bg-[#faf4ee]/60 border border-[#ede3d8] hover:border-[#c75d3e]/30 transition-all flex flex-col justify-between"
           >
             <div>

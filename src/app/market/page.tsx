@@ -199,10 +199,8 @@ export default function MarketPage() {
   }, [location, gpsLocation]);
 
   // Load Market Analysis whenever radius, location, or business changes.
-  // Skip while GPS is still resolving to avoid loading at the static fallback
-  // and immediately re-loading at the real GPS location.
+  // Loads immediately with activeLocation so user is never blocked.
   const loadMarketIntelligence = useCallback(async () => {
-    if (!location && gpsLoading) return; // Wait for GPS before loading
     try {
       setLoading(true);
       const [mkt, rankedComps, mandiList, prices] = await Promise.all([
@@ -213,16 +211,16 @@ export default function MarketPage() {
       ]);
 
       setMarket(mkt);
-      setCompetitors(rankedComps);
-      setMarkets(mandiList);
-      setPriceSignals(prices);
+      setCompetitors(rankedComps || []);
+      setMarkets(mandiList || []);
+      setPriceSignals(prices || []);
     } catch (err) {
       console.error("Failed to load market intelligence", err);
     } finally {
       setLoading(false);
       setIsSwitchingRadius(false);
     }
-  }, [radiusKm, activeLocation, location, gpsLoading, business?.id]);
+  }, [radiusKm, activeLocation, business?.id]);
 
   useEffect(() => {
     loadMarketIntelligence();
@@ -290,8 +288,19 @@ export default function MarketPage() {
             </p>
           </div>
 
-          {/* Action Row: Live GPS + Radius Toggle 5 km vs 10 km */}
+          {/* Action Row: Real-time Discovery Badge + Live GPS + Radius Toggle 5 km vs 10 km */}
           <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto shrink-0">
+            {/* Real-Time Live Radar Badge */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-2xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 shadow-2xs">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span>
+                <strong className="font-bold">{competitors.length} Live Shops</strong> ({radiusKm} km)
+              </span>
+            </div>
+
             {/* Live GPS Button */}
             <button
               type="button"

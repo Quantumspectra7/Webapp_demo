@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { CheckCircle2, Loader2, MapPin, Search, Building2, Calculator } from "lucide-react";
 
 interface AnalysisTransitionProps {
   locationName: string;
   businessTitle: string;
+  userName?: string;
   onComplete?: () => void;
 }
 
@@ -36,13 +38,14 @@ const TRANSITION_STEPS = [
 export const AnalysisTransition: React.FC<AnalysisTransitionProps> = ({
   locationName,
   businessTitle,
+  userName,
   onComplete,
 }) => {
   const router = useRouter();
   const [activeStepIndex, setActiveStepIndex] = useState(0);
 
   useEffect(() => {
-    // Step progression every 750ms
+    // Step progression every 800ms → 4 steps × 800ms = 3.2s + 800ms delay = 4s total
     const timer = setInterval(() => {
       setActiveStepIndex((prev) => {
         if (prev < TRANSITION_STEPS.length - 1) {
@@ -55,11 +58,11 @@ export const AnalysisTransition: React.FC<AnalysisTransitionProps> = ({
             } else {
               router.push("/dashboard");
             }
-          }, 600);
+          }, 800);
           return prev;
         }
       });
-    }, 750);
+    }, 800);
 
     return () => clearInterval(timer);
   }, [router, onComplete]);
@@ -68,12 +71,19 @@ export const AnalysisTransition: React.FC<AnalysisTransitionProps> = ({
     <div className="min-h-screen bg-[#fff8f2] flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-3xl border border-[#ede3d8] p-8 shadow-lg text-center">
         {/* Brand Crest */}
-        <div className="w-12 h-12 rounded-2xl bg-[#c75d3e] text-white font-bold text-lg flex items-center justify-center mx-auto mb-4 shadow-sm">
-          GV
+        <div className="mb-4">
+          <Image
+            src="/gramvest_logo3.png"
+            alt="GramVest"
+            width={90}
+            height={70}
+            className="h-16 w-auto object-contain mx-auto"
+            priority
+          />
         </div>
 
         <h2 className="font-serif text-2xl font-bold text-[#241b16]">
-          Synthesizing Decision Dossier
+          {userName ? `Building your report, ${userName.split(" ")[0]}...` : "Synthesizing Decision Dossier"}
         </h2>
         <p className="text-xs text-[#786d65] mt-1 mb-8">
           {businessTitle} · {locationName}

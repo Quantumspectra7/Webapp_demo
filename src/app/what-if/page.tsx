@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
+import { useApp } from "@/context/AppContext";
 import { SourceBadge } from "@/components/common/SourceBadge";
 import { ConfidenceBadge } from "@/components/common/ConfidenceBadge";
 import { financeService, simulatorService } from "@/services";
@@ -31,6 +32,7 @@ import {
 } from "recharts";
 
 export default function WhatIfPage() {
+  const { business } = useApp();
   const [baseScenario, setBaseScenario] = useState<FinancialScenario | null>(null);
   const [simulationResult, setSimulationResult] = useState<WhatIfResult | null>(null);
   const [loading, setLoading] = useState(true);
@@ -69,7 +71,7 @@ export default function WhatIfPage() {
       }
     }
     init();
-  }, []);
+  }, [business?.id]);
 
   const handleSliderChange = (updates: Partial<{
     price: number;
@@ -110,7 +112,7 @@ export default function WhatIfPage() {
     let pw = 0;
 
     if (preset === "summer_fodder") {
-      // Raw milk cost +15%, power +20%
+      // Raw cost +15%, power +20%
       p = 0;
       d = -5;
       r = 15;
@@ -173,21 +175,57 @@ export default function WhatIfPage() {
     }
   };
 
+  const isDairy = business?.id?.includes("dairy") || business?.title?.toLowerCase().includes("dairy");
+  const isFlour = business?.id?.includes("flour") || business?.title?.toLowerCase().includes("flour");
+  const isFarm = business?.id?.includes("equipment") || business?.title?.toLowerCase().includes("equipment");
+
+  const rawCostName = isDairy
+    ? "Raw Milk Procurement Cost"
+    : isFlour
+    ? "Grain / Raw Material Cost"
+    : "Operating / Input Cost";
+
+  const rawCostDesc = isDairy
+    ? "Simulates dry-season cattle feed price escalation."
+    : isFlour
+    ? "Simulates mandi wheat procurement price escalation."
+    : "Simulates equipment maintenance and diesel fuel cost rise.";
+
+  const preset1Label = isDairy
+    ? "Summer Fodder Spike (+15% Milk Cost)"
+    : isFlour
+    ? "Grain Mandi Spike (+15% Wheat Cost)"
+    : "Input Spike (+15% Operating Cost)";
+
+  const volumeDesc = isDairy
+    ? "Simulates sweet shop off-take slump or flush surplus."
+    : isFlour
+    ? "Simulates retail / bakery flour off-take slump."
+    : "Simulates off-season farmer machine hiring drop.";
+
+  const headerSubtitle = `Simulate downside shocks (${
+    isDairy
+      ? "feed price rises, milk demand drops"
+      : isFlour
+      ? "grain price rises, flour demand drops"
+      : "diesel price rises, hiring demand drops"
+  }) to verify loan repayment safety.`;
+
   const chartComparisonData = [
     {
       name: "Monthly Revenue",
-      Base: baseScenario?.projections.monthlyRevenue || 765000,
-      Scenario: simulationResult?.projectedRevenue || 765000,
+      Base: baseScenario?.projections.monthlyRevenue || 0,
+      Scenario: simulationResult?.projectedRevenue || 0,
     },
     {
       name: "Net Profit",
-      Base: baseScenario?.projections.monthlyNetProfit || 35000,
-      Scenario: simulationResult?.projectedNetProfit || 35000,
+      Base: baseScenario?.projections.monthlyNetProfit || 0,
+      Scenario: simulationResult?.projectedNetProfit || 0,
     },
     {
       name: "Net Cash Flow",
-      Base: baseScenario?.projections.monthlyNetCashFlow || 28400,
-      Scenario: simulationResult?.projectedCashFlow || 28400,
+      Base: baseScenario?.projections.monthlyNetCashFlow || 0,
+      Scenario: simulationResult?.projectedCashFlow || 0,
     },
   ];
 
@@ -204,7 +242,7 @@ export default function WhatIfPage() {
               </h1>
             </div>
             <p className="text-[14px] text-[#56423d]">
-              Simulate downside shocks (fodder price rises, customer demand drops) to verify loan repayment safety.
+              {headerSubtitle}
             </p>
           </div>
 
@@ -227,7 +265,7 @@ export default function WhatIfPage() {
             className="px-3 py-1.5 rounded-lg bg-[#fbebe4] hover:bg-[#ffdbd1] text-[#9d3e21] border border-[#ffb5a0] text-[12px] font-bold transition-colors flex items-center gap-1.5"
           >
             <AlertTriangle size={13} />
-            <span>Summer Fodder Spike (+15% Milk Cost)</span>
+            <span>{preset1Label}</span>
           </button>
           <button
             onClick={() => handleApplyPreset("demand_slump")}
@@ -265,11 +303,11 @@ export default function WhatIfPage() {
               </p>
             </div>
 
-            {/* Lever 1: Milk Procurement Cost (Summer Fodder) */}
+            {/* Lever 1: Raw Material / Input Cost */}
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="text-[13px] font-bold text-[#25231f]">
-                  Raw Milk Procurement Cost
+                  {rawCostName}
                 </label>
                 <span
                   className={`text-[14px] font-bold tabular-nums ${
@@ -289,7 +327,7 @@ export default function WhatIfPage() {
                 className="w-full h-2 bg-[#e7ded5] rounded-lg appearance-none cursor-pointer accent-[#9d3e21]"
               />
               <span className="text-[11px] text-[#706c63]">
-                Simulates dry-season cattle feed price escalation.
+                {rawCostDesc}
               </span>
             </div>
 
@@ -317,7 +355,7 @@ export default function WhatIfPage() {
                 className="w-full h-2 bg-[#e7ded5] rounded-lg appearance-none cursor-pointer accent-[#536346]"
               />
               <span className="text-[11px] text-[#706c63]">
-                Simulates sweet shop off-take slump or winter flush surplus.
+                {volumeDesc}
               </span>
             </div>
 

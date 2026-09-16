@@ -302,6 +302,15 @@ export class MockMarketProvider implements IMarketProvider {
       ];
     }
 
+    if (scenario.id === "biz-farm-equipment") {
+      return [
+        { commodity: "Laser Land Leveling Custom Hiring", rangeMin: 800, rangeMax: 1050, currentAvg: 900.0, unit: "₹ / hour", trend: "rising", frequency: "Seasonal Pre-Sowing Rate", notes: "Punjab Agricultural Mechanization Board" },
+        { commodity: "Super Seeder Wheat Sowing Service", rangeMin: 2200, rangeMax: 2600, currentAvg: 2400.0, unit: "₹ / acre", trend: "rising", frequency: "October-November Peak Rate", notes: "Jagraon Farmers Welfare Society" },
+        { commodity: "Paddy Straw Baling (Residue Management)", rangeMin: 1100, rangeMax: 1400, currentAvg: 1250.0, unit: "₹ / acre", trend: "stable", frequency: "Post-Harvest Rate", notes: "Punjab Bio-Energy Supply Ledger" },
+        { commodity: "Commercial High-Speed Diesel (Wholesale)", rangeMin: 87, rangeMax: 92, currentAvg: 89.5, unit: "₹ / Liter", trend: "stable", frequency: "Weekly Fuel Monitor", notes: "IOCL Ludhiana Depot" },
+      ];
+    }
+
     // Default: Dairy
     return [
       { commodity: "Raw Buffalo Milk (Farmgate Fat 6.5%)", rangeMin: 38, rangeMax: 43, currentAvg: 40.5, unit: "₹ / Liter", trend: "stable", frequency: "Daily Milk Testing", notes: "Punjab Dairy Development Board" },
@@ -546,12 +555,23 @@ export class MockMarketProvider implements IMarketProvider {
 
     return scenario.risks.map((r, i) => ({
       id: r.id || `risk-${i + 1}`,
-      category: r.category === "Operational" ? "Operational" : r.category === "Supply" ? "Supply / Input Cost" : "Financial",
+      category:
+        r.category === "Operational"
+          ? "Operational"
+          : r.category === "Supply"
+          ? "Supply / Input Cost"
+          : r.category === "Financial"
+          ? "Financial"
+          : r.category === "Market"
+          ? "Competition"
+          : "Regulatory",
       risk: r.title,
       severity: r.severity,
       likelihood: r.severity === "High" ? "Medium" : "Low",
-      impactDescription: `Can impact gross margin or operating uptime if unaddressed.`,
+      impactDescription: r.whyItMatters || `Can impact gross margin or operating uptime if unaddressed.`,
       mitigationStrategy: r.mitigation,
+      whyItMatters: r.whyItMatters || `Can reduce operating margins and project debt coverage if unaddressed.`,
+      whatYouCanDo: r.whatYouCanDo || r.mitigation,
     }));
   }
 
@@ -559,7 +579,23 @@ export class MockMarketProvider implements IMarketProvider {
     await new Promise((res) => setTimeout(res, 50));
     const scenario = getScenarioForBusiness(this.activeCategoryId);
 
-    const overallScore = Math.min(88, Math.max(74, 72 + Math.round(scenario.marketInsights.valueAdditionPct / 2)));
+    // Component Scores
+    const marketScore = Math.min(92, Math.max(76, 70 + Math.round(scenario.marketInsights.valueAdditionPct / 2)));
+    const competitionScore = 80;
+    const capitalScore = 74;
+    const profitScore = Math.min(90, Math.max(75, 68 + Math.round(scenario.marketInsights.valueAdditionPct * 0.45)));
+    const riskScore = 68;
+
+    // Weights: Market Demand (25%), Competition Opportunity (20%), Capital Fit (20%), Profit/Cash Flow (20%), Risk Resilience (15%)
+    const overallScore = Math.round(
+      marketScore * 0.25 +
+      competitionScore * 0.20 +
+      capitalScore * 0.20 +
+      profitScore * 0.20 +
+      riskScore * 0.15
+    );
+
+    const primaryScheme = scenario.governmentSchemes[0]?.schemeName || "PMFME / PMEGP";
 
     return {
       overallScore,
@@ -567,42 +603,50 @@ export class MockMarketProvider implements IMarketProvider {
       quartileLabel: overallScore >= 80 ? "Top 15% (Bankable)" : "Top Quartile (70-80)",
       statusPills: [
         { label: "Market Demand", status: "Strong", tone: "positive" },
-        { label: "Operating Margin", status: "Good", tone: "positive" },
-        { label: "Scheme Eligibility", status: "Strong", tone: "positive" },
-        { label: "Working Capital", status: "Manageable", tone: "caution" },
+        { label: "Competition Opportunity", status: "Good", tone: "positive" },
+        { label: "Capital Fit", status: "Manageable", tone: "caution" },
+        { label: "Profit & Cash Flow", status: "Strong", tone: "positive" },
+        { label: "Risk Resilience", status: "Manageable", tone: "caution" },
       ],
       components: [
         {
-          category: "Market Demand & Off-take",
-          weight: 0.35,
-          score: 84,
-          driver: `Strong demand from ${scenario.marketInsights.typicalBuyers[0]}`,
-          improvementAction: "Collect 2 signed buyer MOUs before bank term loan sanction",
+          category: "Market Demand",
+          weight: 0.25,
+          score: marketScore,
+          driver: `Strong catchment demand driven by regular off-take from ${scenario.marketInsights.typicalBuyers.slice(0, 2).join(" & ")}.`,
+          improvementAction: `Collect 2 signed buyer MOUs before bank term loan sanction to guarantee early cash flow.`,
         },
         {
-          category: "Financial Viability & DSCR",
-          weight: 0.30,
-          score: 78,
-          driver: `DSCR benchmark ~1.65 with ₹${(scenario.indicativeProjectCost / 100000).toFixed(1)}L project cost`,
-          improvementAction: "Apply for 35% PMFME subsidy to reduce effective term loan debt",
-        },
-        {
-          category: "Operational & Raw Material Feasibility",
+          category: "Competition Opportunity",
           weight: 0.20,
-          score: 82,
-          driver: "Direct mandi/farmgate raw material supply with low transit waste",
-          improvementAction: "Maintain 15 kVA diesel generator backup for continuous operation",
+          score: competitionScore,
+          driver: `Significant headroom: existing nearby units operate mostly unorganized or traditional facilities with quality limitations.`,
+          improvementAction: `Differentiate through modern hygienic packaging, certified quality standards, and consistent delivery.`,
         },
         {
-          category: "Regulatory & Scheme Alignment",
+          category: "Capital Fit",
+          weight: 0.20,
+          score: capitalScore,
+          driver: `Your available capital covers the mandatory promoter equity threshold for an estimated ₹${(scenario.indicativeProjectCost / 100000).toFixed(1)}L project cost.`,
+          improvementAction: `Apply under ${primaryScheme} for capital subsidy to minimize debt borrowing and interest load.`,
+        },
+        {
+          category: "Profit / Cash Flow Potential",
+          weight: 0.20,
+          score: profitScore,
+          driver: `Value-addition margin of ~${scenario.marketInsights.valueAdditionPct}% comfortably covers debt obligations with DSCR above 1.55x.`,
+          improvementAction: `Optimize raw material procurement at harvest cycles to preserve peak gross margin buffer.`,
+        },
+        {
+          category: "Risk Resilience",
           weight: 0.15,
-          score: 90,
-          driver: `Pre-qualified for ${scenario.governmentSchemes[0]?.schemeName || "PMFME"}`,
-          improvementAction: "File Udyam registration and basic FSSAI license",
+          score: riskScore,
+          driver: `Key risks including ${scenario.risks[0]?.title || "raw material seasonality"} can be managed with adequate backup infrastructure.`,
+          improvementAction: scenario.risks[0]?.mitigation || `Maintain a rolling emergency cash reserve and backup power equipment.`,
         },
       ],
       metadata: {
-        source: `Punjab Udyam Registry & GramVest Engine (${scenario.registrySource})`,
+        source: `Punjab Udyam Registry & GramVest Viability Engine (${scenario.registrySource})`,
         sourceDate: "2026-09-01",
         confidence: "high",
         dataStatus: "verified",

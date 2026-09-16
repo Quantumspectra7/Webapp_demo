@@ -16,6 +16,8 @@ import {
   ShieldCheck,
   Truck,
   ArrowRight,
+  Sparkles,
+  ExternalLink,
 } from "lucide-react";
 
 interface MarketIntelligencePanelProps {
@@ -86,24 +88,29 @@ export const MarketIntelligencePanel: React.FC<MarketIntelligencePanelProps> = (
         </p>
       </div>
 
-      {/* 2. MARKET REACH METRICS */}
+      {/* 2. MARKET REACH METRICS (POWERED BY GOOGLE AI OVERVIEW) */}
       <div className="p-5 rounded-3xl bg-white border border-[#ede3d8] shadow-2xs">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-1.5">
             <Users size={15} className="text-[#c75d3e]" />
             <span className="text-xs font-bold uppercase tracking-wider text-[#241b16]">
-              Market Reach ({radiusKm} km)
+              Market Catchment ({radiusKm} km)
             </span>
             <EvidencePopover
-              title="Catchment Population Reference"
-              source="Census Reference Data & Gram Panchayat Rolls"
-              sourceYear="2021 Projected"
+              title="Google AI Overview Live Demographic Catchment"
+              source={market.demographics.metadata.source}
+              sourceYear={market.demographics.metadata.sourceDate}
               confidence="high"
-              note="Historical population projected to 2026 across villages within the radial boundary."
+              note={
+                Array.isArray(market.demographics.metadata.assumptions)
+                  ? market.demographics.metadata.assumptions.join("; ")
+                  : (market.demographics.metadata.assumptions || "Real-time Google AI Mode SerpBlock synthesis.")
+              }
             />
           </div>
-          <span className="text-[10px] font-bold text-[#786d65] bg-[#faf4ee] px-2 py-0.5 rounded-md border border-[#ede3d8]">
-            Demo estimate
+          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#1e40af] bg-[#eff6ff] px-2 py-0.5 rounded-full border border-[#bfdbfe]">
+            <Sparkles size={11} className="text-[#3b82f6]" />
+            Google AI Mode
           </span>
         </div>
 
@@ -111,24 +118,24 @@ export const MarketIntelligencePanel: React.FC<MarketIntelligencePanelProps> = (
         <div className="p-3.5 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] mb-3 flex items-center justify-between">
           <div>
             <span className="text-[10px] uppercase font-bold text-[#786d65] block">
-              Estimated Reachable Customers
+              Estimated Target Customers
             </span>
             <p className="text-2xl font-serif font-bold text-[#241b16] mt-0.5">
-              {formatNumber(market.estimatedReachCustomers || (radiusKm === 5 ? 620 : 1850))}
+              {formatNumber(market.estimatedReachCustomers || (radiusKm === 5 ? 1135 : 2465))}
             </p>
           </div>
           <div className="text-right">
             <span className="text-xs font-bold text-[#3a6b4c]">
               ~{market.addressableMarketSharePct || (radiusKm === 5 ? 5.2 : 4.8)}% Share
             </span>
-            <span className="block text-[10px] text-[#786d65]">of total market</span>
+            <span className="block text-[10px] text-[#786d65]">of total catchment</span>
           </div>
         </div>
 
-        {/* Sub-metrics: Population & Households */}
+        {/* Grid Parameters: Population, Households, Daily Market Demand, Avg Household size */}
         <div className="grid grid-cols-2 gap-2.5">
           <div className="p-2.5 rounded-xl border border-[#ede3d8] bg-white">
-            <span className="text-[10px] font-bold text-[#786d65] block">Population</span>
+            <span className="text-[10px] font-bold text-[#786d65] block">Live Population</span>
             <span className="text-base font-bold text-[#241b16] font-mono">
               {formatNumber(market.demographics.populationInRadius)}
             </span>
@@ -139,7 +146,49 @@ export const MarketIntelligencePanel: React.FC<MarketIntelligencePanelProps> = (
               {formatNumber(market.demographics.householdsInRadius)}
             </span>
           </div>
+          <div className="p-2.5 rounded-xl border border-[#ede3d8] bg-white">
+            <span className="text-[10px] font-bold text-[#786d65] block">Market Demand</span>
+            <span className="text-sm font-bold text-[#241b16] font-mono">
+              {formatNumber(market.estimatedAddressableMarketLiters)} L/day
+            </span>
+          </div>
+          <div className="p-2.5 rounded-xl border border-[#ede3d8] bg-white">
+            <span className="text-[10px] font-bold text-[#786d65] block">Avg Household</span>
+            <span className="text-sm font-bold text-[#3a6b4c] font-mono">
+              ~5.6 Persons
+            </span>
+          </div>
         </div>
+
+        {/* Live Google AI Overview Intelligence Snippet */}
+        {market.demographics.metadata?.aiSnippet && (
+          <div className="mt-3 p-3 rounded-2xl bg-[#f0f7ff] border border-[#dbeafe] text-[#1e3a8a]">
+            <div className="flex items-center gap-1.5 font-bold text-[11px] mb-1 text-[#2563eb]">
+              <Sparkles size={12} className="text-[#2563eb]" />
+              <span>Google AI Overview Synthesis</span>
+            </div>
+            <p className="text-[11px] leading-relaxed text-[#334155]">
+              {market.demographics.metadata.aiSnippet}
+            </p>
+            {market.demographics.metadata.references && market.demographics.metadata.references.length > 0 && (
+              <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-[#bfdbfe]/50">
+                <span className="text-[9px] font-semibold text-[#64748b] uppercase">Sources:</span>
+                {market.demographics.metadata.references.slice(0, 2).map((ref, idx) => (
+                  <a
+                    key={idx}
+                    href={ref.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-0.5 text-[10px] text-[#2563eb] hover:underline font-medium"
+                  >
+                    <span>{ref.title || "Reference"}</span>
+                    <ExternalLink size={9} />
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* 3. COMPETITOR DENSITY VISUAL */}

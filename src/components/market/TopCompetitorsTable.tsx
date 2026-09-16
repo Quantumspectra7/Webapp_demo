@@ -27,14 +27,6 @@ interface TopCompetitorsTableProps {
   onDistanceFilterChange: (dist: string) => void;
 }
 
-const CATEGORY_OPTIONS = [
-  { label: "All", value: "all" },
-  { label: "Dairy", value: "Dairy" },
-  { label: "Milk Processing", value: "Milk Processing" },
-  { label: "Collection", value: "Collection" },
-  { label: "Retail", value: "Retail" },
-];
-
 const DISTANCE_OPTIONS = [
   { label: "All Distances", value: "all" },
   { label: "< 2 km", value: "<2km" },
@@ -56,31 +48,61 @@ export const TopCompetitorsTable: React.FC<TopCompetitorsTableProps> = ({
   // Top 10 Slice per specification
   const top10 = competitors.slice(0, 10);
 
+  // Derive dynamic category filter options based on competitors present
+  const categoryOptions = React.useMemo(() => {
+    const rawCategories = Array.from(new Set(competitors.map((c) => c.category || c.businessType || "General")));
+    if (rawCategories.length <= 1) return [{ label: "All Businesses", value: "all" }];
+    
+    const opts = [{ label: "All", value: "all" }];
+    rawCategories.slice(0, 4).forEach((cat) => {
+      // Short label
+      let label = cat;
+      if (label.length > 18) label = label.split(" ")[0] + "...";
+      opts.push({ label, value: cat });
+    });
+    return opts;
+  }, [competitors]);
+
   const getCategoryBadge = (cat?: string, type?: string) => {
-    if (cat === "Milk Processing" || type === "chilling_hub") {
+    const text = (cat || "").toLowerCase();
+    if (text.includes("processing") || type === "chilling_hub") {
       return (
         <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#3a6b4c]/10 text-[#3a6b4c]">
           Processing
         </span>
       );
     }
-    if (cat === "Collection" || type === "cooperative_center") {
+    if (text.includes("collection") || type === "cooperative_center") {
       return (
         <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-100 text-amber-800">
-          Collection
+          Cooperative / Hub
         </span>
       );
     }
-    if (type === "sweet_maker") {
+    if (text.includes("flour") || text.includes("chakki")) {
+      return (
+        <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">
+          Atta Chakki
+        </span>
+      );
+    }
+    if (text.includes("machin") || text.includes("hiring") || text.includes("equipment")) {
+      return (
+        <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+          Custom Hiring (CHC)
+        </span>
+      );
+    }
+    if (type === "sweet_maker" || text.includes("sweet")) {
       return (
         <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-100 text-purple-800">
-          Derivatives
+          Value-Add
         </span>
       );
     }
     return (
       <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#c75d3e]/10 text-[#c75d3e]">
-        Dairy
+        {cat ? cat.split(" ")[0] : "Verified"}
       </span>
     );
   };
@@ -105,7 +127,7 @@ export const TopCompetitorsTable: React.FC<TopCompetitorsTableProps> = ({
         <div className="flex flex-wrap items-center gap-2">
           {/* Category Filter */}
           <div className="flex items-center gap-1 bg-[#faf4ee] p-1 rounded-xl border border-[#ede3d8]">
-            {CATEGORY_OPTIONS.map((opt) => (
+            {categoryOptions.map((opt) => (
               <button
                 key={opt.value}
                 type="button"
@@ -156,7 +178,7 @@ export const TopCompetitorsTable: React.FC<TopCompetitorsTableProps> = ({
 
             return (
               <div
-                key={comp.id}
+                key={`${comp.id || "comp"}-${idx}`}
                 onClick={() => onSelectCompetitor(comp)}
                 onMouseEnter={() => onHoverCompetitor(comp.id)}
                 onMouseLeave={() => onHoverCompetitor(null)}

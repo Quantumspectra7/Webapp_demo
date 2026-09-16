@@ -39,8 +39,70 @@ export const LocationStep: React.FC<LocationStepProps> = ({
 
   // Manual form values
   const [manualDistrict, setManualDistrict] = useState(initialLocation.district || "Ludhiana");
-  const [manualBlock, setManualBlock] = useState(initialLocation.block || "Jagraon");
-  const [manualVillage, setManualVillage] = useState(initialLocation.villageOrTown || "Jagraon");
+  const [manualBlock, setManualBlock] = useState(initialLocation.block || "Khanna");
+  const [manualVillage, setManualVillage] = useState(initialLocation.villageOrTown || "Khanna");
+
+  // GPS state
+  const [isFetchingGps, setIsFetchingGps] = useState(false);
+  const [gpsMessage, setGpsMessage] = useState<string | null>(null);
+
+  const handleFetchLiveLocation = () => {
+    if (!navigator.geolocation) {
+      setSearchError("Geolocation is not supported by your browser.");
+      return;
+    }
+
+    setIsFetchingGps(true);
+    setGpsMessage("Acquiring GPS fix...");
+    setSearchError(null);
+
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const lat = +pos.coords.latitude.toFixed(5);
+        const lng = +pos.coords.longitude.toFixed(5);
+        setGpsMessage(`Coordinates found: ${lat}°, ${lng}°. Resolving address...`);
+
+        try {
+          const resolved = await locationService.resolveLocation(lat, lng);
+          setSelectedLocation({
+            ...resolved,
+            latitude: lat,
+            longitude: lng,
+            precision: "point",
+            source: "map",
+            confidence: "high",
+          });
+          setGpsMessage(null);
+        } catch {
+          setSelectedLocation((prev) => ({
+            ...prev,
+            latitude: lat,
+            longitude: lng,
+            source: "map",
+            confidence: "high",
+          }));
+          setGpsMessage(null);
+        } finally {
+          setIsFetchingGps(false);
+        }
+      },
+      (err) => {
+        console.warn("GPS error", err);
+        setIsFetchingGps(false);
+        setGpsMessage(null);
+        if (err.code === err.PERMISSION_DENIED) {
+          setSearchError("Location permission was denied. Please enable permission or type your town/PIN code.");
+        } else {
+          setSearchError("Could not retrieve GPS location. Please enter your town or 6-digit PIN code.");
+        }
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 30000,
+      }
+    );
+  };
 
   // Load districts on mount
   useEffect(() => {
@@ -162,7 +224,7 @@ export const LocationStep: React.FC<LocationStepProps> = ({
         district: manualDistrict,
         block: manualBlock,
         villageOrTown: manualVillage,
-        pincode: "142026",
+        pincode: "141401",
         latitude: selectedLocation.latitude,
         longitude: selectedLocation.longitude,
         precision: "administrative",
@@ -198,17 +260,48 @@ export const LocationStep: React.FC<LocationStepProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         {/* Left Column: Search + Manual Options + Confirmation Card */}
         <div className="lg:col-span-5 flex flex-col gap-4">
-          {/* Method A: Search */}
+          {/* Live Location Quick Fetch */}
+          <div className="bg-white rounded-2xl border border-[#ede3d8] p-4 sm:p-5 shadow-2xs flex flex-col gap-2.5">
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#786d65]">
+                Option 1: Live GPS Detection
+              </label>
+              <span className="text-[10px] font-semibold text-[#3a6b4c] bg-[#3a6b4c]/10 px-2 py-0.5 rounded-full">
+                Instant Auto-Detect
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={handleFetchLiveLocation}
+              disabled={isFetchingGps}
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#241b16] hover:bg-[#382f29] text-white text-xs font-bold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+            >
+              <Compass size={15} className={`text-[#d4e6c1] ${isFetchingGps ? "animate-spin" : ""}`} />
+              <span>{isFetchingGps ? "Acquiring GPS Satellite Fix..." : "Use Current / Live Location"}</span>
+            </button>
+            {gpsMessage && (
+              <p className="text-[11px] text-[#3a6b4c] font-medium animate-pulse text-center mt-1">
+                {gpsMessage}
+              </p>
+            )}
+          </div>
+
+          {/* Method A: Search by Pincode or Town */}
           <div className="bg-white rounded-2xl border border-[#ede3d8] p-4 sm:p-5 shadow-2xs relative">
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#786d65] mb-2">
-              Find Village, Town, Block or District
-            </label>
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#786d65]">
+                Option 2: Search by PIN Code or Town
+              </label>
+              <span className="text-[10px] text-[#786d65] font-mono">
+                6-Digit PIN or Name
+              </span>
+            </div>
             <div className="relative">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="e.g. Jagraon, Sidhwan Bet, Nakodar..."
+                placeholder="e.g. 141401, Khanna, Samrala, Nakodar..."
                 className="w-full rounded-xl border border-[#ede3d8] bg-[#faf4ee]/60 pl-10 pr-4 py-2.5 text-sm text-[#241b16] placeholder-[#786d65]/60 focus:border-[#c75d3e] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#c75d3e] transition-all"
               />
               <Search
@@ -374,7 +467,7 @@ export const LocationStep: React.FC<LocationStepProps> = ({
                 {selectedLocation.latitude.toFixed(4)}° N, {selectedLocation.longitude.toFixed(4)}° E
               </span>
               <span className="font-medium text-[#241b16]">
-                PIN: {selectedLocation.pincode || "142024"}
+                PIN: {selectedLocation.pincode || "141401"}
               </span>
             </div>
 

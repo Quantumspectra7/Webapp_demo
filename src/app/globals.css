@@ -73,3 +73,33 @@
   background-color: #f6f2e9;
   font-family: var(--font-plus-jakarta), sans-serif;
 }
+
+/* Seamless Google Translate styling: completely obliterate top banner */
+iframe.goog-te-banner-frame,
+.goog-te-banner-frame,
+iframe[class*="goog-te-banner-frame"],
+iframe[id*=":1.container"],
+iframe[id*=":2.container"],
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9od-aZ2wEe-OiiCO,
+.VIpgJd-ZVi9od-OR95cd-bN97Pc,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0px !important;
+  width: 0px !important;
+  pointer-events: none !important;
+}
+
+html, body {
+  top: 0px !important;
+  position: static !important;
+  margin-top: 0px !important;
+}
+
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}

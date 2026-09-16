@@ -10,21 +10,21 @@ import { LocationStep } from "@/components/onboarding/LocationStep";
 import { BusinessStep } from "@/components/onboarding/BusinessStep";
 import { CapitalStep } from "@/components/onboarding/CapitalStep";
 import { ExperienceStep } from "@/components/onboarding/ExperienceStep";
-import { ReviewStep } from "@/components/onboarding/ReviewStep";
+import { PersonalDetailsStep, PersonalDetails } from "@/components/onboarding/PersonalDetailsStep";
 import { AnalysisTransition } from "@/components/onboarding/AnalysisTransition";
 
-// Demo initial baseline for SIH demonstration
+// Default profile — no pre-filled dummy user data
 const DEFAULT_PROFILE: AnalysisProfile = {
-  userId: "user-demo-punjab-01",
+  userId: "user-onboarding-new",
   location: {
-    id: "loc-jagraon-01",
+    id: "loc-khanna-01",
     state: "Punjab",
     district: "Ludhiana",
-    block: "Jagraon",
-    villageOrTown: "Jagraon",
-    pincode: "142026",
-    latitude: 30.7853,
-    longitude: 75.4731,
+    block: "Khanna",
+    villageOrTown: "Khanna",
+    pincode: "141401",
+    latitude: 30.702,
+    longitude: 76.22,
     precision: "point",
     source: "preset",
     confidence: "high",
@@ -46,17 +46,29 @@ const DEFAULT_PROFILE: AnalysisProfile = {
   analysisRadius: 5,
 };
 
+const PERSONAL_DETAILS_KEY = "gramvest_onboarding_personal_v1";
+
 export default function OnboardingPage() {
   const router = useRouter();
-  const { applyAnalysisProfile } = useApp();
+  const { applyAnalysisProfile, registerUserAccount, userAccount, analysisProfile } = useApp();
 
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [profile, setProfile] = useState<AnalysisProfile>(DEFAULT_PROFILE);
+  const [personalDetails, setPersonalDetails] = useState<Partial<PersonalDetails>>({});
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [draftLastSaved, setDraftLastSaved] = useState<string | null>(null);
 
-  // Restore draft if present on client mount
+  // Restore onboarding draft or active profile from localStorage on mount
   useEffect(() => {
+    if (analysisProfile) {
+      setProfile((prev) => ({
+        ...prev,
+        ...analysisProfile,
+        location: analysisProfile.location || prev.location,
+        business: analysisProfile.business || prev.business,
+      }));
+    }
+
     const saved = onboardingStore.restoreDraft();
     if (saved && saved.profile) {
       setProfile((prev) => ({
@@ -70,9 +82,26 @@ export default function OnboardingPage() {
       }
       setDraftLastSaved(saved.lastSavedAt);
     }
-  }, []);
 
-  // Save draft helper
+    // Restore personal details if previously entered or from userAccount
+    try {
+      const rawPersonal = localStorage.getItem(PERSONAL_DETAILS_KEY);
+      if (rawPersonal) {
+        setPersonalDetails(JSON.parse(rawPersonal));
+      } else if (userAccount?.authenticated) {
+        setPersonalDetails({
+          name: userAccount.name || "",
+          phone: userAccount.phone || "",
+          email: userAccount.email || "",
+          businessName: userAccount.businessName || "",
+        });
+      }
+    } catch {
+      // ignore
+    }
+  }, [analysisProfile, userAccount]);
+
+  // Persist step helper
   const persistStep = (updatedProfile: AnalysisProfile, nextStep: number) => {
     setProfile(updatedProfile);
     setCurrentStep(nextStep);
@@ -81,34 +110,22 @@ export default function OnboardingPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Step 1: Location confirmed
+  // Step 1: Location
   const handleLocationConfirmed = (location: LocationProfile) => {
-    const updated: AnalysisProfile = {
-      ...profile,
-      location,
-    };
-    persistStep(updated, 2);
+    persistStep({ ...profile, location }, 2);
   };
 
-  // Step 2: Business confirmed
+  // Step 2: Business
   const handleBusinessConfirmed = (business: BusinessProfile) => {
-    const updated: AnalysisProfile = {
-      ...profile,
-      business,
-    };
-    persistStep(updated, 3);
+    persistStep({ ...profile, business }, 3);
   };
 
-  // Step 3: Capital confirmed
+  // Step 3: Capital
   const handleCapitalConfirmed = (capital: number) => {
-    const updated: AnalysisProfile = {
-      ...profile,
-      capital,
-    };
-    persistStep(updated, 4);
+    persistStep({ ...profile, capital }, 4);
   };
 
-  // Step 4: Experience confirmed
+  // Step 4: Experience / Familiarity
   const handleExperienceConfirmed = (data: {
     experience: "beginner" | "intermediate" | "experienced" | "already_running";
     hasRelevantSkills: "yes" | "no" | "somewhat";
@@ -127,11 +144,39 @@ export default function OnboardingPage() {
     persistStep(updated, 5);
   };
 
-  // Step 5: Start Analysis triggered
-  const handleStartAnalysis = async () => {
+  // Step 5: Personal Details → Register + trigger analysis
+  const handlePersonalDetailsConfirmed = async (details: PersonalDetails) => {
+    // Save personal details to localStorage for persistence
+    try {
+      localStorage.setItem(PERSONAL_DETAILS_KEY, JSON.stringify(details));
+    } catch {
+      // ignore
+    }
+    setPersonalDetails(details);
+
+    // Register the user account
+    registerUserAccount({
+      name: details.name,
+      phone: details.phone,
+      email: details.email,
+      businessName: details.businessName || undefined,
+    });
+
+    const updatedProfile: AnalysisProfile = {
+      ...profile,
+      business: {
+        ...profile.business,
+        customBusinessName: details.businessName || profile.business.customBusinessName,
+      },
+    };
+    setProfile(updatedProfile);
+
+    // Mark step 6 (analysis) in draft so reload knows flow is complete
+    onboardingStore.saveDraft(updatedProfile, 6);
+
+    // Trigger the analysis transition
     setIsTransitioning(true);
-    await applyAnalysisProfile(profile);
-    onboardingStore.clearDraft();
+    await applyAnalysisProfile(updatedProfile);
   };
 
   // Back navigation
@@ -140,8 +185,14 @@ export default function OnboardingPage() {
       setCurrentStep((prev) => prev - 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      router.push("/get-started");
+      router.push("/");
     }
+  };
+
+  // Analysis complete → clear draft and go to dashboard
+  const handleTransitionComplete = () => {
+    onboardingStore.clearDraft();
+    router.replace("/dashboard");
   };
 
   if (isTransitioning) {
@@ -149,23 +200,24 @@ export default function OnboardingPage() {
       <AnalysisTransition
         locationName={`${profile.location.villageOrTown}, ${profile.location.district}`}
         businessTitle={profile.business.customBusinessName || profile.business.categoryName}
-        onComplete={() => router.push("/dashboard")}
+        userName={personalDetails.name}
+        onComplete={handleTransitionComplete}
       />
     );
   }
 
   return (
     <div className="min-h-screen bg-[#fff8f2] text-[#1d1b18] flex flex-col justify-between selection:bg-[#c75d3e] selection:text-white">
-      {/* Top Lightweight Progress Bar */}
+      {/* Progress Bar */}
       <OnboardingProgress
         currentStep={currentStep}
-        onStepClick={(s) => setCurrentStep(s)}
+        onStepClick={(s) => { if (s < currentStep) setCurrentStep(s); }}
         onBack={handleBack}
         canGoBack={true}
         draftLastSaved={draftLastSaved}
       />
 
-      {/* Step Content Container */}
+      {/* Step Content */}
       <main className="flex-1 py-4 sm:py-8">
         {currentStep === 1 && (
           <LocationStep
@@ -200,11 +252,9 @@ export default function OnboardingPage() {
         )}
 
         {currentStep === 5 && (
-          <ReviewStep
-            profile={profile}
-            onEditStep={(s) => setCurrentStep(s)}
-            onStartAnalysis={handleStartAnalysis}
-            isSubmitting={isTransitioning}
+          <PersonalDetailsStep
+            initialDetails={personalDetails}
+            onConfirmDetails={handlePersonalDetailsConfirmed}
           />
         )}
       </main>

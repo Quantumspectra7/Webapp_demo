@@ -13,6 +13,7 @@ import {
   SchemeRouteRecommendation,
 } from "@/domain";
 import { formatCurrency } from "@/lib/formatters";
+import { getFeasibilityRationale } from "@/data/real/feasibility_rationales";
 import {
   ArrowRight,
   TrendingUp,
@@ -30,7 +31,7 @@ import {
 } from "lucide-react";
 
 export default function DashboardPage() {
-  const { location, business, profile } = useApp();
+  const { location, business, profile, analysisProfile } = useApp();
   const [market, setMarket] = useState<MarketAnalysis | null>(null);
   const [financials, setFinancials] = useState<FinancialScenario | null>(null);
   const [opportunity, setOpportunity] = useState<OpportunityAnalysis | null>(null);
@@ -38,16 +39,35 @@ export default function DashboardPage() {
   const [schemes, setSchemes] = useState<SchemeRouteRecommendation | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const effectiveLocation =
+    location?.district && location.district.trim() !== ""
+      ? location
+      : analysisProfile?.location?.district
+      ? {
+          id: analysisProfile.location.id || "loc-custom-active",
+          state: analysisProfile.location.state || "Punjab",
+          district: analysisProfile.location.district || "Ludhiana",
+          block: analysisProfile.location.block || "Khanna",
+          villageOrTown: analysisProfile.location.villageOrTown || "Khanna",
+          pincode: analysisProfile.location.pincode || "141401",
+          latitude: analysisProfile.location.latitude || 30.702,
+          longitude: analysisProfile.location.longitude || 76.22,
+          marketCatchmentName: `${analysisProfile.location.block || "Khanna"} Agro Catchment`,
+          nearestMandi: `${analysisProfile.location.block || "Khanna"} APMC Mandi`,
+          distanceToMandiKm: 5.4,
+        }
+      : location;
+
   useEffect(() => {
     async function loadDashboardData() {
       try {
         setLoading(true);
         const [mkt, fin, opp, viab, sch] = await Promise.all([
-          marketService.getAnalysis(5),
+          marketService.getAnalysis(5, effectiveLocation || undefined, business?.id),
           financeService.getScenario(),
           marketService.getOpportunity(),
           marketService.getViabilityScore(),
-          schemeService.getRecommendations(),
+          schemeService.getRecommendations(business?.id),
         ]);
         setMarket(mkt);
         setFinancials(fin);
@@ -61,7 +81,8 @@ export default function DashboardPage() {
       }
     }
     loadDashboardData();
-  }, []);
+  // Re-fetch whenever the user's location or business changes (e.g. after onboarding)
+  }, [effectiveLocation?.latitude, effectiveLocation?.longitude, business?.id]);
 
   if (loading) {
     return (
@@ -79,12 +100,53 @@ export default function DashboardPage() {
     );
   }
 
-  const villageName = location?.villageOrTown || "Sidhwan Bet";
-  const blockName = location?.block || "Jagraon";
-  const districtName = location?.district || "Ludhiana";
-  const stateName = location?.state || "Punjab";
-  const bizTitle = business?.title || "Dairy Processing & Chilling Unit";
-  const ownCap = profile?.ownCapitalAvailable || 100000;
+  const hasAnalysis = !!(effectiveLocation?.district && effectiveLocation.district.trim() !== "");
+
+  const villageName = effectiveLocation?.villageOrTown || "";
+  const blockName = effectiveLocation?.block || "";
+  const districtName = effectiveLocation?.district || "";
+  const stateName = effectiveLocation?.state || "Punjab";
+  const bizTitle = business?.title || "";
+  const ownCap = profile?.ownCapitalAvailable || 0;
+
+  const locationDisplay = [blockName, districtName, stateName].filter(Boolean).join(", ") || "Your Location";
+
+  const rationale = getFeasibilityRationale(
+    business?.id,
+    villageName || "your area",
+    financials?.projections?.monthlyNetProfit ? `${formatCurrency(financials.projections.monthlyNetProfit)} / mo` : undefined
+  );
+
+  // Show CTA if user hasn't completed onboarding (no location/business set)
+  if (!hasAnalysis) {
+    return (
+      <AppShell>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4 space-y-6">
+          <div className="w-16 h-16 rounded-full bg-[#fdf0ea] border border-[#ede3d8] flex items-center justify-center">
+            <Sparkles size={28} className="text-[#c75d3e]" />
+          </div>
+          <div>
+            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#241b16] mb-2">
+              Set Up Your Business Analysis
+            </h1>
+            <p className="text-sm text-[#786d65] max-w-md mx-auto">
+              Complete a quick profile to unlock your personalized market intelligence, financial projections, scheme recommendations, and feasibility score.
+            </p>
+          </div>
+          <Link
+            href="/onboarding"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#c75d3e] hover:bg-[#bd5537] text-white text-sm font-bold shadow-warm-sm transition-all"
+          >
+            <Sparkles size={16} />
+            <span>Start Your Analysis →</span>
+          </Link>
+          <p className="text-xs text-[#9e8e84]">
+            Takes under 3 minutes · No registration required
+          </p>
+        </div>
+      </AppShell>
+    );
+  }
 
   return (
     <AppShell>
@@ -99,11 +161,15 @@ export default function DashboardPage() {
               <span>Business Control Center · Summary After Analysis</span>
             </div>
             <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#241b16]">
-              {blockName}, {districtName}, {stateName}
+              {locationDisplay}
             </h1>
             <p className="text-sm font-semibold text-[#382f29] mt-0.5">
-              {bizTitle} &nbsp;·&nbsp;{" "}
-              <span className="text-[#c75d3e] font-mono">{formatCurrency(ownCap)} own capital</span>
+              {bizTitle || "Your Business"}&nbsp;·&nbsp;{" "}
+              {ownCap > 0 ? (
+                <span className="text-[#c75d3e] font-mono">{formatCurrency(ownCap)} own capital</span>
+              ) : (
+                <span className="text-[#786d65] font-mono">Capital not set</span>
+              )}
             </p>
           </div>
 
@@ -154,9 +220,11 @@ export default function DashboardPage() {
                 Market Opportunity
               </span>
               <p className="text-base sm:text-lg font-serif font-bold text-[#3a6b4c] mt-1">
-                Moderate–Strong
+                {(viability?.overallScore || 78) >= 80 ? "Strong" : "Moderate–Strong"}
               </p>
-              <p className="text-[11px] text-[#786d65] mt-0.5">68% local unserved demand</p>
+              <p className="text-[11px] text-[#786d65] mt-0.5">
+                {viability?.components?.[0]?.score || 80}% demand confidence
+              </p>
             </div>
 
             <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8]">
@@ -164,9 +232,11 @@ export default function DashboardPage() {
                 Competition
               </span>
               <p className="text-base sm:text-lg font-serif font-bold text-[#d97706] mt-1">
-                Moderate
+                {(viability?.components?.[1]?.score || 70) >= 75 ? "Favorable" : "Moderate"}
               </p>
-              <p className="text-[11px] text-[#786d65] mt-0.5">2 small local collection hubs</p>
+              <p className="text-[11px] text-[#786d65] mt-0.5 truncate" title={opportunity?.keyGaps?.[0]?.headline}>
+                {opportunity?.keyGaps?.[0]?.title || "Market headroom available"}
+              </p>
             </div>
 
             <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8]">
@@ -174,19 +244,85 @@ export default function DashboardPage() {
                 Financial Fit
               </span>
               <p className="text-base sm:text-lg font-serif font-bold text-[#3a6b4c] mt-1">
-                Strong
+                {financials?.projections?.annualDSCR && financials.projections.annualDSCR >= 1.5 ? "Bank Grade" : "Viable"}
               </p>
-              <p className="text-[11px] text-[#786d65] mt-0.5">1.62x DSCR · 35% Subsidy</p>
+              <p className="text-[11px] text-[#786d65] mt-0.5">
+                {financials?.projections?.annualDSCR ? `${financials.projections.annualDSCR.toFixed(2)}x DSCR` : "1.50x DSCR"} · Priority Credit
+              </p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-[#fcedea] border border-[#c75d3e]/30">
-              <span className="text-[11px] uppercase font-bold text-[#c75d3e] block">
-                Overall Feasibility
-              </span>
+            <div className="p-4 rounded-2xl bg-[#fcedea] border border-[#c75d3e]/30 relative group cursor-pointer transition-all hover:shadow-md hover:border-[#c75d3e]">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] uppercase font-bold text-[#c75d3e] block">
+                  Overall Feasibility
+                </span>
+                <span className="flex items-center gap-1 text-[9px] font-bold text-[#c75d3e] bg-white px-1.5 py-0.5 rounded-md border border-[#c75d3e]/20 group-hover:bg-[#c75d3e] group-hover:text-white transition-colors">
+                  <Info size={11} />
+                  <span>Hover: Risks</span>
+                </span>
+              </div>
               <p className="text-2xl font-serif font-extrabold text-[#c75d3e] mt-0.5">
-                78 <span className="text-xs font-normal text-[#786d65]">/ 100</span>
+                {viability?.overallScore || 78} <span className="text-xs font-normal text-[#786d65]">/ 100</span>
               </p>
-              <p className="text-[11px] font-bold text-[#3a6b4c] mt-0.5">FEASIBLE</p>
+              <p className="text-[11px] font-bold text-[#3a6b4c] mt-0.5">
+                {(viability?.overallScore || 78) >= 80 ? "BANKABLE" : "FEASIBLE"}
+              </p>
+
+              {/* Hover Popover: Why choose & Risk reasons */}
+              <div className="absolute right-0 sm:-right-4 top-full mt-2 w-80 sm:w-96 p-4 rounded-2xl bg-white border-2 border-[#c75d3e] shadow-2xl z-50 text-left pointer-events-none group-hover:pointer-events-auto opacity-0 group-hover:opacity-100 transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                <div className="flex items-center justify-between pb-2 border-b border-[#ede3d8]">
+                  <span className="text-xs font-bold text-[#241b16] flex items-center gap-1.5">
+                    <Scale size={14} className="text-[#c75d3e]" />
+                    <span>Feasibility Rationale &amp; Risks</span>
+                  </span>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#fcedea] text-[#c75d3e]">
+                    Score: {viability?.overallScore || 78}/100
+                  </span>
+                </div>
+
+                <div className="space-y-2.5 mt-2.5 text-xs">
+                  {/* Why Choose Section */}
+                  <div className="p-2.5 rounded-xl bg-[#f0f6ec] border border-[#3a6b4c]/20">
+                    <p className="font-bold text-[#3a6b4c] flex items-center gap-1 mb-1 text-[11px]">
+                      <CheckCircle2 size={13} />
+                      <span>Why Choose {bizTitle.split("&")[0].trim()}?</span>
+                    </p>
+                    <p className="text-[11px] text-[#241b16] leading-relaxed">
+                      {rationale.whyChoose}
+                    </p>
+                  </div>
+
+                  {/* Top Risk Reasons Section */}
+                  <div className="p-2.5 rounded-xl bg-[#fdf6f4] border border-[#c75d3e]/20 space-y-1.5">
+                    <p className="font-bold text-[#c75d3e] flex items-center gap-1 text-[11px]">
+                      <AlertTriangle size={13} />
+                      <span>Key Risk Factors to Consider:</span>
+                    </p>
+                    <ul className="space-y-1.5 text-[11px] text-[#382f29]">
+                      {rationale.keyRisks.map((r, idx) => (
+                        <li key={idx} className="flex items-start gap-1.5 leading-snug">
+                          <span className="text-[#c75d3e] font-bold mt-0.5">•</span>
+                          <div>
+                            <strong className="text-[#241b16]">{r.title}:</strong>{" "}
+                            <span className="text-[#56423d]">{r.reason}</span>
+                            <span className="block text-[10px] text-[#3a6b4c] font-medium mt-0.5">
+                              ↳ <em>Action:</em> {r.mitigation}
+                            </span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Bottom Quick Safeguard */}
+                  <div className="text-[10px] text-[#786d65] pt-1 flex items-center justify-between border-t border-[#ede3d8]">
+                    <span>💡 <strong>Safeguard:</strong> {rationale.safeguard}</span>
+                    <Link href="/feasibility" className="text-[#c75d3e] font-bold hover:underline">
+                      Full Breakdown →
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -201,9 +337,11 @@ export default function DashboardPage() {
                 <span>Market</span>
               </div>
               <p className="text-sm font-serif font-bold text-[#241b16] mt-1 group-hover:text-[#c75d3e]">
-                ~3,800 Ltrs / Day
+                {financials?.operationalAssumptions?.dailyCapacityLiters
+                  ? `${financials.operationalAssumptions.dailyCapacityLiters.toLocaleString()} units / day`
+                  : "Field Assessed"}
               </p>
-              <p className="text-[11px] text-[#786d65]">10km catchment deficit</p>
+              <p className="text-[11px] text-[#786d65]">Capacity threshold</p>
             </Link>
 
             <Link
@@ -215,9 +353,11 @@ export default function DashboardPage() {
                 <span>Finance</span>
               </div>
               <p className="text-sm font-serif font-bold text-[#3a6b4c] mt-1 group-hover:text-[#c75d3e]">
-                ₹68,400 / mo
+                {financials?.projections?.monthlyNetProfit
+                  ? `${formatCurrency(financials.projections.monthlyNetProfit)} / mo`
+                  : "Assessed"}
               </p>
-              <p className="text-[11px] text-[#786d65]">Net operating margin</p>
+              <p className="text-[11px] text-[#786d65]">Net operating profit</p>
             </Link>
 
             <Link
@@ -229,9 +369,9 @@ export default function DashboardPage() {
                 <span>Risks</span>
               </div>
               <p className="text-sm font-serif font-bold text-[#241b16] mt-1 group-hover:text-[#c75d3e]">
-                3 Important
+                Mitigations Ready
               </p>
-              <p className="text-[11px] text-[#786d65]">Actionable mitigations</p>
+              <p className="text-[11px] text-[#786d65]">Structured countermeasures</p>
             </Link>
 
             <Link
@@ -242,10 +382,16 @@ export default function DashboardPage() {
                 <Coins size={14} className="text-[#c75d3e]" />
                 <span>Scheme</span>
               </div>
-              <p className="text-sm font-serif font-bold text-[#c75d3e] mt-1">
-                PMEGP Term Loan
+              <p className="text-sm font-serif font-bold text-[#c75d3e] mt-1 truncate" title={financials?.financingMeans?.subsidySchemeName || "Priority Term Loan"}>
+                {financials?.financingMeans?.subsidySchemeName
+                  ? financials.financingMeans.subsidySchemeName.split("(")[0].trim()
+                  : "Priority Term Loan"}
               </p>
-              <p className="text-[11px] text-[#786d65]">35% rural margin grant</p>
+              <p className="text-[11px] text-[#786d65]">
+                {financials?.financingMeans?.eligibleSubsidyAmount
+                  ? `Up to ${formatCurrency(financials.financingMeans.eligibleSubsidyAmount)} subsidy`
+                  : "Capital subsidy matched"}
+              </p>
             </Link>
           </div>
 
@@ -258,10 +404,12 @@ export default function DashboardPage() {
               <span>Official Decision Advisory</span>
             </div>
             <blockquote className="font-serif italic text-base sm:text-lg text-[#241b16] leading-snug">
-              “The business appears feasible under the current assumptions, but feed-cost volatility and local competition should be monitored.”
+              “{opportunity?.executiveSummary
+                ? opportunity.executiveSummary.slice(0, 150) + "..."
+                : `The business appears feasible under the current operating assumptions for ${bizTitle}.`}”
             </blockquote>
             <p className="text-xs text-[#786d65]">
-              Ground-truthed for {villageName} and Jagraon APMC catchment. Feeder power availability and PMEGP capital subsidy support robust debt servicing.
+              Ground-truthed for {villageName}, {blockName} catchment. Infrastructure connectivity and priority scheme routing support robust debt servicing.
             </p>
           </div>
         </div>

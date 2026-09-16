@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateMarketAnalysisPayload } from "@/lib/m3Engine";
+import { getGoogleAiCatchmentData } from "@/lib/googleAiOverviewService";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -7,7 +8,14 @@ export async function GET(request: NextRequest) {
   const category = searchParams.get("category") || "Dairy";
   const village = searchParams.get("village") || "Jagraon";
 
-  const analysis = generateMarketAnalysisPayload(radius, undefined, undefined, category, village);
+  let aiData = undefined;
+  try {
+    aiData = await getGoogleAiCatchmentData(village, "Ludhiana", radius, category);
+  } catch (e) {
+    // fallback
+  }
+
+  const analysis = generateMarketAnalysisPayload(radius, undefined, undefined, category, village, undefined, aiData);
 
   return NextResponse.json({
     LocationAnalysis: {

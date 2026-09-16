@@ -37,23 +37,12 @@ import {
 } from "recharts";
 
 export default function MoneyPage() {
-  const { profile } = useApp();
-  const [scenario, setScenario] = useState<FinancialScenario | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { profile, business, financialScenario } = useApp();
+  const [scenario, setScenario] = useState<FinancialScenario | null>(financialScenario);
+  const [loading, setLoading] = useState(!financialScenario);
 
-  // Capital capacity state (default ₹1,00,000 as per challenge specification)
-  const [ownCapital, setOwnCapital] = useState(profile?.ownCapitalAvailable || 100000);
-
-  // Project breakdown values
-  const [equipmentCost, setEquipmentCost] = useState(650000);
-  const [workingCapital, setWorkingCapital] = useState(150000);
-  const [shedCivilCost, setShedCivilCost] = useState(120000);
-  const [dgGeneratorCost, setDgGeneratorCost] = useState(80000);
-
-  // Repayment parameters
-  const [interestRate, setInterestRate] = useState(9.5);
-  const [tenureMonths, setTenureMonths] = useState(60);
-  const [moratoriumMonths, setMoratoriumMonths] = useState(6);
+  // Capital capacity state (synced with active profile)
+  const ownCapital = profile?.ownCapitalAvailable || scenario?.financingMeans?.ownContribution || 100000;
 
   useEffect(() => {
     async function loadFinance() {
@@ -67,49 +56,64 @@ export default function MoneyPage() {
         setLoading(false);
       }
     }
-    loadFinance();
-  }, []);
+    if (!scenario || scenario.id !== financialScenario?.id) {
+      loadFinance();
+    }
+  }, [financialScenario]);
 
-  const totalProjectCost = equipmentCost + workingCapital + shedCivilCost + dgGeneratorCost;
+  // Derive dynamic cost breakdown items
+  const costItems = scenario?.costBreakdown || [];
+  const totalProjectCost = scenario?.totalProjectCost || 1000000;
   const indicativeProjectCapacity = ownCapital * 10;
   const potentialFinancing = ownCapital * 9;
 
-  // Monthly Loan EMI calculation based on net loan required
-  // Net loan = Total Project Cost - 35% PMEGP subsidy - Own capital
-  const subsidyAmount = Math.round(totalProjectCost * 0.35);
-  const netLoanRequired = Math.max(0, totalProjectCost - subsidyAmount - ownCapital);
-  const monthlyRate = interestRate / 100 / 12;
-  const monthlyEmi =
-    netLoanRequired > 0 && monthlyRate > 0
-      ? Math.round(
-          (netLoanRequired * monthlyRate * Math.pow(1 + monthlyRate, tenureMonths)) /
-            (Math.pow(1 + monthlyRate, tenureMonths) - 1)
-        )
-      : 0;
+  // Repayment parameters from scenario loan terms
+  const interestRate = scenario?.loanTerms?.interestRatePct || 9.5;
+  const tenureMonths = scenario?.loanTerms?.tenureMonths || 60;
+  const moratoriumMonths = scenario?.loanTerms?.moratoriumMonths || 6;
+  const monthlyEmi = scenario?.loanTerms?.monthlyEMI || 0;
 
-  // Business Health metrics
-  const monthlyRevenue = 500 * 30 * 46; // 500 L/day * 30 days * ₹46/L = ₹6,90,000
-  const monthlyRawMaterial = 500 * 30 * 34; // 500 L/day * 30 days * ₹34/L = ₹5,10,000
-  const monthlyOpEx = 18000 + 15000 + 12000; // Power/diesel + Labor + Consumables = ₹45,000
-  const monthlyEbitda = monthlyRevenue - monthlyRawMaterial - monthlyOpEx; // ₹1,35,000
-  const monthlyNetProfit = monthlyEbitda - monthlyEmi - 8000; // ₹88,150 (less depr/tax)
-  const dscr = monthlyEmi > 0 ? +(monthlyEbitda / monthlyEmi).toFixed(2) : 9.99;
-  const breakEvenUnitsDaily = Math.round((monthlyOpEx + monthlyEmi) / (46 - 34) / 30); // ~177 L/day
+  // Business Health metrics directly from active projections
+  const monthlyRevenue = scenario?.projections?.monthlyRevenue || 0;
+  const monthlyRawMaterial = scenario?.projections?.monthlyRawMaterialCost || 0;
+  const monthlyOpEx = scenario?.projections?.monthlyOperatingExpenses || 0;
+  const monthlyTotalExp = monthlyRawMaterial + monthlyOpEx;
+  const monthlyNetProfit = scenario?.projections?.monthlyNetProfit || 0;
+  const dscr = scenario?.projections?.annualDSCR ? +scenario.projections.annualDSCR.toFixed(2) : 1.5;
+  const breakEvenMonthly = scenario?.projections?.breakEvenMonthlyLiters || 0;
+  const breakEvenUnitsDaily = Math.round(breakEvenMonthly / 30);
 
-  const chartData = [
-    { month: "M1", Revenue: 480000, Expenses: 395000, NetCashFlow: 85000 },
-    { month: "M2", Revenue: 540000, Expenses: 430000, NetCashFlow: 110000 },
-    { month: "M3", Revenue: 620000, Expenses: 490000, NetCashFlow: 130000 },
-    { month: "M4", Revenue: 690000, Expenses: 555000, NetCashFlow: 135000 },
-    { month: "M5", Revenue: 690000, Expenses: 555000, NetCashFlow: 135000 },
-    { month: "M6", Revenue: 690000, Expenses: 555000, NetCashFlow: 135000 },
-    { month: "M7", Revenue: 690000, Expenses: 555000, NetCashFlow: 116150 }, // EMI starts
-    { month: "M8", Revenue: 710000, Expenses: 565000, NetCashFlow: 126150 },
-    { month: "M9", Revenue: 710000, Expenses: 565000, NetCashFlow: 126150 },
-    { month: "M10", Revenue: 710000, Expenses: 565000, NetCashFlow: 126150 },
-    { month: "M11", Revenue: 730000, Expenses: 575000, NetCashFlow: 136150 },
-    { month: "M12", Revenue: 730000, Expenses: 575000, NetCashFlow: 136150 },
-  ];
+  // Dynamic business capacity units and labels
+  const isDairy = business?.id?.includes("dairy") || business?.title?.toLowerCase().includes("dairy");
+  const isFlour = business?.id?.includes("flour") || business?.title?.toLowerCase().includes("flour");
+  const isFarm = business?.id?.includes("equipment") || business?.title?.toLowerCase().includes("equipment");
+
+  const unitLabel = isDairy ? "L / day" : isFlour ? "kg / day" : "acres / day";
+  const costSummaryLabel = isDairy
+    ? "Milk + Power + Staff"
+    : isFlour
+    ? "Grain + Power + Labor"
+    : "Fuel + Spares + Operator";
+
+  const dailyCapacity = scenario?.operationalAssumptions?.dailyCapacityLiters || 500;
+  const monthlyVolume = dailyCapacity * 30;
+  const volumeSummaryLabel = `${monthlyVolume.toLocaleString()} ${isDairy ? "L" : isFlour ? "kg" : "acres"} / mo`;
+
+  // 12-Month Cash Flow Dynamic Projection series
+  const chartData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => {
+    const ramp = m === 1 ? 0.7 : m === 2 ? 0.8 : m === 3 ? 0.9 : 1.0;
+    const rev = Math.round(monthlyRevenue * ramp);
+    const opex = Math.round(monthlyTotalExp * ramp);
+    const emiApplied = m > moratoriumMonths ? monthlyEmi : 0;
+    const exp = opex + emiApplied;
+    const net = rev - exp;
+    return {
+      month: `M${m}`,
+      Revenue: rev,
+      Expenses: exp,
+      NetCashFlow: net,
+    };
+  });
 
   return (
     <AppShell>
@@ -125,12 +129,11 @@ export default function MoneyPage() {
               Capital Capacity, Costs &amp; Cash Flow
             </h1>
             <p className="text-sm text-[#786d65] mt-1">
-              Evaluating how much enterprise your equity can leverage, capital capex structure, loan repayment, and DSCR solvency.
+              Evaluating how much enterprise your equity can leverage, capital capex structure, loan repayment, and DSCR solvency for {business?.title || "your enterprise"}.
             </p>
           </div>
 
           <div className="flex items-center gap-2.5">
-            {/* Embedded Try a What-If Button */}
             <Link
               href="/what-if"
               className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-[#ede3d8] bg-white hover:bg-[#faf4ee] text-xs font-bold text-[#c75d3e] shadow-2xs transition-all"
@@ -160,7 +163,7 @@ export default function MoneyPage() {
               How much business can your capital support?
             </h2>
             <p className="text-xs text-[#786d65] mt-1">
-              Under RBI priority sector and PMEGP rural credit guidelines, a 10% own equity base can support up to 10x total enterprise outlay.
+              Under RBI priority sector credit guidelines, a 10% own equity base can support up to 10x total enterprise outlay through term debt and sovereign capital subsidies.
             </p>
           </div>
 
@@ -174,7 +177,7 @@ export default function MoneyPage() {
               <p className="text-2xl font-serif font-extrabold text-[#241b16]">
                 {formatCurrency(ownCapital)}
               </p>
-              <p className="text-[11px] text-[#786d65]">10% Required Promoter Equity</p>
+              <p className="text-[11px] text-[#786d65]">Promoter Equity Contribution</p>
             </div>
 
             {/* Step 2: Indicative Project Capacity */}
@@ -196,20 +199,22 @@ export default function MoneyPage() {
               <p className="text-2xl font-serif font-extrabold text-[#3a6b4c]">
                 {formatCurrency(potentialFinancing)}
               </p>
-              <p className="text-[11px] text-[#786d65]">Combined Bank Term Loan + 35% Subsidy</p>
+              <p className="text-[11px] text-[#786d65]">Combined Bank Term Loan + Capital Subsidy</p>
             </div>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-[#faf4ee] border border-[#ede3d8] flex items-center justify-between text-xs text-[#786d65]">
+          <div className="p-3.5 rounded-xl bg-[#faf4ee] border border-[#ede3d8] flex flex-col sm:flex-row sm:items-center justify-between text-xs text-[#786d65] gap-2">
             <span>
               <strong>Regulatory Notice:</strong> Labeled as an <em>indicative financing capacity</em> based on standard rural credit norms, not guaranteed loan sanction.
             </span>
-            <span className="font-mono font-bold text-[#3a6b4c]">PMEGP Rule 10%</span>
+            <span className="font-mono font-bold text-[#3a6b4c]">
+              {scenario?.financingMeans?.subsidySchemeName ? "Priority Scheme Aligned" : "RBI PSL Norms"}
+            </span>
           </div>
         </div>
 
         {/* ========================================================
-            2. PROJECT STRUCTURE (Equipment, Working Capital, Setup, DG Generator)
+            2. DYNAMIC PROJECT COST STRUCTURE (from costBreakdown)
            ======================================================== */}
         <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#ede3d8] shadow-warm-sm space-y-5">
           <div className="flex items-center justify-between border-b border-[#ede3d8] pb-3">
@@ -222,50 +227,25 @@ export default function MoneyPage() {
               </h2>
             </div>
             <span className="text-xs font-bold text-[#c75d3e] bg-[#fcedea] px-3 py-1 rounded-full">
-              Shed &amp; Machinery Vetted
+              {costItems.length} Vetted Line Items
             </span>
           </div>
 
+          {/* Dynamic CapEx Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] space-y-1">
-              <span className="text-[10px] uppercase font-bold text-[#786d65] block">
-                1. Machinery &amp; Equipment
-              </span>
-              <p className="text-lg font-serif font-bold text-[#241b16]">
-                {formatCurrency(equipmentCost)}
-              </p>
-              <p className="text-[11px] text-[#786d65]">1,000L BMC + Lab Analyzer</p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] space-y-1">
-              <span className="text-[10px] uppercase font-bold text-[#786d65] block">
-                2. Initial Working Capital
-              </span>
-              <p className="text-lg font-serif font-bold text-[#241b16]">
-                {formatCurrency(workingCapital)}
-              </p>
-              <p className="text-[11px] text-[#786d65]">15-Day Farmer Milk Advance</p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] space-y-1">
-              <span className="text-[10px] uppercase font-bold text-[#786d65] block">
-                3. Civil Shed Setup
-              </span>
-              <p className="text-lg font-serif font-bold text-[#241b16]">
-                {formatCurrency(shedCivilCost)}
-              </p>
-              <p className="text-[11px] text-[#786d65]">Tiled Floor &amp; Drainage</p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] space-y-1">
-              <span className="text-[10px] uppercase font-bold text-[#786d65] block">
-                4. Backup DG Generator
-              </span>
-              <p className="text-lg font-serif font-bold text-[#241b16]">
-                {formatCurrency(dgGeneratorCost)}
-              </p>
-              <p className="text-[11px] text-[#786d65]">15kVA Silent Diesel Set</p>
-            </div>
+            {costItems.map((item, idx) => (
+              <div key={idx} className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] space-y-1">
+                <span className="text-[10px] uppercase font-bold text-[#786d65] block truncate">
+                  {idx + 1}. {item.category}
+                </span>
+                <p className="text-lg font-serif font-bold text-[#241b16]">
+                  {formatCurrency(item.cost)}
+                </p>
+                <p className="text-[11px] text-[#786d65] line-clamp-2" title={item.itemName}>
+                  {item.itemName}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -283,7 +263,7 @@ export default function MoneyPage() {
               </h2>
             </div>
             <span className="text-xs font-bold text-[#3a6b4c] bg-[#f0f6ec] px-3 py-1 rounded-full">
-              PMEGP Priority Lending
+              {scenario?.financingMeans?.subsidySchemeName || "Priority Lending"}
             </span>
           </div>
 
@@ -297,7 +277,7 @@ export default function MoneyPage() {
             <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8]">
               <span className="text-[10px] uppercase font-bold text-[#786d65] block">Repayment Tenure</span>
               <p className="text-lg font-serif font-bold text-[#241b16] mt-0.5">{tenureMonths} Months</p>
-              <p className="text-[10px] text-[#786d65]">5-Year Term Schedule</p>
+              <p className="text-[10px] text-[#786d65]">Equated Installment Schedule</p>
             </div>
 
             <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8]">
@@ -311,7 +291,7 @@ export default function MoneyPage() {
               <p className="text-xl font-serif font-extrabold text-[#c75d3e] mt-0.5">
                 {formatCurrency(monthlyEmi)}
               </p>
-              <p className="text-[10px] text-[#786d65]">Starting Month 7</p>
+              <p className="text-[10px] text-[#786d65]">Starting Month {moratoriumMonths + 1}</p>
             </div>
           </div>
         </div>
@@ -331,7 +311,7 @@ export default function MoneyPage() {
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-[#3a6b4c] text-white">
-                DSCR: {dscr}x (Bank Grade)
+                DSCR: {dscr}x ({dscr >= 1.5 ? "Bank Grade" : "Moderate Solvency"})
               </span>
             </div>
           </div>
@@ -342,15 +322,15 @@ export default function MoneyPage() {
               <p className="text-base font-serif font-bold text-[#241b16] mt-0.5">
                 {formatCurrency(monthlyRevenue)}
               </p>
-              <p className="text-[10px] text-[#786d65]">15,000 L @ ₹46/L</p>
+              <p className="text-[10px] text-[#786d65]">{volumeSummaryLabel}</p>
             </div>
 
             <div className="p-3.5 rounded-2xl bg-[#faf4ee] border border-[#ede3d8]">
               <span className="text-[10px] uppercase font-bold text-[#786d65] block">Monthly OpEx</span>
               <p className="text-base font-serif font-bold text-[#241b16] mt-0.5">
-                {formatCurrency(monthlyRawMaterial + monthlyOpEx)}
+                {formatCurrency(monthlyTotalExp)}
               </p>
-              <p className="text-[10px] text-[#786d65]">Milk + Power + Staff</p>
+              <p className="text-[10px] text-[#786d65]">{costSummaryLabel}</p>
             </div>
 
             <div className="p-3.5 rounded-2xl bg-[#f0f6ec] border border-[#3a6b4c]/30">
@@ -364,9 +344,13 @@ export default function MoneyPage() {
             <div className="p-3.5 rounded-2xl bg-[#faf4ee] border border-[#ede3d8]">
               <span className="text-[10px] uppercase font-bold text-[#786d65] block">Break-Even Point</span>
               <p className="text-base font-serif font-bold text-[#241b16] mt-0.5">
-                {breakEvenUnitsDaily} L / day
+                {breakEvenUnitsDaily} {unitLabel}
               </p>
-              <p className="text-[10px] text-[#786d65]">Only 35% of capacity</p>
+              <p className="text-[10px] text-[#786d65]">
+                {scenario?.projections?.breakEvenCapacityPct
+                  ? `${scenario.projections.breakEvenCapacityPct}% of capacity`
+                  : "Sustainable threshold"}
+              </p>
             </div>
 
             <div className="p-3.5 rounded-2xl bg-[#faf4ee] border border-[#ede3d8]">

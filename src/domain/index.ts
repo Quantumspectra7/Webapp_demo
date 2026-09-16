@@ -10,6 +10,8 @@ export interface ConfidenceMetadata {
   dataStatus: "live" | "demo" | "verified" | "audited";
   sampleCoverage?: string;
   assumptions?: string[];
+  aiSnippet?: string;
+  references?: Array<{ title?: string; link?: string }>;
 }
 
 export interface VentureLocation {
@@ -182,6 +184,8 @@ export interface RiskItem {
   likelihood: "High" | "Medium" | "Low";
   impactDescription: string;
   mitigationStrategy: string;
+  whyItMatters?: string;
+  whatYouCanDo?: string;
 }
 
 export interface ViabilityScore {
@@ -328,7 +332,6 @@ export interface StructuredAdvisorResponse {
   confidence: "high" | "medium" | "low" | "unknown";
   needs_clarification: boolean;
 }
-
 export interface AdvisorMessage {
   id: string;
   role: "user" | "assistant";
@@ -341,7 +344,6 @@ export interface AdvisorMessage {
     route: string;
   }[];
 }
-
 export interface WhatIfParameters {
   priceAdjustmentPct: number; // e.g. -10 to +15%
   demandAdjustmentPct: number; // e.g. -30 to +30%
@@ -359,7 +361,6 @@ export interface WhatIfComparison {
   status: "positive" | "neutral" | "negative";
   interpretation: string;
 }
-
 export interface WhatIfResult {
   parameters: WhatIfParameters;
   comparisonItems: WhatIfComparison[];
@@ -477,6 +478,10 @@ export interface UserAccount {
   id: string;
   name: string;
   contact: string; // phone or email
+  phone?: string;
+  email?: string;
+  businessName?: string;
+  registeredAt?: string;
   isGuest: boolean;
   authenticated: boolean;
 }

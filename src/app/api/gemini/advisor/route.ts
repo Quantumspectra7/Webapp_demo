@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
       viability,
       schemes,
       language,
+      isVoiceQuery,
     } = await req.json();
 
     const openRouterKey = process.env.OPENROUTER_API_KEY;
@@ -24,7 +25,12 @@ export async function POST(req: NextRequest) {
         ? "Language requirement: Respond in English, but naturally incorporate Hindi/Hinglish business terms where helpful."
         : "Language requirement: Respond in clear, professional English.";
 
+    const voiceInstruction = isVoiceQuery
+      ? "VOICE INTERACTION REQUIREMENT: The user is communicating via voice. Keep your main answer field concise, direct, and conversational (under 65 words). State the primary financial or market finding immediately. Do NOT produce a long block of text. Focus on actionable guidance."
+      : "";
+
     const systemContext = `
+${voiceInstruction}
 PRODUCTION PROMPT — GRAMVEST AI ADVISOR
 You are the production AI Advisor for GramVest, a hyper-local business decision-support platform for rural micro-entrepreneurs.
 Your purpose is NOT to be a general chatbot.

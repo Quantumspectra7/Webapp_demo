@@ -19,6 +19,7 @@
     "react-dom": "19.2.8",
     "react-leaflet": "^5.0.0",
     "recharts": "^3.10.1",
+    "scrapebadger": "^0.47.1",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {

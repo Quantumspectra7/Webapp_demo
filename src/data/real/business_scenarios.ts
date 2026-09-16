@@ -76,6 +76,8 @@ export interface BusinessScenarioData {
     category: "Supply" | "Operational" | "Financial" | "Regulatory" | "Market";
     severity: "Low" | "Medium" | "High";
     mitigation: string;
+    whyItMatters?: string;
+    whatYouCanDo?: string;
   }[];
 }
 
@@ -181,10 +183,10 @@ export const REAL_BUSINESS_SCENARIOS: Record<string, BusinessScenarioData> = {
     },
 
     risks: [
-      { id: "R-D-1", title: "Feeder Power Cut during Chilling Cycle", category: "Operational", severity: "High", mitigation: "Dedicated 10 kVA silent diesel generator with automatic changeover switch (AMF panel)." },
-      { id: "R-D-2", title: "Milk Sourage / Acidity Inflow", category: "Supply", severity: "Medium", mitigation: "Mandatory rapid alcohol test & electronic MBRT testing before accepting milk cans into bulk vat." },
-      { id: "R-D-3", title: "Farmer Payment Default / Flight", category: "Financial", severity: "Medium", mitigation: "Direct DBT bank transfers every 10 days backed by clear digital passbook SMS updates." },
-      { id: "R-D-4", title: "Summer Procurement Dip", category: "Supply", severity: "Medium", mitigation: "Silage feed aggregation partnerships with local dairy farmers to ensure stable summer yield." },
+      { id: "R-D-1", title: "Feeder Power Cut during Chilling Cycle", category: "Operational", severity: "High", mitigation: "Dedicated 10 kVA silent diesel generator with automatic changeover switch (AMF panel).", whyItMatters: "Unchilled milk souring occurs if temperature climbs above 4°C for over 45 minutes, risking entire batch rejection at private dairies.", whatYouCanDo: "Pre-budget an automated 10-15kVA DG generator directly into the bank loan capex; schedule primary chilling cycles during stable grid hours." },
+      { id: "R-D-2", title: "Feed-Price Volatility & Fodder Cost Inflation", category: "Supply", severity: "High", mitigation: "Silage feed aggregation partnerships with local dairy farmers to ensure stable summer yield.", whyItMatters: "Higher input costs reduce farmer margins and raw milk yields, driving procurement rates higher and reducing margins.", whatYouCanDo: "Maintain multi-source silage contracts with local FPOs and lock in seasonal grain by-products in bulk during harvest." },
+      { id: "R-D-3", title: "Farmer Payment Default / Flight to Middlemen", category: "Financial", severity: "Medium", mitigation: "Direct DBT bank transfers every 10 days backed by clear digital passbook SMS updates.", whyItMatters: "Traditional milk aggregators lock in small dairy farmers with informal cash loans, making them reluctant to switch.", whatYouCanDo: "Offer guaranteed prompt weekly digital bank settlements via UPI/NEFT and provide transparent digital ultrasonic fat/SNF slips." },
+      { id: "R-D-4", title: "Summer Procurement Dip & Lean Season Drop", category: "Supply", severity: "Medium", mitigation: "Diversify cow-buffalo procurement mix and introduce heat-stress mineral supplements to member farmers.", whyItMatters: "Buffalo milk output naturally contracts during extreme North Indian heat (May–June), driving procurement competition higher.", whatYouCanDo: "Balance procurement with 40% cow milk with year-round lactation curves and provide heat-stress mineral supplements." },
     ],
   },
 
@@ -289,10 +291,10 @@ export const REAL_BUSINESS_SCENARIOS: Record<string, BusinessScenarioData> = {
     },
 
     risks: [
-      { id: "R-F-1", title: "Grain Moisture & Weevil Infestation", category: "Supply", severity: "High", mitigation: "Install digital moisture meter at intake; maintain grain silos under 12% moisture with hermetic seals." },
-      { id: "R-F-2", title: "Chakki Stone Overheating (Nutrient Loss)", category: "Operational", severity: "Medium", mitigation: "Use water-cooled stone bearings and calibrated low-RPM motor drive." },
-      { id: "R-F-3", title: "High Seasonal Working Capital Lock", category: "Financial", severity: "High", mitigation: "Avail Mandi Warehouse Receipt Financing (Pledge loan) at 7% interest for harvest stocking." },
-      { id: "R-F-4", title: "Power Surge & Motor Burnout", category: "Operational", severity: "Medium", mitigation: "Automatic phase failure relay and surge protection in electrical distribution board." },
+      { id: "R-F-1", title: "Grain Moisture & Weevil Infestation", category: "Supply", severity: "High", mitigation: "Install digital moisture meter at intake; maintain grain silos under 12% moisture with hermetic seals.", whyItMatters: "Excess moisture above 13% causes rapid mould and weevil infestation, spoiling entire multi-ton wheat batches.", whatYouCanDo: "Mandatory digital moisture testing at grain intake and use airtight hermetic storage silos with periodic organic neem/fumigation." },
+      { id: "R-F-2", title: "Grain Price Volatility & Seasonal Stocking Squeeze", category: "Supply", severity: "High", mitigation: "Avail Mandi Warehouse Receipt Financing (Pledge loan) at 7% interest for harvest stocking.", whyItMatters: "Wheat procurement prices swing 15-25% between April harvest glut and winter, squeezing unhedged flour milling margins.", whatYouCanDo: "Lock in 30-45 days buffer grain stock during April-May Baisakhi harvest using bank warehouse receipt pledge credit." },
+      { id: "R-F-3", title: "Heavy 3-Phase Power Load & Feeder Outages", category: "Operational", severity: "Medium", mitigation: "Automatic phase failure relay and APFC capacitor panel to prevent motor coil burnout.", whyItMatters: "Commercial 20 HP stone chakki draws heavy current; unmanaged voltage drops burn motor windings and halt flour production.", whatYouCanDo: "Install an APFC power capacitor panel and phase failure cut-off relay to protect milling motors from grid swings." },
+      { id: "R-F-4", title: "Local Unorganized Chakki Price Undercutting", category: "Market", severity: "Medium", mitigation: "Differentiate via FSSAI-certified, hygienically destoned and cold-ground premium packaged atta.", whyItMatters: "Informal village toll chakkis operate with low overheads and toll fees, competing on price rather than hygienic purity.", whatYouCanDo: "Market guaranteed adulteration-free, destoned cold-ground atta in branded tamper-evident 5kg and 10kg bags to local grocers and dhabas." },
     ],
   },
 
@@ -615,8 +617,114 @@ export const REAL_BUSINESS_SCENARIOS: Record<string, BusinessScenarioData> = {
     risks: [
       { id: "R-S-1", title: "Heat-Induced Loss of Aroma/Color", category: "Operational", severity: "High", mitigation: "Water-cooled pulverizer ensures chamber temperature remains strictly under 45°C." },
       { id: "R-S-2", title: "Moisture-Induced Fungal Growth", category: "Supply", severity: "High", mitigation: "Mandatory pre-grinding moisture test (<8%) and hot-air solar batch drying." },
-      { id: "R-S-3", title: "Retail Shelf Payment Delays", category: "Financial", severity: "Medium", mitigation: "Strict 14-day credit limit with cash discounts for upfront settlement." },
-      { id: "R-S-4", title: "Worker Respiratory Irritation", category: "Operational", severity: "Medium", mitigation: "Enclosed negative-pressure cyclone dust collector + mandatory N95 respirators." },
+      { id: "R-S-3", title: "Retail Shelf Payment Delays", category: "Financial", severity: "Medium", mitigation: "Strict 14-day credit limit with cash discounts for upfront settlement.", whyItMatters: "Retail grocers often delay packaged spice payments for 30-45 days, straining monthly cash flow.", whatYouCanDo: "Implement strict 14-day rolling invoice cycle with 2% cash discount for spot UPI settlement." },
+      { id: "R-S-4", title: "Worker Respiratory Irritation", category: "Operational", severity: "Medium", mitigation: "Enclosed negative-pressure cyclone dust collector + mandatory N95 respirators.", whyItMatters: "Pungent chilli capsaicin and fine turmeric dust cause acute worker coughing and absenteeism if unventilated.", whatYouCanDo: "Install sealed cyclone dust extraction ducts and supply washable 3M N95 protective respirators." },
+    ],
+  },
+
+  // 6. Farm Equipment & Custom Hiring Centre
+  "biz-farm-equipment": {
+    id: "biz-farm-equipment",
+    categoryId: "biz-farm-equipment",
+    title: "Farm Equipment & Custom Hiring Centre",
+    punjabiTitle: "ਖੇਤੀ ਮਸ਼ੀਨਰੀ ਅਤੇ ਕਸਟਮ ਹਾਇਰਿੰਗ ਸੈਂਟਰ",
+    categoryName: "Agricultural Mechanization & Custom Hiring",
+    description: "Modern Custom Hiring Centre equipped with a 55 HP 4WD utility tractor, laser land leveler, super seeder, straw baler/reaper, and rotavator serving smallholders on pay-per-acre custom service.",
+    registrySource: "Punjab Department of Agriculture & Farmers Welfare (SMAM Registry)",
+    defaultScale: "small",
+    capacityUnit: "Acres / season",
+    dailyCapacity: 35,
+    capacityUtilization: 65,
+    headcount: 3,
+    powerRequirementKW: 5.0,
+
+    indicativeProjectCost: 1800000,
+    ownContribution: 180000,
+    loanRequirement: 1620000,
+    tenureMonths: 84,
+    interestRate: 8.5,
+    sellingPricePerUnit: 1800, // Average ₹1,800 / acre hiring fee
+    purchasePricePerUnit: 720, // Average operating fuel + consumables / acre
+    monthlyPowerCost: 8000,
+    monthlyLaborCost: 35000,
+    monthlyAdminCost: 6000,
+
+    capexItems: [
+      { name: "55 HP 4WD Utility Tractor (Heavy Duty)", specification: "Power steering, dual clutch, high ground clearance with front ballast", amount: 820000, category: "Machinery", supplierOrigin: "Hoshiarpur / Mohali" },
+      { name: "Laser Guided Land Leveler", specification: "Dual slope transmitter receiver with 8-ft drag bucket", amount: 340000, category: "Machinery", supplierOrigin: "Ludhiana Agricultural Cluster" },
+      { name: "Super Seeder (Paddy Stubble Direct Sowing)", specification: "11-tyne with press wheel mechanism for residue management", amount: 260000, category: "Machinery", supplierOrigin: "Batala" },
+      { name: "Paddy Straw Reaper & Square Baler", specification: "Tractor-driven straw chopper with knotter", amount: 220000, category: "Machinery", supplierOrigin: "Khanna" },
+      { name: "Implement Parking Shed & Service Workshop", specification: "Covered GI sheet bay with basic maintenance compressor & toolkits", amount: 160000, category: "Civil / Shed", supplierOrigin: "Jagraon Local" },
+    ],
+
+    opexMonthlyItems: [
+      { name: "Diesel Fuel for Custom Field Operations", amount: 75000, category: "Raw Material" },
+      { name: "Commercial Shed Utilities & Grid Electricity", amount: 8000, category: "Power & Utilities" },
+      { name: "Tractor Drivers (2) & Maintenance Mechanic (1)", amount: 35000, category: "Wages" },
+      { name: "Implement Blades, Shear Pins, Lubricating Grease", amount: 14000, category: "Packaging & Logistics" },
+      { name: "Tyre Wear, Hydraulic Hose & Engine Oil Servicing", amount: 8000, category: "Maintenance" },
+    ],
+
+    marketInsights: {
+      catchmentDemand: "Severe seasonal farm labor shortage across Jagraon and Sidhwan Bet. Strict anti-stubble burning regulations mandate mechanized seeding, creating guaranteed off-take for laser levelers and super seeders.",
+      typicalBuyers: ["Small & marginal farmers (<5 acres)", "Village Farmer Producer Organizations (FPOs)", "Direct Village Panchayats", "Progressive wheat-paddy growers"],
+      valueAdditionPct: 35,
+      keyCompetitorDensity: "Moderate for basic old tractors; very low for modern precision Laser Levelers and Super Seeders with certified GPS calibration.",
+      pricingTrend: "Super seeder sowing commands ₹2,200-₹2,500/acre; laser leveling commands ₹800-₹1,000/hour; straw baling commands ₹1,200/acre.",
+      seasonalFactors: "Intense peak demand during 45 days of Kharif-Rabi transition (Oct-Nov) and wheat harvest (April-May); lean utilization during monsoon.",
+    },
+
+    governmentSchemes: [
+      {
+        schemeName: "Sub-Mission on Agricultural Mechanization (SMAM)",
+        subsidyType: "Capital Investment Subsidy",
+        subsidyPct: 40,
+        maxSubsidyAmount: 1000000,
+        nodalAgency: "Department of Agriculture & Farmers Welfare (Punjab)",
+        applicableBenefit: "40% capital subsidy on establishing rural Custom Hiring Centre (up to ₹7.20 Lakhs).",
+      },
+      {
+        schemeName: "Agriculture Infrastructure Fund (AIF)",
+        subsidyType: "Interest Subvention",
+        subsidyPct: 3,
+        maxSubsidyAmount: 2000000,
+        nodalAgency: "NABARD / National Horticulture Board",
+        applicableBenefit: "3% interest subvention for 7 years on term loan + CGTMSE credit guarantee fee waiver.",
+      },
+    ],
+
+    swot: {
+      strengths: [
+        "Critical solution to Punjab's severe agricultural labor shortage and strict anti-stubble burning mandates.",
+        "High equipment utilization by rotating between land leveling, sowing, spraying, and harvest baling.",
+        "Substantial 40% SMAM capital subsidy significantly lowers debt repayment liability.",
+        "Immediate cash or harvest grain settlement from small and marginal farmers.",
+      ],
+      weaknesses: [
+        "High capital intensity with seasonal machinery idle periods during monsoon months.",
+        "High sensitivity to diesel fuel price inflation directly affecting per-acre operating costs.",
+        "Requires skilled tractor drivers to prevent implement damage during night operations.",
+        "Weather dependence: delayed rains or unseasonal showers shift entire operational window.",
+      ],
+      opportunities: [
+        "Paddy straw baling tie-ups with nearby biomass power and compressed biogas (CBG) plants.",
+        "Sub-contracting full village cluster land preparation for local FPOs.",
+        "Introducing drone spraying service attachment in Phase 2 for pesticide optimization.",
+        "Custom hiring software tracking machine hours and acreage via GPS telemetry.",
+      ],
+      threats: [
+        "Unseasonal torrential rains stalling field tractor operations.",
+        "Major mechanical breakdowns during the peak 15-day wheat sowing window.",
+        "Diesel supply shortages or rapid price surges during harvest seasons.",
+        "Delayed rental payment recovery from credit-strained smallholders.",
+      ],
+    },
+
+    risks: [
+      { id: "R-FE-1", title: "Seasonality & Peak 20-Day Sowing Window", category: "Operational", severity: "High", mitigation: "Pre-service all tractor hydraulics and stock critical shear pins, belts, and bearings before October 15.", whyItMatters: "70% of annual sowing revenue is earned in a narrow 3-week window; machine downtime during this period causes irreversible customer loss.", whatYouCanDo: "Pre-service all tractor hydraulics and maintain buffer stock of critical shear pins, belts, and bearings before October 15." },
+      { id: "R-FE-2", title: "Diesel Fuel Price Volatility", category: "Financial", severity: "High", mitigation: "Quote dynamic fuel-indexed rental contracts and procure wholesale bulk diesel barrels before peak seasons.", whyItMatters: "Fuel accounts for over 50% of operating variable expenses, directly squeezing per-acre custom hiring margins.", whatYouCanDo: "Quote dynamic fuel-indexed rental contracts and procure wholesale bulk diesel barrels before peak harvest/sowing seasons." },
+      { id: "R-FE-3", title: "Equipment Utilization During Lean Months", category: "Market", severity: "Medium", mitigation: "Offer off-season rural haulage, trolley transport for mandi grain, and orchard inter-cultivation services.", whyItMatters: "Tractors and implements lying idle from July-August and Jan-March inflate capital carrying costs.", whatYouCanDo: "Offer off-season rural haulage, trolley transport for mandi grain, and orchard inter-cultivation services." },
+      { id: "R-FE-4", title: "Delayed Farmer Rental Receivables", category: "Financial", severity: "Medium", mitigation: "Implement a 50% upfront booking token with balance payable within 7 days of harvest mandi settlement.", whyItMatters: "Small farmers often request credit until crop marketing post-harvest, straining operational cash flow.", whatYouCanDo: "Implement a 50% upfront booking token with balance payable within 7 days of harvest mandi settlement." },
     ],
   },
 };
@@ -644,6 +752,17 @@ export const getScenarioForBusiness = (businessId?: string | null): BusinessScen
   }
   if (lower.includes("spice") || lower.includes("masala") || lower.includes("grinding")) {
     return REAL_BUSINESS_SCENARIOS["biz-spice-processing"];
+  }
+  if (
+    lower.includes("farm") ||
+    lower.includes("equipment") ||
+    lower.includes("machinery") ||
+    lower.includes("tractor") ||
+    lower.includes("hiring") ||
+    lower.includes("seeder") ||
+    lower.includes("leveler")
+  ) {
+    return REAL_BUSINESS_SCENARIOS["biz-farm-equipment"];
   }
 
   // Default fallback to dairy

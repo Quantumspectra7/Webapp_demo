@@ -1,8 +1,8 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
+import { useApp } from "@/context/AppContext";
 import { marketService } from "@/services";
 import { OpportunityAnalysis, ViabilityScore } from "@/domain";
 import {
@@ -16,12 +16,11 @@ import {
   Scale,
   Sparkles,
 } from "lucide-react";
-
 export default function OpportunityPage() {
+  const { location, business, financialScenario } = useApp();
   const [opportunity, setOpportunity] = useState<OpportunityAnalysis | null>(null);
   const [viability, setViability] = useState<ViabilityScore | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     async function loadOpportunity() {
       try {
@@ -39,7 +38,35 @@ export default function OpportunityPage() {
       }
     }
     loadOpportunity();
-  }, []);
+  }, [business?.id]);
+  const locName = `${location?.villageOrTown || location?.block || "Catchment"}, ${location?.district || "Punjab"}`;
+  const demandScore = viability?.components?.find((c) => c.category.toLowerCase().includes("market"))?.score || viability?.overallScore || 82;
+  const compScore = viability?.components?.find((c) => c.category.toLowerCase().includes("comp"))?.score || 70;
+  const capitalScore = viability?.components?.find((c) => c.category.toLowerCase().includes("capital"))?.score || 88;
+
+  const promisingPoints = opportunity?.conditionsToSucceed && opportunity.conditionsToSucceed.length > 0
+    ? opportunity.conditionsToSucceed
+    : [
+        `Local catchment shows steady consumption and captive customer base for ${business?.title || "this sector"}.`,
+        `Direct highway and feeder road access enables efficient regional transit.`,
+        `Capital subsidy structures lower effective debt obligations, keeping breakeven achievable.`,
+      ];
+
+  const watchoutPoints = opportunity?.concernsAndWatchouts && opportunity.concernsAndWatchouts.length > 0
+    ? opportunity.concernsAndWatchouts
+    : [
+        `Seasonal swings in raw material costs require buffer working capital discipline.`,
+        `Local payment credit cycles must be structured to prevent cash flow strain.`,
+        `Continuous power supply and backup equipment remain vital during peak hours.`,
+      ];
+
+  const improvementPoints = opportunity?.recommendations && opportunity.recommendations.length > 0
+    ? opportunity.recommendations
+    : [
+        `Sign formal buyer off-take agreements before commissioning major equipment.`,
+        `Apply under priority government subsidy schemes to minimize net equity exposure.`,
+        `Procure certified equipment from established regional machinery manufacturers.`,
+      ];
 
   return (
     <AppShell>
@@ -55,7 +82,7 @@ export default function OpportunityPage() {
               Why this business could work here
             </h1>
             <p className="text-sm text-[#786d65] mt-1">
-              Evaluating local supply deficits, competitor capacity bottlenecks, and capital alignment for Sidhwan Bet &amp; Jagraon.
+              Evaluating local supply deficits, competitor capacity bottlenecks, and capital alignment for {locName}.
             </p>
           </div>
 
@@ -75,7 +102,7 @@ export default function OpportunityPage() {
               Core Decision Signals
             </span>
             <span className="text-xs font-bold text-[#3a6b4c] bg-[#f0f6ec] px-2.5 py-1 rounded-full border border-[#3a6b4c]/20">
-              Grounded in Ludhiana Mandi Telemetry
+              Grounded in {location?.district || "Regional"} Mandi Telemetry
             </span>
           </div>
 
@@ -84,13 +111,13 @@ export default function OpportunityPage() {
             <div className="space-y-2 p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8]">
               <div className="flex justify-between items-center text-xs">
                 <span className="font-bold text-[#241b16]">Demand Deficit Signal</span>
-                <span className="font-mono font-bold text-[#3a6b4c]">82% · Strong</span>
+                <span className="font-mono font-bold text-[#3a6b4c]">{demandScore}% · Strong</span>
               </div>
               <div className="w-full bg-[#ede3d8] rounded-full h-2.5 overflow-hidden font-mono tracking-widest text-[10px] text-[#3a6b4c]">
-                <div className="bg-[#3a6b4c] h-2.5 rounded-full" style={{ width: "82%" }} />
+                <div className="bg-[#3a6b4c] h-2.5 rounded-full" style={{ width: `${demandScore}%` }} />
               </div>
               <p className="text-[11px] text-[#786d65]">
-                Unserved dairy deficit (~3,800 L/day) across 14 Gram Panchayats with zero local commercial chilling.
+                {opportunity?.keyGaps?.[1]?.headline || `Steady regional demand across ${location?.block || "local"} panchayats for ${business?.title || "processed goods"}.`}
               </p>
             </div>
 
@@ -98,13 +125,13 @@ export default function OpportunityPage() {
             <div className="space-y-2 p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8]">
               <div className="flex justify-between items-center text-xs">
                 <span className="font-bold text-[#241b16]">Competition Headroom</span>
-                <span className="font-mono font-bold text-[#d97706]">70% · Moderate</span>
+                <span className="font-mono font-bold text-[#d97706]">{compScore}% · Moderate</span>
               </div>
               <div className="w-full bg-[#ede3d8] rounded-full h-2.5 overflow-hidden">
-                <div className="bg-[#d97706] h-2.5 rounded-full" style={{ width: "70%" }} />
+                <div className="bg-[#d97706] h-2.5 rounded-full" style={{ width: `${compScore}%` }} />
               </div>
               <p className="text-[11px] text-[#786d65]">
-                Only 2 facilities operating at &lt;40% utilization due to delayed farmer payment cycles.
+                {opportunity?.keyGaps?.[0]?.headline || `Incumbents operate with loose, unbranded product lacking quality consistency.`}
               </p>
             </div>
 
@@ -112,27 +139,29 @@ export default function OpportunityPage() {
             <div className="space-y-2 p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8]">
               <div className="flex justify-between items-center text-xs">
                 <span className="font-bold text-[#241b16]">Capital &amp; Subsidy Fit</span>
-                <span className="font-mono font-bold text-[#3a6b4c]">88% · Exceptional</span>
+                <span className="font-mono font-bold text-[#3a6b4c]">{capitalScore}% · Bankable</span>
               </div>
               <div className="w-full bg-[#ede3d8] rounded-full h-2.5 overflow-hidden">
-                <div className="bg-[#3a6b4c] h-2.5 rounded-full" style={{ width: "88%" }} />
+                <div className="bg-[#3a6b4c] h-2.5 rounded-full" style={{ width: `${capitalScore}%` }} />
               </div>
               <p className="text-[11px] text-[#786d65]">
-                ₹1,00,000 own equity qualifies for 35% PMEGP capital grant (₹4,90,000 non-repayable).
+                {financialScenario?.financingMeans?.subsidySchemeName
+                  ? `${financialScenario.financingMeans.subsidySchemeName} eligible for capital grant assistance.`
+                  : "Promoter capital meets mandatory equity criteria for term debt."}
               </p>
             </div>
 
             {/* Signal 4: Market Access */}
             <div className="space-y-2 p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8]">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-[#241b16]">Market Access &amp; Power</span>
+                <span className="font-bold text-[#241b16]">Market Access &amp; Infrastructure</span>
                 <span className="font-mono font-bold text-[#c75d3e]">78% · Solid</span>
               </div>
               <div className="w-full bg-[#ede3d8] rounded-full h-2.5 overflow-hidden">
                 <div className="bg-[#c75d3e] h-2.5 rounded-full" style={{ width: "78%" }} />
               </div>
               <p className="text-[11px] text-[#786d65]">
-                SH-13 pucca transit road within 80m and 3-phase agricultural power feeder at 180m.
+                Pucca connectivity and power infrastructure support commercial setup in {location?.district || "this area"}.
               </p>
             </div>
           </div>
@@ -150,29 +179,17 @@ export default function OpportunityPage() {
                 Why it looks promising
               </h2>
               <ul className="space-y-2.5 text-xs text-[#56423d] leading-relaxed">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#3a6b4c] font-bold mt-0.5">•</span>
-                  <span>
-                    <strong>Unchilled Milk Surplus:</strong> 14 neighboring villages produce over 14,000 Ltrs/day, with farmers losing ₹3–₹4/L due to souring in afternoon transit.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#3a6b4c] font-bold mt-0.5">•</span>
-                  <span>
-                    <strong>Direct Highway Access:</strong> Immediate access to SH-13 and NH-703 connects your chilling hub to Ludhiana sweet clusters and corporate bulk tankers.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#3a6b4c] font-bold mt-0.5">•</span>
-                  <span>
-                    <strong>PMEGP Subsidy Clearance:</strong> 35% non-repayable capital grant reduces loan debt servicing pressure, keeping break-even at only 42% capacity.
-                  </span>
-                </li>
+                {promisingPoints.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="text-[#3a6b4c] font-bold mt-0.5">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div className="p-3 rounded-xl bg-[#f0f6ec] text-[11px] font-semibold text-[#3a6b4c]">
-              Net Advantage: 68% captive supplier base
+              {opportunity?.verdictSubtitle || "Advantage: Captive rural market cluster"}
             </div>
           </div>
 
@@ -186,29 +203,17 @@ export default function OpportunityPage() {
                 What could limit it
               </h2>
               <ul className="space-y-2.5 text-xs text-[#56423d] leading-relaxed">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#c75d3e] font-bold mt-0.5">•</span>
-                  <span>
-                    <strong>Summer Afternoon Feeder Drops:</strong> Rural agricultural feeder schedules drop to low voltage between 1:00 PM and 3:30 PM, necessitating a diesel backup.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#c75d3e] font-bold mt-0.5">•</span>
-                  <span>
-                    <strong>Feed Price Volatility:</strong> Mustard cake and silage prices fluctuate up to 18% during dry pre-monsoon months, squeezing farmer milk yields.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#c75d3e] font-bold mt-0.5">•</span>
-                  <span>
-                    <strong>Informal Credit Chains:</strong> Local middlemen (doodhis) offer cash advances to small farmers, requiring competitive weekly settlement terms.
-                  </span>
-                </li>
+                {watchoutPoints.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="text-[#c75d3e] font-bold mt-0.5">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div className="p-3 rounded-xl bg-[#fcedea] text-[11px] font-semibold text-[#c75d3e]">
-              Watch Out: Diesel cost can erode 4% net margin
+              Watch Out: Working capital and input supply discipline required
             </div>
           </div>
 
@@ -222,29 +227,17 @@ export default function OpportunityPage() {
                 What would improve it
               </h2>
               <ul className="space-y-2.5 text-xs text-[#56423d] leading-relaxed">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#d97706] font-bold mt-0.5">•</span>
-                  <span>
-                    <strong>Institutional Off-Take Agreement:</strong> Signing a guaranteed seasonal procurement contract with Verka or a private processor locks in a minimum floor price.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#d97706] font-bold mt-0.5">•</span>
-                  <span>
-                    <strong>Hybrid Solar Integration:</strong> Sizing a 10kVA solar-inverter array reduces DG fuel expenditure by 65% during peak refrigeration hours.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#d97706] font-bold mt-0.5">•</span>
-                  <span>
-                    <strong>Transparent FAT/SNF Testing:</strong> Installing an ultrasonic milk testing kiosk with instant SMS slips builds trust and pulls farmers away from informal middlemen.
-                  </span>
-                </li>
+                {improvementPoints.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="text-[#d97706] font-bold mt-0.5">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div className="p-3 rounded-xl bg-[#faf4ee] border border-[#ede3d8] text-[11px] font-semibold text-[#241b16]">
-              Action: Budget solar in DPR addendum
+              Action: Establish buyer off-take agreements early
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { useApp } from "@/context/AppContext";
 import { UserAccount } from "@/domain";
 import { User, Phone, Mail, ArrowRight, ShieldCheck, X, Check } from "lucide-react";
@@ -64,11 +65,14 @@ export const QuickSessionModal: React.FC<QuickSessionModalProps> = ({
           <X size={18} />
         </button>
 
-        <div className="flex items-center gap-2 mb-2">
-          <div className="w-8 h-8 rounded-lg bg-[#c75d3e] text-white font-bold text-sm flex items-center justify-center">
-            GV
-          </div>
-          <span className="font-serif font-bold text-lg text-[#241b16]">GramVest</span>
+        <div className="flex items-center mb-2">
+          <Image
+            src="/gramvest_logo3.png"
+            alt="GramVest"
+            width={120}
+            height={40}
+            className="h-9 w-auto object-contain"
+          />
         </div>
 
         <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#241b16] mt-2">

@@ -36,6 +36,7 @@ export interface IMarketProvider {
   getSwotAnalysis(): Promise<SwotQuadrant>;
   getRisks(): Promise<RiskItem[]>;
   getViabilityScore(): Promise<ViabilityScore>;
+  setActiveCategory?(categoryId: string): void;
 }
 
 export interface IFinanceProvider {
@@ -55,13 +56,14 @@ export interface IFinanceProvider {
 }
 
 export interface ISchemeProvider {
-  getRecommendedSchemes(): Promise<SchemeRouteRecommendation>;
+  getRecommendedSchemes(categoryId?: string, projectCost?: number, ownCapital?: number): Promise<SchemeRouteRecommendation>;
   calculateSubsidy(projectCost: number, schemeCode: string, isRuralSpecial: boolean): Promise<{
     subsidyAmount: number;
     subsidyRatePct: number;
     effectiveNetLoan: number;
     disclaimer: string;
   }>;
+  setActiveCategory?(categoryId: string): void;
 }
 
 export interface IAdvisorProvider {

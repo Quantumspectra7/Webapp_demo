@@ -1,51 +1,63 @@
 import { AnalysisProfile } from "@/domain";
 import { IAnalysisProfileProvider } from "@/providers/interfaces";
 
-// Default demo baseline profile
-const DEFAULT_ANALYSIS_PROFILE: AnalysisProfile = {
-  userId: "user-demo-punjab-01",
-  location: {
-    id: "loc-jagraon-01",
-    state: "Punjab",
-    district: "Ludhiana",
-    block: "Jagraon",
-    villageOrTown: "Sidhwan Bet",
-    pincode: "142024",
-    latitude: 30.7853,
-    longitude: 75.4731,
-    precision: "point",
-    source: "preset",
-    confidence: "high",
-  },
-  business: {
-    categoryId: "biz-dairy",
-    categoryName: "Dairy Processing & Milk Chilling Unit",
-    businessDescription: "Bulk milk cooling and dairy value addition supplying rural households and commercial buyers.",
-    scale: "small",
-    targetCustomers: ["Local households", "Private dairies (Verka, Nestle)"],
-  },
-  capital: 100000,
-  experience: "beginner",
-  hasRelevantSkills: "somewhat",
-  existingAssets: ["Building / Shed", "Vehicle"],
-  preferredScale: "small",
-  desiredMonthlyIncome: 45000,
-  riskPreference: "conservative",
-  analysisRadius: 5,
-};
+const STORAGE_KEY = "gramvest_analysis_profile";
 
+/**
+ * MockAnalysisProfileProvider — Phase 1 Real Data Foundation
+ *
+ * Returns null by default. No hardcoded Jagraon/Dairy demo profile.
+ * Only returns a profile after saveProfile() has been explicitly called
+ * (i.e., after user completes onboarding).
+ *
+ * Persists to localStorage so the profile survives page refreshes.
+ */
 export class MockAnalysisProfileProvider implements IAnalysisProfileProvider {
-  private currentProfile: AnalysisProfile = { ...DEFAULT_ANALYSIS_PROFILE };
+  private currentProfile: AnalysisProfile | null = null;
+
+  constructor() {
+    if (typeof window !== "undefined") {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          this.currentProfile = JSON.parse(raw) as AnalysisProfile;
+        }
+      } catch {
+        this.currentProfile = null;
+      }
+    }
+  }
 
   async saveProfile(profile: AnalysisProfile): Promise<AnalysisProfile> {
-    this.currentProfile = {
+    const saved = {
       ...profile,
       updatedAt: new Date().toISOString(),
     };
-    return this.currentProfile;
+    this.currentProfile = saved;
+
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      } catch (e) {
+        console.warn("Failed to persist analysis profile to localStorage", e);
+      }
+    }
+
+    return saved;
   }
 
   async getProfile(): Promise<AnalysisProfile | null> {
+    if (typeof window !== "undefined") {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          this.currentProfile = JSON.parse(raw) as AnalysisProfile;
+        }
+      } catch {
+        // ignore
+      }
+    }
     return this.currentProfile;
   }
 }
+

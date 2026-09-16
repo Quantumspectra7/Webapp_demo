@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 import { useApp } from "@/context/AppContext";
+import { schemeService } from "@/services";
+import { SchemeRouteRecommendation, Scheme } from "@/domain";
+import { formatCurrency } from "@/lib/formatters";
 import {
   Coins,
   ShieldCheck,
@@ -18,10 +21,32 @@ import {
   Landmark,
   BadgePercent,
   AlertCircle,
+  HelpCircle,
 } from "lucide-react";
 
 export default function FinancingPage() {
-  const { profile, location, business } = useApp();
+  const { profile, location, business, financialScenario } = useApp();
+  const [recommendation, setRecommendation] = useState<SchemeRouteRecommendation | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadSchemes() {
+      try {
+        setLoading(true);
+        const data = await schemeService.getRecommendations(
+          business?.id,
+          financialScenario?.totalProjectCost,
+          profile?.ownCapitalAvailable
+        );
+        setRecommendation(data);
+      } catch (err) {
+        console.error("Failed to load scheme recommendations", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadSchemes();
+  }, [business?.id, financialScenario?.totalProjectCost, profile?.ownCapitalAvailable]);
 
   // Document checklist toggle state
   const [checkedDocs, setCheckedDocs] = useState<Record<string, boolean>>({
@@ -41,6 +66,23 @@ export default function FinancingPage() {
   const completedDocs = Object.values(checkedDocs).filter(Boolean).length;
   const readinessPct = Math.round((completedDocs / totalDocs) * 100);
 
+  const topScheme = recommendation?.recommendedScheme;
+  const secondaryScheme = recommendation?.secondaryScheme;
+
+  const totalProjectCost = financialScenario?.totalProjectCost || 1000000;
+  const subsidyAmount = recommendation?.indicativeSubsidyBenefit || Math.round(totalProjectCost * ((topScheme?.subsidyRatePct || 35) / 100));
+  const interestRate = financialScenario?.loanTerms?.interestRatePct || 9.5;
+  const tenureMonths = financialScenario?.loanTerms?.tenureMonths || 60;
+  const moratoriumMonths = financialScenario?.loanTerms?.moratoriumMonths || 6;
+
+  const matchReasons = topScheme?.eligibilityCriteria && topScheme.eligibilityCriteria.length > 0
+    ? topScheme.eligibilityCriteria.slice(0, 3)
+    : [
+        `Estimated project cost falls within the official subsidy scheme ceiling.`,
+        `Promoter equity contribution meets the minimum margin requirement.`,
+        `Enterprise qualifies for concessional priority sector interest rates.`,
+      ];
+
   return (
     <AppShell>
       <div className="space-y-8 max-w-6xl mx-auto pb-12">
@@ -55,7 +97,7 @@ export default function FinancingPage() {
               Which financing route fits me?
             </h1>
             <p className="text-sm text-[#786d65] mt-1">
-              Targeted credit pathway matching your enterprise scale, capital structure, and rural location.
+              Targeted credit pathway matching {business?.title || "your enterprise"} scale, capital structure, and rural location.
             </p>
           </div>
 
@@ -69,76 +111,84 @@ export default function FinancingPage() {
         </div>
 
         {/* ========================================================
-            RECOMMENDED ROUTE: TERM LOAN + 35% SOVEREIGN SUBSIDY
+            RECOMMENDED ROUTE: DYNAMIC SCHEME MATCH
            ======================================================== */}
         <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#c75d3e] shadow-warm-md space-y-6 relative overflow-hidden">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2 max-w-2xl">
               <div className="flex items-center gap-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#fcedea] text-[#c75d3e] border border-[#c75d3e]/20">
-                  Optimal Financing Match
+                  Potential match
                 </span>
-                <span className="text-xs text-[#786d65]">Rural Priority Lending</span>
+                <span className="text-xs text-[#786d65]">
+                  {topScheme?.governingMinistry || "Rural Priority Lending"} · 2024-26 Guidelines
+                </span>
               </div>
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#241b16]">
-                Recommended Route: Rural Term Loan with PMEGP Margin Subsidy
+                Recommended Route: {topScheme?.name || "Rural Term Loan with Capital Subsidy"}
               </h2>
               <p className="text-sm text-[#56423d] leading-relaxed">
-                Structured term debt blended with a 35% non-repayable sovereign capital subsidy, pre-aligned to Public Sector Bank underwriting guidelines (SBI, PNB, Punjab Gramin Bank).
+                {topScheme?.keyFitReason ||
+                  `Structured priority term debt blended with capital subsidy, pre-aligned to Public Sector Bank underwriting guidelines.`}
               </p>
             </div>
 
             {/* Grant Callout Card */}
             <div className="p-5 rounded-2xl bg-[#f0f6ec] border border-[#3a6b4c]/30 text-center min-w-[220px] flex-shrink-0">
               <span className="text-[10px] uppercase font-bold text-[#3a6b4c] tracking-wider block">
-                Eligible Capital Subsidy
+                Indicative Capital Subsidy
               </span>
               <p className="text-3xl font-serif font-extrabold text-[#3a6b4c] mt-1 mb-0.5">
-                35%
+                {topScheme?.subsidyRatePct || 35}%
               </p>
-              <p className="text-xs font-bold text-[#241b16]">₹3,50,000 to ₹4,90,000</p>
-              <span className="text-[10px] text-[#786d65] block mt-1">Non-repayable KVIC margin money</span>
+              <p className="text-xs font-bold text-[#241b16]">
+                Up to {formatCurrency(subsidyAmount)}
+              </p>
+              <span className="text-[10px] text-[#786d65] block mt-1">
+                {topScheme?.code ? `Code: ${topScheme.code}` : "Non-repayable capital grant"}
+              </span>
             </div>
           </div>
 
-          {/* Why This Route (Project Size, Capital Structure, Business Category) */}
+          {/* Why This Route */}
           <div className="space-y-3 pt-4 border-t border-[#ede3d8]">
             <span className="text-xs font-bold uppercase tracking-wider text-[#786d65] block">
-              Why this route was selected for your venture:
+              Why this route matches your enterprise profile:
             </span>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] space-y-1">
-                <div className="flex items-center gap-2 text-xs font-bold text-[#241b16]">
-                  <Building2 size={16} className="text-[#c75d3e]" />
-                  <span>1. Project Size Fit</span>
+              {matchReasons.map((reason: string, idx: number) => (
+                <div key={idx} className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] space-y-1">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#241b16]">
+                    {idx === 0 ? (
+                      <Building2 size={16} className="text-[#c75d3e]" />
+                    ) : idx === 1 ? (
+                      <BadgePercent size={16} className="text-[#3a6b4c]" />
+                    ) : (
+                      <Landmark size={16} className="text-[#c75d3e]" />
+                    )}
+                    <span>Pillar {idx + 1} Fit</span>
+                  </div>
+                  <p className="text-xs text-[#56423d] leading-relaxed">{reason}</p>
                 </div>
-                <p className="text-xs text-[#56423d] leading-relaxed">
-                  Your estimated ₹10,00,000 capex fits perfectly under PMEGP's ₹50 Lakhs manufacturing ceiling, eliminating complex corporate underwriting hurdles.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] space-y-1">
-                <div className="flex items-center gap-2 text-xs font-bold text-[#241b16]">
-                  <BadgePercent size={16} className="text-[#3a6b4c]" />
-                  <span>2. Capital Structure Fit</span>
-                </div>
-                <p className="text-xs text-[#56423d] leading-relaxed">
-                  Your ₹1,00,000 own savings meets the mandatory 10% promoter equity threshold, unlocking 90% debt-and-subsidy financing with zero collateral up to ₹10L.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] space-y-1">
-                <div className="flex items-center gap-2 text-xs font-bold text-[#241b16]">
-                  <Landmark size={16} className="text-[#c75d3e]" />
-                  <span>3. Business Category Fit</span>
-                </div>
-                <p className="text-xs text-[#56423d] leading-relaxed">
-                  Dairy value addition &amp; rural food processing qualifies as Priority Sector Lending (PSL), ensuring preferential interest rates and quick branch signoff.
-                </p>
-              </div>
+              ))}
             </div>
           </div>
+
+          {/* Appraisal Checkpoints Callout */}
+          {recommendation?.appraisalCheckpoints && recommendation.appraisalCheckpoints.length > 0 && (
+            <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] space-y-2">
+              <div className="flex items-center gap-2 text-xs font-bold text-[#c75d3e]">
+                <AlertCircle size={15} />
+                <span>Needs Verification / Appraisal Checkpoints</span>
+              </div>
+              <ul className="text-xs text-[#786d65] space-y-1 list-disc list-inside">
+                {recommendation.appraisalCheckpoints.map((info: string, i: number) => (
+                  <li key={i}>{info}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Indicative Financing Terms */}
           <div className="space-y-3 pt-4 border-t border-[#ede3d8]">
@@ -149,30 +199,54 @@ export default function FinancingPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div className="p-3 rounded-xl bg-white border border-[#ede3d8]">
                 <span className="text-[10px] uppercase font-bold text-[#786d65] block">Interest Rate</span>
-                <p className="text-base font-serif font-bold text-[#241b16] mt-0.5">8.5% – 9.5% p.a.</p>
+                <p className="text-base font-serif font-bold text-[#241b16] mt-0.5">{interestRate}% p.a.</p>
                 <p className="text-[10px] text-[#786d65]">Concessional PSL rate</p>
               </div>
 
               <div className="p-3 rounded-xl bg-white border border-[#ede3d8]">
                 <span className="text-[10px] uppercase font-bold text-[#786d65] block">Loan Tenure</span>
-                <p className="text-base font-serif font-bold text-[#241b16] mt-0.5">60 Months (5 Yrs)</p>
+                <p className="text-base font-serif font-bold text-[#241b16] mt-0.5">{tenureMonths} Months</p>
                 <p className="text-[10px] text-[#786d65]">Equated monthly installment</p>
               </div>
 
               <div className="p-3 rounded-xl bg-white border border-[#ede3d8]">
                 <span className="text-[10px] uppercase font-bold text-[#786d65] block">Moratorium Grace</span>
-                <p className="text-base font-serif font-bold text-[#3a6b4c] mt-0.5">6 Months</p>
+                <p className="text-base font-serif font-bold text-[#3a6b4c] mt-0.5">{moratoriumMonths} Months</p>
                 <p className="text-[10px] text-[#3a6b4c]">Zero principal during setup</p>
               </div>
 
               <div className="p-3 rounded-xl bg-white border border-[#ede3d8]">
                 <span className="text-[10px] uppercase font-bold text-[#786d65] block">Collateral Security</span>
-                <p className="text-base font-serif font-bold text-[#241b16] mt-0.5">CGTMSE Covered</p>
+                <p className="text-base font-serif font-bold text-[#241b16] mt-0.5">
+                  {topScheme?.creditGuaranteeCover || "CGTMSE / Priority"}
+                </p>
                 <p className="text-[10px] text-[#786d65]">Zero third-party guarantee</p>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Alternative Route if available */}
+        {secondaryScheme && (
+          <div className="p-5 rounded-3xl bg-[#faf4ee] border border-[#ede3d8] space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white text-[#786d65] border border-[#ede3d8]">
+                  Needs verification
+                </span>
+                <h3 className="font-serif font-bold text-base text-[#241b16]">
+                  Alternative Route: {secondaryScheme.name}
+                </h3>
+              </div>
+              <span className="text-xs font-bold text-[#3a6b4c]">
+                {secondaryScheme.subsidyRatePct}% Subsidy
+              </span>
+            </div>
+            <p className="text-xs text-[#786d65] leading-relaxed">
+              {secondaryScheme.keyFitReason}
+            </p>
+          </div>
+        )}
 
         {/* ========================================================
             DOCUMENTS YOU MAY NEED (Interactive Checklist)
@@ -226,8 +300,8 @@ export default function FinancingPage() {
               },
               {
                 id: "doc-5",
-                name: "Machinery Quotation from Vetted OEM",
-                desc: "GST-compliant quotation for 1,000L bulk milk chiller and lab testing set.",
+                name: `Machinery Quotation for ${business?.title || "Equipment"}`,
+                desc: `GST-compliant quotation from vetted equipment manufacturers in Punjab.`,
                 action: "Equipment Vendor",
               },
               {
@@ -272,7 +346,7 @@ export default function FinancingPage() {
           <div className="p-4 rounded-2xl bg-[#faf4ee] border border-[#ede3d8] flex items-start gap-3">
             <Info size={16} className="text-[#c75d3e] flex-shrink-0 mt-0.5" />
             <p className="text-xs text-[#786d65] leading-relaxed">
-              <strong>Statutory Underwriting Notice:</strong> Indicative only — final subsidy eligibility, loan sanction, and disbursement terms are determined solely by the competent lending authority (SBI/PNB branch manager) and District Industries Centre (DIC) board.
+              <strong>Statutory Underwriting Notice:</strong> Potential match only — final subsidy eligibility, loan sanction, and disbursement terms are determined solely by the competent lending authority and District Industries Centre (DIC) board.
             </p>
           </div>
         </div>

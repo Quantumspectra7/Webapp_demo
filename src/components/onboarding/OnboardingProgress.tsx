@@ -12,8 +12,9 @@ const STEPS: StepItem[] = [
   { number: 1, label: "Location" },
   { number: 2, label: "Business" },
   { number: 3, label: "Capital" },
-  { number: 4, label: "Your Experience" },
-  { number: 5, label: "Review" },
+  { number: 4, label: "Experience" },
+  { number: 5, label: "Your Details" },
+  { number: 6, label: "Analysis" },
 ];
 
 interface OnboardingProgressProps {

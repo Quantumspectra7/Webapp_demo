@@ -488,6 +488,7 @@ export default function LandingPage() {
               width={160}
               height={56}
               className="h-12 sm:h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+              style={{ width: "auto" }}
               priority
             />
           </Link>
@@ -597,6 +598,7 @@ export default function LandingPage() {
                   <div className="flex items-center gap-2 pt-1">
                     {heroBenefits.map((_, idx) => (
                       <button
+                        suppressHydrationWarning
                         key={idx}
                         onClick={() => setCurrentHeroIdx(idx)}
                         className={`h-1.5 rounded-full transition-all duration-300 ${currentHeroIdx === idx
@@ -870,6 +872,7 @@ export default function LandingPage() {
                       const isSelected = activeArchetypeKey === key;
                       return (
                         <button
+                          suppressHydrationWarning
                           key={key}
                           onClick={() => handleSelectArchetype(key)}
                           type="button"
@@ -902,6 +905,7 @@ export default function LandingPage() {
                       Target Punjab District
                     </label>
                     <select
+                      suppressHydrationWarning
                       id="district-select"
                       value={selectedDistrict}
                       onChange={(e) => handleSelectDistrict(e.target.value)}
@@ -923,6 +927,7 @@ export default function LandingPage() {
                       Target Mandi / Tehsil
                     </label>
                     <select
+                      suppressHydrationWarning
                       id="tehsil-select"
                       value={selectedTehsil}
                       onChange={(e) => setSelectedTehsil(e.target.value)}
@@ -1346,6 +1351,7 @@ export default function LandingPage() {
                 const isActive = activeEngineStep === t.stepNum;
                 return (
                   <button
+                    suppressHydrationWarning
                     key={t.stepNum}
                     onClick={() => handleTriggerSimulation(t.stepNum)}
                     type="button"
@@ -1406,6 +1412,7 @@ export default function LandingPage() {
 
                   <div className="pt-4 flex flex-wrap items-center gap-3">
                     <button
+                      suppressHydrationWarning
                       type="button"
                       onClick={() => handleTriggerSimulation(activeEngineStep)}
                       className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#faf4ee] hover:bg-[#ede3d8] text-[#241b16] text-xs font-bold border border-[#ede3d8] transition-colors cursor-pointer"
@@ -1690,6 +1697,7 @@ export default function LandingPage() {
               {/* FAQ 1 */}
               <div className="bg-white rounded-2xl border border-[#ede3d8] shadow-xs overflow-hidden">
                 <button
+                  suppressHydrationWarning
                   className="w-full p-5 text-left font-bold text-[#241b16] text-base flex justify-between items-center hover:text-[#c75d3e] transition-colors cursor-pointer"
                   onClick={() => toggleFaq(1)}
                   type="button"
@@ -1717,6 +1725,7 @@ export default function LandingPage() {
               {/* FAQ 2 */}
               <div className="bg-white rounded-2xl border border-[#ede3d8] shadow-xs overflow-hidden">
                 <button
+                  suppressHydrationWarning
                   className="w-full p-5 text-left font-bold text-[#241b16] text-base flex justify-between items-center hover:text-[#c75d3e] transition-colors cursor-pointer"
                   onClick={() => toggleFaq(2)}
                   type="button"
@@ -1744,6 +1753,7 @@ export default function LandingPage() {
               {/* FAQ 3 */}
               <div className="bg-white rounded-2xl border border-[#ede3d8] shadow-xs overflow-hidden">
                 <button
+                  suppressHydrationWarning
                   className="w-full p-5 text-left font-bold text-[#241b16] text-base flex justify-between items-center hover:text-[#c75d3e] transition-colors cursor-pointer"
                   onClick={() => toggleFaq(3)}
                   type="button"
@@ -1771,6 +1781,7 @@ export default function LandingPage() {
               {/* FAQ 4 */}
               <div className="bg-white rounded-2xl border border-[#ede3d8] shadow-xs overflow-hidden">
                 <button
+                  suppressHydrationWarning
                   className="w-full p-5 text-left font-bold text-[#241b16] text-base flex justify-between items-center hover:text-[#c75d3e] transition-colors cursor-pointer"
                   onClick={() => toggleFaq(4)}
                   type="button"
@@ -1798,6 +1809,7 @@ export default function LandingPage() {
               {/* FAQ 5 */}
               <div className="bg-white rounded-2xl border border-[#ede3d8] shadow-xs overflow-hidden">
                 <button
+                  suppressHydrationWarning
                   className="w-full p-5 text-left font-bold text-[#241b16] text-base flex justify-between items-center hover:text-[#c75d3e] transition-colors cursor-pointer"
                   onClick={() => toggleFaq(5)}
                   type="button"
@@ -1825,6 +1837,7 @@ export default function LandingPage() {
               {/* FAQ 6 */}
               <div className="bg-white rounded-2xl border border-[#ede3d8] shadow-xs overflow-hidden">
                 <button
+                  suppressHydrationWarning
                   className="w-full p-5 text-left font-bold text-[#241b16] text-base flex justify-between items-center hover:text-[#c75d3e] transition-colors cursor-pointer"
                   onClick={() => toggleFaq(6)}
                   type="button"
@@ -1903,6 +1916,7 @@ export default function LandingPage() {
                   width={150}
                   height={48}
                   className="h-11 w-auto object-contain brightness-105 group-hover:scale-105 transition-transform duration-200"
+                  style={{ width: "auto" }}
                 />
               </Link>
               <p className="text-xs text-[#ede3d8]/70 leading-relaxed max-w-sm">

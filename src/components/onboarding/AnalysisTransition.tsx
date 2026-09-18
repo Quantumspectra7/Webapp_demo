@@ -78,6 +78,7 @@ export const AnalysisTransition: React.FC<AnalysisTransitionProps> = ({
             width={90}
             height={70}
             className="h-16 w-auto object-contain mx-auto"
+            style={{ width: "auto" }}
             priority
           />
         </div>

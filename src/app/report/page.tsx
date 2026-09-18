@@ -166,6 +166,7 @@ export default function ReportPage() {
                   width={140}
                   height={44}
                   className="h-10 w-auto object-contain"
+                  style={{ width: "auto" }}
                   priority
                 />
                 <span className="text-[11px] uppercase font-bold tracking-widest text-[#786d65] px-2 py-0.5 rounded bg-[#faf4ee] border border-[#ede3d8]">

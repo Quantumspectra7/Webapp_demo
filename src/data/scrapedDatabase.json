@@ -1799,7 +1799,7 @@
       }
     ],
     "scrapedAt": "2026-09-16T06:03:40.720Z",
-    "hitsCount": 5
+    "hitsCount": 6
   },
   {
     "key": "phagwaralawgatelpu-kapurthala-10-bakery",
@@ -3847,6 +3847,48 @@
     "radiusKm": 5,
     "category": "Commercial Chakki Flour & Dal Mill",
     "scrapedAt": "2026-09-16T06:10:26.580Z",
+    "hitsCount": 1
+  },
+  {
+    "population": 43240,
+    "households": 7721,
+    "targetCustomerRate": 0.35,
+    "accessibilityFactor": 0.42,
+    "estimatedCustomers": 1135,
+    "marketDemand": 14200,
+    "marketDemandUnit": "Liters/day",
+    "unmetDemand": 1850,
+    "aiSnippet": "The estimated population of the Khusropur catchment is approximately 94,000 with strong agrarian and commercial off-take.",
+    "source": "GramVest Demographic Engine",
+    "confidence": "high",
+    "references": [],
+    "key": "khusropur-jalandhar-5-dairy",
+    "locationName": "Khusropur",
+    "districtName": "Jalandhar",
+    "radiusKm": 5,
+    "category": "Dairy",
+    "scrapedAt": "2026-09-18T05:20:19.447Z",
+    "hitsCount": 1
+  },
+  {
+    "population": 94000,
+    "households": 16786,
+    "targetCustomerRate": 0.35,
+    "accessibilityFactor": 0.42,
+    "estimatedCustomers": 2468,
+    "marketDemand": 31500,
+    "marketDemandUnit": "Liters/day",
+    "unmetDemand": 4200,
+    "aiSnippet": "The estimated population of the Khusropur catchment is approximately 94,000 with strong agrarian and commercial off-take.",
+    "source": "GramVest Demographic Engine",
+    "confidence": "high",
+    "references": [],
+    "key": "khusropur-jalandhar-10-dairy",
+    "locationName": "Khusropur",
+    "districtName": "Jalandhar",
+    "radiusKm": 10,
+    "category": "Dairy",
+    "scrapedAt": "2026-09-18T05:21:25.357Z",
     "hitsCount": 1
   }
 ]

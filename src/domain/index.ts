@@ -486,15 +486,3 @@ export interface AnalysisProfile {
   updatedAt?: string;
 }
 
-export interface UserAccount {
-  id: string;
-  name: string;
-  contact: string; // phone or email
-  phone?: string;
-  email?: string;
-  businessName?: string;
-  registeredAt?: string;
-  isGuest: boolean;
-  authenticated: boolean;
-}
-

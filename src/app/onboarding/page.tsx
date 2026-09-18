@@ -50,7 +50,7 @@ const PERSONAL_DETAILS_KEY = "gramvest_onboarding_personal_v1";
 
 export default function OnboardingPage() {
   const router = useRouter();
-  const { applyAnalysisProfile, userAccount, analysisProfile, isLoading } = useApp();
+  const { applyAnalysisProfile, analysisProfile } = useApp();
 
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [profile, setProfile] = useState<AnalysisProfile>(DEFAULT_PROFILE);
@@ -60,11 +60,6 @@ export default function OnboardingPage() {
 
   // Restore onboarding draft or active profile from localStorage on mount
   useEffect(() => {
-    if (!isLoading && !userAccount?.authenticated) {
-      router.replace("/auth");
-      return;
-    }
-
     if (analysisProfile) {
       setProfile((prev) => ({
         ...prev,
@@ -88,22 +83,16 @@ export default function OnboardingPage() {
       setDraftLastSaved(saved.lastSavedAt);
     }
 
-    // Restore personal details if previously entered or from userAccount
+    // Restore personal details entered during a previous onboarding session
     try {
       const rawPersonal = localStorage.getItem(PERSONAL_DETAILS_KEY);
       if (rawPersonal) {
         setPersonalDetails(JSON.parse(rawPersonal));
-      } else if (userAccount?.authenticated) {
-        setPersonalDetails({
-          name: userAccount.name || "",
-          phone: userAccount.phone || "",
-          businessName: userAccount.businessName || "",
-        });
       }
     } catch {
       // ignore
     }
-  }, [analysisProfile, userAccount, isLoading, router]);
+  }, [analysisProfile]);
 
   // Persist step helper
   const persistStep = (updatedProfile: AnalysisProfile, nextStep: number) => {

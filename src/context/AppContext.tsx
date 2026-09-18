@@ -1,7 +1,6 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
-import { supabase } from "@/lib/supabase";
 import { translateText, SupportedLanguage } from "@/lib/i18n";
 import {
   EntrepreneurProfile,
@@ -9,7 +8,6 @@ import {
   BusinessCategory,
   FinancialScenario,
   AnalysisProfile,
-  UserAccount,
 } from "@/domain";
 import { profileService, financeService, onboardingProfileService, marketService, schemeService } from "@/services";
 
@@ -21,14 +19,11 @@ interface AppContextType {
   business: BusinessCategory | null;
   financialScenario: FinancialScenario | null;
   analysisProfile: AnalysisProfile | null;
-  userAccount: UserAccount | null;
   selectedRadius: 5 | 10;
   language: "EN" | "PA" | "HI";
   t: (text: string) => string;
   setSelectedRadius: (radius: 5 | 10) => void;
   setLanguage: (lang: "EN" | "PA" | "HI") => void;
-  setUserAccount: (account: UserAccount | null) => void;
-  logoutUserAccount: () => void;
   setAnalysisProfile: (profile: AnalysisProfile | null) => void;
   applyAnalysisProfile: (profile: AnalysisProfile) => Promise<void>;
   updateProfile: (data: Partial<EntrepreneurProfile>) => Promise<void>;
@@ -38,20 +33,6 @@ interface AppContextType {
   isLoading: boolean;
 }
 
-const accountFromUser = (user: { id: string; email?: string; user_metadata?: Record<string, unknown>; created_at: string } | null): UserAccount | null => {
-  if (!user?.email) return null;
-
-  return {
-    id: user.id || user.email,
-    name: (user.user_metadata?.full_name as string | undefined) || user.email.split("@")[0],
-    contact: user.email,
-    email: user.email,
-    registeredAt: user.created_at,
-    isGuest: false,
-    authenticated: true,
-  };
-};
-
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -60,7 +41,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [business, setBusiness] = useState<BusinessCategory | null>(null);
   const [financialScenario, setFinancialScenario] = useState<FinancialScenario | null>(null);
   const [analysisProfile, setAnalysisProfile] = useState<AnalysisProfile | null>(null);
-  const [userAccount, setUserAccount] = useState<UserAccount | null>(null);
   const [selectedRadius, setSelectedRadius] = useState<5 | 10>(5);
   const [language, setLanguage] = useState<"EN" | "PA" | "HI">("EN");
   const [isLoading, setIsLoading] = useState(true);
@@ -79,9 +59,21 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setProfile(prof);
       setLocation(loc);
 
-      const { data: sessionData } = await supabase.auth.getSession();
-      const currentUser = accountFromUser(sessionData.session?.user || null);
-      setUserAccount(currentUser);
+      // Retrieve registered user details from localStorage if available
+      let currentUser: { name?: string; phone?: string } | null = null;
+      if (typeof window !== "undefined") {
+        try {
+          const rawPersonal = localStorage.getItem("gramvest_onboarding_personal_v1");
+          if (rawPersonal) {
+            const parsed = JSON.parse(rawPersonal);
+            if (parsed && typeof parsed === "object") {
+              currentUser = parsed;
+            }
+          }
+        } catch (e) {
+          console.warn("Failed to parse onboarding personal details", e);
+        }
+      }
 
       // If user had previously saved an analysis profile, restore business, location, profile & financials
       if (savedAnalysis) {
@@ -213,12 +205,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   useEffect(() => {
     loadInitialData();
-
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUserAccount(accountFromUser(session?.user || null));
-    });
-
-    return () => authListener.subscription.unsubscribe();
   }, []);
 
   const updateProfile = async (data: Partial<EntrepreneurProfile>) => {
@@ -321,10 +307,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   };
 
-  const logoutUserAccount = () => {
-    void supabase.auth.signOut();
-  };
-
   const t = useCallback(
     (text: string) => translateText(text, language as SupportedLanguage),
     [language]
@@ -338,14 +320,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         business,
         financialScenario,
         analysisProfile,
-        userAccount,
         selectedRadius,
         language,
         t,
         setSelectedRadius,
         setLanguage,
-        setUserAccount,
-        logoutUserAccount,
         setAnalysisProfile,
         applyAnalysisProfile,
         updateProfile,

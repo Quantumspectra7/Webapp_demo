@@ -47,9 +47,6 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
     updateLocation,
     applyAnalysisProfile,
     analysisProfile,
-    userAccount,
-    logoutUserAccount,
-    isLoading,
   } = useApp();
 
   const t = getTranslation(language);
@@ -62,14 +59,6 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Route Protection: enforce completion of the 6-step analysis form before entering workspace
-  useEffect(() => {
-    if (isLoading) return;
-    if (!userAccount?.authenticated || userAccount.isGuest) {
-      router.replace("/auth");
-    }
-  }, [userAccount, isLoading, router]);
 
   // Edit modal state
   const [editOwnCapital, setEditOwnCapital] = useState(profile?.ownCapitalAvailable || 100000);
@@ -249,15 +238,6 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
     setEditModalOpen(false);
   };
 
-  const isRegistered =
-    (userAccount && userAccount.authenticated && !userAccount.isGuest) ||
-    (typeof window !== "undefined" && !!localStorage.getItem("gramvest_user_account"));
-
-  // If unregistered, return null while useEffect redirects cleanly to /onboarding
-  if (!isLoading && !isRegistered) {
-    return null;
-  }
-
   return (
     <div suppressHydrationWarning className="min-h-screen bg-[#fff8f2] text-[#1d1b18] flex flex-col selection:bg-[#c75d3e] selection:text-white">
       {/* Mobile Top Header */}
@@ -269,6 +249,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
             width={130}
             height={40}
             className="h-9 w-auto object-contain"
+            style={{ width: "auto" }}
             priority
           />
         </Link>
@@ -298,6 +279,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
                 width={150}
                 height={52}
                 className="h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-200"
+                style={{ width: "auto" }}
                 priority
               />
             </Link>
@@ -483,7 +465,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
                   suppressHydrationWarning
                   className="w-6 h-6 rounded-full bg-[#c75d3e] text-white text-[11px] font-bold flex items-center justify-center"
                 >
-                  {mounted ? (userAccount?.name || profile?.fullName || "User").substring(0, 2).toUpperCase() : "US"}
+                  {mounted ? (profile?.fullName || "User").substring(0, 2).toUpperCase() : "US"}
                 </div>
                 <ChevronDown size={13} className="text-[#786d65]" />
               </button>
@@ -491,11 +473,8 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
               {userMenuOpen && (
                 <div className="absolute right-0 top-full mt-2 w-64 rounded-2xl bg-white border border-[#ede3d8] shadow-lg p-3 z-50 text-xs">
                   <div className="px-2 py-1.5 border-b border-[#ede3d8] mb-2" suppressHydrationWarning>
-                    <p className="font-bold text-[#241b16]">{mounted ? (userAccount?.name || profile?.fullName || "Registered User") : "Registered User"}</p>
-                    <p className="text-[11px] text-[#786d65]">{mounted ? (userAccount?.phone || profile?.phone || userAccount?.contact) : ""}</p>
-                    {mounted && userAccount?.email && (
-                      <p className="text-[10px] text-[#786d65] truncate">{userAccount.email}</p>
-                    )}
+                    <p className="font-bold text-[#241b16]">{mounted ? (profile?.fullName || "User") : "User"}</p>
+                    <p className="text-[11px] text-[#786d65]">{mounted ? profile?.phone || "" : ""}</p>
                   </div>
                   <Link
                     href="/onboarding"
@@ -511,17 +490,6 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
                   >
                     View Feasibility Report
                   </Link>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setUserMenuOpen(false);
-                      logoutUserAccount();
-                      router.push("/onboarding");
-                    }}
-                    className="w-full text-left mt-1 pt-1.5 border-t border-[#ede3d8] px-2 py-1 text-red-600 hover:bg-red-50 rounded-lg font-bold transition-colors cursor-pointer"
-                  >
-                    Sign Out
-                  </button>
                 </div>
               )}
             </div>
